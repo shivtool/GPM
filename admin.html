@@ -7,14 +7,14 @@
   <title>Attendance Admin</title>
   <style>
     :root {
-      --bg: #eef2f7;
-      --ink: #14213d;
-      --mut: #66758a;
+      --bg: #c2f5d3;
+      --ink: #ce8d43;
+      --mut: #8b0cf3;
       --pri: #0b5ed7;
       --ok: #12855a;
       --bad: #c62f3e;
-      --line: #dce3ec;
-      --navy: #0f2a43
+      --line: #1f07f7;
+      --navy: #3390e7
     }
 
     * {
@@ -35,7 +35,7 @@
 
     .hdr {
       background: var(--navy);
-      color: #fff;
+      color: #f3dcdc;
       padding: 10px 16px;
       display: flex;
       justify-content: space-between;
@@ -60,7 +60,7 @@
 
     .hdr button {
       background: #ffffff22;
-      color: #fff;
+      color: #f3d2d2;
       border: 0;
       padding: 7px 12px;
       border-radius: 8px
@@ -68,7 +68,7 @@
 
     .hdr select {
       background: #ffffff22;
-      color: #fff;
+      color: #f3dcdc;
       border: 1px solid #ffffff44;
       border-radius: 8px;
       padding: 7px 10px;
@@ -644,10 +644,10 @@
 
       <section id="t-mark" hidden>
         <div class="card">
-          <h3>Attendance mark karein (Admin)</h3>
+          <h3>Attendance Mark Karein (Admin)</h3>
           <div class="row">
-            <div><label>Tarikh (From)</label><input id="mf" type="date" onchange="loadMark()"></div>
-            <div><label>Tak (khali = sirf ek din)</label><input id="mto" type="date"></div>
+            <div><label>Date (From)</label><input id="mf" type="date" onchange="loadMark()"></div>
+            <div><label>Date (To)</label><input id="mto" type="date"></div>
             <div><label>Kya mark karein</label><select id="mty">
                 <option value="FULL">Full day (Present)</option>
                 <option value="CL">CL - Casual Leave</option>
@@ -673,20 +673,20 @@
 
       <section id="t-hol" hidden>
         <div class="card">
-          <h3>Chhutti jodein</h3>
+          <h3>Add Holiday</h3>
           <div class="row">
-            <div><label>Kis sansthan ke liye</label><select id="hoo"></select></div>
-            <div><label>Tarikh (From)</label><input id="hf" type="date"></div>
-            <div><label>Tak (khali = sirf ek din)</label><input id="ht" type="date"></div>
-            <div><label>Chhutti ka naam</label><input id="hn" maxlength="60" placeholder="jaise Diwali"></div><button
+            <div><label>Select Sansthan</label><select id="hoo"></select></div>
+            <div><label>Date (From)</label><input id="hf" type="date"></div>
+            <div><label>Date (To)</label><input id="ht" type="date"></div>
+            <div><label>Holiday Name</label><input id="hn" maxlength="60" placeholder="jaise Diwali"></div><button
               class="btn" onclick="addHol()">Jodein</button>
           </div>
-          <div class="note">Ravivar apne aap saptahik chhutti mana jata hai. "Sabhi sansthan" chunne par chhutti sab par
+          <div class="note">Sunday apne aap weekly holiday mana jata hai. "All Units" chunne par chhutti sab par
             lagti hai. Chhutti ke din us sansthan ka staff Check In nahi kar sakta aur wo din Absent nahi ginta. Kisi se
             chhutti ke din kaam karwana ho to Attendance tab se Full day ya Office Work mark karein.</div>
         </div>
         <div class="card">
-          <h3>Chhuttiyon ki list &nbsp;<select id="hy" onchange="holList()"
+          <h3>Holidays List &nbsp;<select id="hy" onchange="holList()"
               style="width:auto;display:inline-block;padding:6px 10px"></select></h3>
           <div class="tw">
             <table id="thol"></table>
@@ -696,12 +696,12 @@
 
       <section id="t-rep" hidden>
         <div class="card noprint">
-          <h3>Report banayein</h3>
+          <h3>Create Report</h3>
           <div class="row">
             <div><label>From</label><input id="rf" type="date"></div>
             <div><label>To</label><input id="rt" type="date"></div>
             <div><label>Staff</label><select id="rs">
-                <option value="">Sabhi staff</option>
+                <option value="">All Staff</option>
               </select></div>
             <div><label>Report ka prakar</label><select id="rty">
                 <option value="full">Poori report (Summary + Register + Details)</option>
@@ -716,7 +716,7 @@
             <button class="btn g" onclick="quick('m')">Is mahine</button><button class="btn g"
               onclick="quick('p')">Pichhla mahina</button>
           </div>
-          <div class="note">Report upar chune hue sansthan ki banti hai ("Sabhi sansthan" chunne par sab ki). Print
+          <div class="note">Report upar chune hue sansthan ki banti hai ("All Units" chunne par sab ki). Print
             dabane par "Save as PDF" chunkar PDF bhi bana sakte hain. Page A4 landscape mein set hai.</div>
         </div>
         <div id="rout"></div>
@@ -724,11 +724,11 @@
 
       <section id="t-admins" hidden>
         <div class="card">
-          <h3>Naya Sansthan Admin banayein</h3>
+          <h3>Add New Unit Admin</h3>
           <div class="row">
-            <div><label>Sansthan</label><select id="aorg"></select></div>
-            <div><label>Admin ka naam</label><input id="an" maxlength="40" placeholder="jaise Pradhanacharya"></div>
-            <button class="btn" onclick="addAdmin()">Admin banayein</button>
+            <div><label>Unit</label><select id="aorg"></select></div>
+            <div><label>Name of Admin</label><input id="an" maxlength="40" placeholder="Ex: Pradhanacharya"></div>
+            <button class="btn" onclick="addAdmin()">Add Admin</button>
           </div>
           <div class="note">Admin ID aur ek asthayi password server khud banata hai (password sirf ek baar dikhta hai).
             Pehli login par admin ko naya password rakhna padta hai. <b>Sansthan admin</b> sirf apne sansthan ka staff,
@@ -746,11 +746,11 @@
 
       <section id="t-audit" hidden>
         <div class="card">
-          <h3>Gatividhi log <small style="color:#66758a;font-weight:400">(pichhli 300, sabse nayi pehle)</small></h3>
+          <h3>Activity log <small style="color:#66758a;font-weight:400">(pichhli 300, sabse nayi pehle)</small></h3>
           <div class="tw">
             <table id="taud"></table>
           </div>
-          <div class="note">Yahan har zaroori kaam (login, staff jodna/hatana, attendance mark, chhutti, sansthan aur
+          <div class="note">Important (login, staff jodna/hatana, attendance mark, chhutti, sansthan aur
             admin ke badlav, mana kiye gaye prayas) ka samay aur kisne kiya, ye likha hota hai. Password kabhi nahi
             likhe jate.</div>
         </div>
@@ -800,7 +800,7 @@
     /* aaj ki tarikh/samay hamesha IST (UTC+5:30) mein, chahe phone/browser ka timezone kuch bhi ho */
     const ist = () => new Date(Date.now() + 19800000), todayS = () => ist().toISOString().slice(0, 10);
     const dmy = s => String(s).split("-").reverse().join("-");
-    const WD = ["Ravivar", "Somvar", "Mangalvar", "Budhvar", "Guruvar", "Shukravar", "Shanivar"];
+    const WD = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const toast = t => { const e = $("toast"); e.textContent = t; e.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => e.style.display = "none", 3200) };
     let TOK = sessionStorage.getItem("at") || "", orgs = [], users = [], hols = [], CUR = sessionStorage.getItem("ao") || "", curTab = "dash", rows = [], sumRows = [], lastTy = "full", lastTitle = "", ME = null, TEMPPW = "", lastT = 0, lastR = null, admList = [], lastAdm = "";
 
@@ -850,7 +850,7 @@
     let tabs = {};
     function buildNav() {
       tabs = { dash: "Dashboard" }; if (ME.role === "super") { tabs.orgs = "Sansthan"; tabs.admins = "Admin" }
-      Object.assign(tabs, { staff: "Staff", mark: "Attendance", hol: "Holiday", rep: "Report", audit: "Gatividhi", set: "Settings" });
+      Object.assign(tabs, { staff: "Staff", mark: "Attendance", hol: "Holiday", rep: "Report", audit: "Activity", set: "Settings" });
       $("nav").innerHTML = Object.entries(tabs).map(([k, v]) => `<button data-k="${k}" onclick="tab('${k}')">${v}</button>`).join("")
     }
 
