@@ -1,467 +1,147 @@
 <!DOCTYPE html>
-<html lang="hi">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1e31">
-<title>Shiv Attendance</title>
+<html lang="hi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shiv Attendance – उपयोग गाइड / User Guide</title>
 <style>
-:root{
-  --navy:#0b1e31; --navy2:#17405f; --ink:#0f2438; --mut:#5f7387;
-  --ok:#16a06f; --bad:#d64550; --amb:#a86a00; --amber:#ffb83d; --vio:#6a4fd8; --sky:#3b8fe0;
-  --gbg:linear-gradient(135deg,rgba(255,255,255,.66),rgba(255,255,255,.22) 45%,rgba(255,255,255,.46));
-  --nav:calc(94px + env(safe-area-inset-bottom)); --r:22px
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{background:#d3ece0}
-body{margin:0;min-height:100vh;min-height:100dvh;color:var(--ink);background:#d3ece0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;padding-bottom:var(--nav);overflow-x:hidden}
-button,input{font-family:inherit}
-button{cursor:pointer}
+:root{--ink:#14213d;--mut:#5b6b82;--bg:#f4f6ff}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;font-family:"Noto Sans Devanagari","Nirmala UI","Mangal","Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:16px}
 [hidden]{display:none!important}
+body[data-l=hi] .en,body[data-l=en] .hi{display:none!important}
+.hero{position:relative;overflow:hidden;color:#fff;text-align:center;padding:48px 18px 70px;background:linear-gradient(120deg,#6a5cff,#ff3d9a,#ffb629,#18d6c4);background-size:300% 300%;animation:bg 14s ease infinite}
+@keyframes bg{50%{background-position:100% 50%}}
+.hero h1{margin:8px 0 6px;font-size:clamp(28px,6vw,48px);text-shadow:0 3px 14px #0003}.hero p{margin:0 auto;max-width:620px;font-size:17px;opacity:.95}
+.pin{font-size:56px;display:inline-block;animation:bob 3s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-9px)}}
+.lang{display:inline-flex;margin-top:18px;background:#ffffff33;border-radius:30px;padding:4px;backdrop-filter:blur(6px)}
+.lang button{border:0;background:none;color:#fff;font:inherit;font-weight:700;padding:8px 22px;border-radius:26px;cursor:pointer}
+body[data-l=hi] #bh,body[data-l=en] #be{background:#fff;color:#6a5cff}
+nav{position:sticky;top:0;z-index:9;display:flex;gap:6px;overflow-x:auto;background:#fffffff0;backdrop-filter:blur(8px);padding:9px 12px;box-shadow:0 3px 14px #14213d1a}
+nav a{flex:none;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px;padding:7px 14px;border-radius:20px;background:#eef0ff}
+nav a:hover{background:#6a5cff;color:#fff}
+main{max-width:980px;margin:-40px auto 0;padding:0 14px 40px;position:relative}
+.sec{background:#fff;border-radius:22px;padding:22px;margin-bottom:22px;box-shadow:0 10px 30px #14213d14;border-top:7px solid var(--c)}
+.sec h2{margin:0 0 4px;font-size:26px;color:var(--c)}.sec .sub{color:var(--mut);margin:0 0 14px}
+.tag{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--c);padding:3px 12px;border-radius:20px;margin-bottom:8px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.card{border-radius:18px;padding:16px;color:#fff;position:relative;overflow:hidden}
+.card b{font-size:18px;display:block;margin-bottom:4px}.card .n{position:absolute;right:12px;top:-6px;font-size:64px;font-weight:900;opacity:.22}
+.k1{background:linear-gradient(135deg,#16a06f,#18d6c4)}.k2{background:linear-gradient(135deg,#0b5ed7,#6a5cff)}.k3{background:linear-gradient(135deg,#ff3d9a,#ffb629)}
+ol.s{list-style:none;counter-reset:s;padding:0;margin:0}
+ol.s li{counter-increment:s;position:relative;padding:10px 12px 10px 58px;margin:8px 0;border-radius:14px;background:color-mix(in srgb,var(--c) 9%,#fff)}
+ol.s li:before{content:counter(s);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:var(--c);color:#fff;font-weight:800;display:grid;place-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.chip{padding:5px 14px;border-radius:20px;color:#fff;font-weight:700;font-size:14px}
+.f{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.fe{border-radius:16px;padding:14px;background:color-mix(in srgb,var(--c) 10%,#fff);border-left:6px solid var(--c)}.fe b{color:var(--c)}
+table{width:100%;border-collapse:collapse;border-radius:14px;overflow:hidden}
+th{background:var(--c);color:#fff;padding:10px;text-align:left}td{padding:9px 10px;border-bottom:1px solid #e6e9f5}tr:nth-child(even) td{background:#f7f8ff}
+.tw{overflow-x:auto}
+.warn{border-radius:14px;padding:12px 14px;margin-top:12px;background:#fff4d6;color:#7a5200;border-left:6px solid #ffb629}
+.ok{background:#dff5ea;color:#0b6b49;border-left-color:#16a06f}
+details{border-radius:14px;margin:8px 0;background:#f6f7ff;border:1px solid #e1e4ff;overflow:hidden}
+summary{cursor:pointer;font-weight:700;padding:12px 14px;color:#c62f3e}summary:hover{background:#eceeff}details p{margin:0;padding:0 14px 12px}
+code{background:#14213d;color:#7dffb3;padding:2px 8px;border-radius:7px;font-size:14px}
+.bt{display:inline-block;margin:6px 4px 0 0;padding:9px 18px;border:0;border-radius:24px;background:#14213d;color:#fff;font:inherit;font-weight:700;cursor:pointer}
+footer{text-align:center;padding:26px 14px;color:#fff;background:linear-gradient(120deg,#14213d,#6a5cff)}footer b{font-size:18px}
+@media print{.hero{animation:none}nav,.lang,.bt{display:none}body{background:#fff}.sec{box-shadow:none;break-inside:avoid}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head>
+<body data-l="hi">
+<header class="hero"><div class="pin">📍</div>
+<h1>Shiv Attendance</h1>
+<p><span class="hi">लोकेशन आधारित स्मार्ट अटेंडेंस — उपयोग गाइड</span><span class="en">Location-based smart attendance — User Guide</span></p>
+<div><a id="bk" class="bt" href="app.html" hidden>← ऐप / App</a></div>
+<div class="lang"><button id="bh" onclick="L('hi')">हिंदी</button><button id="be" onclick="L('en')">English</button></div></header>
+<nav><a href="#start"><span class="hi">शुरुआत</span><span class="en">Start</span></a><a href="#staff"><span class="hi">स्टाफ</span><span class="en">Staff</span></a><a href="#admin"><span class="hi">संस्थान एडमिन</span><span class="en">Sansthan Admin</span></a><a href="#super"><span class="hi">सुपर एडमिन</span><span class="en">Super Admin</span></a><a href="#rules"><span class="hi">नियम</span><span class="en">Rules</span></a><a href="#faq"><span class="hi">समस्या-समाधान</span><span class="en">FAQ</span></a><a href="#setup"><span class="hi">सेटअप</span><span class="en">Setup</span></a></nav>
+<main>
 
-/* ===== aurora backdrop ===== */
-.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:linear-gradient(160deg,#dcf4e4,#cbe9e7 55%,#d3e2f7)}
-.orb{position:absolute;border-radius:50%;filter:blur(54px);opacity:.55;animation:drift 15s ease-in-out infinite alternate;translate:calc(var(--gx,0)*1px) calc(var(--gy,0)*1px);transition:translate .4s}
-.o1{width:55vmax;height:55vmax;left:-22vmax;top:28vh;background:#2fd0b0}
-.o2{width:50vmax;height:50vmax;right:-22vmax;top:48vh;background:#5a9bff;opacity:.42;animation-duration:19s}
-.o3{width:38vmax;height:38vmax;left:20vw;bottom:-14vmax;background:#ffc15a;opacity:.5;animation-duration:23s}
-.grid{position:absolute;left:-50%;right:-50%;bottom:-8%;height:40%;background:linear-gradient(rgba(11,30,49,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(11,30,49,.08) 1px,transparent 1px);background-size:46px 46px;transform:perspective(520px) rotateX(64deg);-webkit-mask-image:linear-gradient(transparent,#000 80%);mask-image:linear-gradient(transparent,#000 80%);animation:gridmove 3s linear infinite}
-.load{position:fixed;top:0;left:0;right:0;height:3px;z-index:80;display:none;overflow:hidden}
-.load::after{content:"";position:absolute;top:0;bottom:0;width:40%;background:linear-gradient(90deg,transparent,var(--amber),#2fd6a0,transparent);animation:ldb 1s linear infinite}
-#net{position:fixed;top:10px;left:50%;transform:translateX(-50%) translateY(-60px);z-index:70;background:#3a1218;color:#ffb3b8;font-size:12.5px;font-weight:600;padding:8px 16px;border-radius:30px;box-shadow:0 10px 24px -8px rgba(0,0,0,.4);transition:transform .35s cubic-bezier(.2,.9,.3,1.2)}
-#net.on{transform:translateX(-50%) translateY(0)}
+<section class="sec" id="start" style="--c:#6a5cff"><span class="tag">1</span>
+<h2><span class="hi">3 आसान कदम</span><span class="en">3 easy steps</span></h2>
+<p class="sub" data-adm><span class="hi">तीन तरह के उपयोगकर्ता: स्टाफ, संस्थान एडमिन (अपने संस्थान का), सुपर एडमिन (सबका)।</span><span class="en">Three kinds of users: Staff, Sansthan Admin (own organization only) and Super Admin (everything).</span></p>
+<div class="g3">
+<div class="card k1"><span class="n">1</span><b><span class="hi">संस्थान चुनें</span><span class="en">Choose your Sansthan</span></b><span class="hi">पहली बार लॉगिन पर अपना संस्थान चुनें।</span><span class="en">On first login, pick your organization.</span></div>
+<div class="card k2"><span class="n">2</span><b><span class="hi">लॉगिन करें</span><span class="en">Login</span></b><span class="hi">मोबाइल नंबर + User ID (जैसे <u>shr001</u>)।</span><span class="en">Mobile number + User ID (like <u>shr001</u>).</span></div>
+<div class="card k3"><span class="n">3</span><b><span class="hi">ऑफिस में Check In</span><span class="en">Check In at office</span></b><span class="hi">ऑफिस के 100 मीटर के अंदर हरा बटन दबाएँ।</span><span class="en">Tap the green button within 100 m of the office.</span></div>
+</div></section>
 
-/* ===== glass base ===== */
-.chip,.mini,.mnav,.cal,.row,.ruled,.st,.nav{isolation:isolate;position:relative;background:var(--gbg);backdrop-filter:blur(16px) saturate(170%);-webkit-backdrop-filter:blur(16px) saturate(170%);border:1px solid rgba(255,255,255,.55);box-shadow:0 14px 28px -12px rgba(11,30,49,.38),0 2px 6px rgba(11,30,49,.08),inset 0 1px 0 #fff,inset 0 -2px 6px rgba(11,30,49,.06)}
-.chip::before,.mini::before,.mnav::before,.cal::before,.row::before,.ruled::before,.st::before,.nav::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.7) 0,rgba(255,255,255,0) 32%),linear-gradient(295deg,rgba(255,255,255,.35) 0,rgba(255,255,255,0) 20%)}
-.chip::after,.mini::after,.mnav::after,.cal::after,.row::after,.ruled::after,.st::after,.nav::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;background:linear-gradient(135deg,#fff,rgba(80,190,255,.8) 25%,rgba(255,255,255,.15) 50%,rgba(255,180,80,.8) 75%,#fff);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+<section class="sec" id="staff" style="--c:#16a06f"><span class="tag"><span class="hi">स्टाफ ऐप</span><span class="en">STAFF APP</span></span>
+<h2>📱 <span class="hi">स्टाफ के लिए</span><span class="en">For Staff</span></h2>
+<ol class="s">
+<li><span class="hi">फोन में <b>Chrome</b> खोलें, एडमिन द्वारा दिया लिंक खोलें, <b>Location (GPS) ON</b> रखें और <b>Allow</b> दबाएँ।</span><span class="en">Open the link in <b>Chrome</b>, keep <b>Location (GPS) ON</b> and tap <b>Allow</b>.</span></li>
+<li><span class="hi">पहली बार <b>अपना संस्थान चुनें</b>, फिर मोबाइल नंबर और User ID डालें। (User ID एडमिन बताते हैं: संस्थान के पहले 3 अक्षर + क्रम, जैसे <code>shr001</code>)</span><span class="en">First time: <b>choose your Sansthan</b>, then enter mobile and User ID. (Your admin gives the ID: first 3 letters of the Sansthan + number, e.g. <code>shr001</code>)</span></li>
+<li><span class="hi">पहली लॉगिन पर आपका खाता इसी <b>फोन से जुड़</b> जाता है। दूसरे फोन से लॉगिन के लिए एडमिन से "Phone reset" कराएँ।</span><span class="en">On first login your account gets <b>locked to this phone</b>. For a new phone ask the admin for "Phone reset".</span></li>
+<li><span class="hi">बड़ा गोल बटन <b>हरा</b> होते ही <b>Check In</b> दबाएँ। लाल हो तो ऑफिस के और पास जाएँ।</span><span class="en">When the big round button turns <b>green</b>, tap <b>Check In</b>. If red, move closer to the office.</span></li>
+<li><span class="hi"><b>Check Out</b> Check In के कम से कम <b>2 घंटे बाद</b> खुलता है (बटन पर समय दिखता है)।</span><span class="en"><b>Check Out</b> opens at least <b>2 hours after</b> Check In (the button shows the wait).</span></li>
+<li><span class="hi">शाम <b>8 बजे</b> तक Check Out न किया तो अपने-आप Out होगा और उस दिन <b>Absent</b> गिना जाएगा।</span><span class="en">If you do not Check Out by <b>8 PM</b>, it is closed automatically and that day counts as <b>Absent</b>.</span></li>
+<li><span class="hi"><b>"मेरी report"</b> टैब में महीना बदलकर कैलेंडर, घंटे और % देखें; Print/PDF और CSV भी मिलता है।</span><span class="en">In <b>"My report"</b> change the month to see calendar, hours and %; Print/PDF and CSV available.</span></li>
+</ol>
+<div class="chips"><span class="chip" style="background:#16a06f">Present</span><span class="chip" style="background:#d64550">Absent</span><span class="chip" style="background:#e08a00">Leave CL/ML</span><span class="chip" style="background:#0b5ed7">Office Work</span><span class="chip" style="background:#6a5cff"><span class="hi">छुट्टी</span><span class="en">Holiday</span></span><span class="chip" style="background:#8795a6"><span class="hi">रविवार</span><span class="en">Sunday</span></span></div>
+<div class="warn ok"><b>✔ <span class="hi">सुझाव</span><span class="en">Tips</span>:</b> <span class="hi">हमेशा एक ही तरीके (Chrome / होम-स्क्रीन शॉर्टकट) से खोलें, ब्राउज़र का डेटा साफ़ न करें, और खुले में 10–20 सेकंड रुककर GPS सटीक होने दें।</span><span class="en">Always open it the same way (Chrome / home-screen shortcut), do not clear browser data, and wait 10–20 s outdoors for an accurate GPS.</span></div>
+</section>
 
-/* ===== login ===== */
-@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
-#lg{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:calc(20px + env(safe-area-inset-top)) 20px 20px;color:#fff;background:radial-gradient(60% 40% at 12% 8%,rgba(45,226,166,.4),transparent),radial-gradient(50% 40% at 92% 88%,rgba(255,184,61,.36),transparent),radial-gradient(45% 40% at 88% 14%,rgba(90,160,255,.4),transparent),linear-gradient(165deg,#0b1e31,#17405f)}
-.lcard{position:relative;width:min(100%,400px);padding:clamp(22px,6vw,34px);border-radius:30px;background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.05) 50%,rgba(255,255,255,.14));backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.28);box-shadow:0 40px 70px -24px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -2px 8px rgba(255,255,255,.08);animation:enter .9s cubic-bezier(.2,.9,.3,1.15) backwards}
-.lcard::before{content:"";position:absolute;inset:-1px;border-radius:31px;padding:1.5px;background:conic-gradient(from var(--ang),rgba(255,255,255,.85),rgba(90,200,255,.6),rgba(255,190,90,.6),rgba(110,255,205,.55),rgba(255,255,255,.85));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 7s linear infinite;pointer-events:none}
-.logo{width:78px;height:78px;border-radius:26px;display:grid;place-items:center;margin-bottom:20px;color:#fff;position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.55) 0,rgba(255,255,255,.05) 50%,transparent 51%),linear-gradient(145deg,#3fdca8,#0f9467);box-shadow:0 10px 0 #0a6a50,0 24px 30px -6px rgba(22,160,111,.6),inset 0 2px 0 rgba(255,255,255,.8),inset 0 -3px 8px rgba(0,0,0,.2);animation:float 4s ease-in-out infinite}
-.logo svg{filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
-.logo::after{content:"";position:absolute;top:-50%;bottom:-50%;width:28%;background:rgba(255,255,255,.6);transform:skewX(-20deg);animation:shine 3.5s ease-in-out infinite}
-#lg h1{margin:0 0 4px;font-size:clamp(28px,8vw,34px);letter-spacing:.3px}
-#lg p{margin:0 0 22px;opacity:.78;font-size:14.5px}
-#lg input,#lg select{width:100%;height:56px;padding:0 16px;border-radius:16px;font-size:17px;margin-bottom:12px;color:var(--ink);background:#fff;border:2px solid transparent;box-shadow:inset 0 3px 6px rgba(11,30,49,.18);transition:.2s}
-#lg select{padding:0 44px 0 16px;font-size:16px;-webkit-appearance:none;appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%230b1e31' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 16px center/14px}
-#lg input:focus,#lg select:focus{outline:0;border-color:var(--amber);box-shadow:inset 0 3px 6px rgba(11,30,49,.18),0 0 0 4px rgba(255,184,61,.35)}
-.go{width:100%;border:0;border-radius:16px;padding:17px;font-size:17px;font-weight:800;color:#3a2100;position:relative;overflow:hidden;margin-top:4px;background:linear-gradient(180deg,#ffd06a,#ffa81f);box-shadow:0 7px 0 #b46a00,0 18px 26px -8px rgba(255,170,0,.55),inset 0 2px 0 rgba(255,255,255,.7);transition:transform .12s,box-shadow .12s}
-.go::after{content:"";position:absolute;top:0;bottom:0;width:28%;background:rgba(255,255,255,.55);transform:skewX(-20deg);animation:shine 3s ease-in-out infinite .6s}
-.go:active{transform:translateY(5px);box-shadow:0 2px 0 #b46a00,0 8px 14px -6px rgba(255,170,0,.5),inset 0 2px 0 rgba(255,255,255,.7)}
-.go:disabled{opacity:.7}
-.err{color:#ffb3b8;font-size:14px;min-height:20px;margin-top:12px}
-#orgBox label{display:block;font-size:13px;opacity:.8;margin:0 0 6px}
-.orgsaved{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:16px;padding:13px 14px;margin-bottom:12px;font-size:15px;box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
-.orgsaved a{color:#ffc861;margin-left:8px;font-weight:700}
-.shake{animation:shake .4s}
+<section class="sec" id="admin" style="--c:#0b5ed7"><span class="tag"><span class="hi">संस्थान एडमिन</span><span class="en">SANSTHAN ADMIN</span></span>
+<h2>🏫 <span class="hi">संस्थान एडमिन के लिए</span><span class="en">For Sansthan Admin</span></h2>
+<p class="sub"><span class="hi">आप सिर्फ अपने संस्थान का स्टाफ, अटेंडेंस, छुट्टी और रिपोर्ट संभाल सकते हैं — किसी और संस्थान का कुछ नहीं दिखेगा।</span><span class="en">You manage only your own organization's staff, attendance, holidays and reports — nothing from other organizations is visible.</span></p>
+<ol class="s"><li><span class="hi">सुपर एडमिन से <b>Admin ID और अस्थायी पासवर्ड</b> लें। पहली लॉगिन पर <b>नया पासवर्ड</b> रखना ज़रूरी है (8+ अक्षर, अक्षर और अंक दोनों)।</span><span class="en">Get your <b>Admin ID and temporary password</b> from the Super Admin. On first login you must set a <b>new password</b> (8+ chars, letters and digits).</span></li></ol>
+<div class="f" style="margin-top:10px">
+<div class="fe"><b>📊 Dashboard</b><br><span class="hi">आज कौन Present, Leave या Absent है — लाइव।</span><span class="en">Who is Present, on Leave or Absent today — live.</span></div>
+<div class="fe"><b>👥 Staff</b><br><span class="hi">नाम + मोबाइल डालें; <b>User ID अपने-आप बनती है</b>। हरे कार्ड से "Message copy" करके स्टाफ को भेजें। Block, Phone reset, Delete यहीं।</span><span class="en">Enter name + mobile; the <b>User ID is generated automatically</b>. Use "Copy message" on the green card to send it. Block, Phone reset, Delete here.</span></div>
+<div class="fe"><b>✅ Attendance</b><br><span class="hi">तारीख और स्टाफ चुनें → <b>Full day / CL / ML / Office Work</b> या Clear। कई दिन चुनने पर रविवार-छुट्टी अपने-आप छूटते हैं।</span><span class="en">Pick date and staff → <b>Full day / CL / ML / Office Work</b> or Clear. For many days, Sundays and holidays are skipped automatically.</span></div>
+<div class="fe"><b>🎉 Holiday</b><br><span class="hi">अपने संस्थान की छुट्टी जोड़ें/हटाएँ। उस दिन Check In बंद और Absent नहीं गिना जाता।</span><span class="en">Add/remove your holidays. Check In is disabled that day and it is not counted Absent.</span></div>
+<div class="fe"><b>🖨️ Report</b><br><span class="hi">Summary, Register (P/A) और Details। <b>Print / PDF</b> (A4 landscape) और <b>CSV</b>।</span><span class="en">Summary, Register (P/A) and Details. <b>Print / PDF</b> (A4 landscape) and <b>CSV</b>.</span></div>
+<div class="fe"><b>🧾 Gatividhi (Log)</b><br><span class="hi">किसने, कब, क्या किया — सब दर्ज रहता है।</span><span class="en">Who did what and when — everything is recorded.</span></div>
+</div></section>
 
-/* ===== shell + hero ===== */
-.app{max-width:540px;margin:auto;min-height:calc(100dvh - var(--nav));display:flex;flex-direction:column}
-#vHome,#vRep{animation:view .5s cubic-bezier(.2,.8,.2,1) backwards}
-#vHome{flex:1;display:flex;flex-direction:column}
-.hero{position:relative;overflow:hidden;color:#fff;padding:calc(16px + env(safe-area-inset-top)) 20px 96px;border-radius:0 0 36px 36px;background:linear-gradient(165deg,var(--navy),var(--navy2));box-shadow:0 22px 40px -18px rgba(11,30,49,.75),inset 0 -2px 0 rgba(255,255,255,.15)}
-#vHome .hero{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center}
-#vRep .hero{padding-bottom:30px}
-.hero::before{content:"";position:absolute;inset:0 -10%;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.11) 38%,rgba(255,255,255,.02) 46%,transparent 52%),radial-gradient(60% 80% at 100% 0%,rgba(255,184,61,.3),transparent 60%),radial-gradient(50% 70% at 0% 100%,rgba(45,226,166,.24),transparent 60%);animation:beam 8s ease-in-out infinite alternate}
-.hero::after{content:"";position:absolute;top:-20%;bottom:-20%;left:62%;width:40px;pointer-events:none;background:linear-gradient(90deg,rgba(255,90,140,0),rgba(255,150,80,.2),rgba(255,230,120,.22),rgba(100,230,170,.2),rgba(90,170,255,.22),rgba(150,110,255,0));filter:blur(2px);animation:sweep 7s ease-in-out infinite alternate}
-.hero>*{position:relative;z-index:1}
-.hr{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.hr small{opacity:.72;font-size:13px}
-.hr b{display:block;font-size:clamp(19px,5.6vw,25px);margin:2px 0}
-.av{width:48px;height:48px;flex:none;border-radius:50%;border:0;display:grid;place-items:center;font-weight:800;font-size:19px;color:#3a2100;background:linear-gradient(180deg,rgba(255,255,255,.55) 0,rgba(255,255,255,0) 50%),linear-gradient(145deg,#ffd47a,#ff9a1f);box-shadow:0 5px 0 #a45f00,0 12px 18px -4px rgba(0,0,0,.5),inset 0 2px 0 rgba(255,255,255,.7);transition:.12s}
-.av:active{transform:translateY(4px);box-shadow:0 1px 0 #a45f00}
-.clock{font-size:clamp(40px,13vw,58px);font-weight:300;letter-spacing:2px;margin-top:10px;font-variant-numeric:tabular-nums;line-height:1.1;text-shadow:0 4px 18px rgba(255,184,61,.35)}
-.date{opacity:.75;font-size:14px;margin-top:2px}
-
-/* ===== punch orb ===== */
-.stagewrap{position:relative;z-index:2;display:grid;place-items:center;margin-top:-84px;padding:0 0 26px}
-.stage{perspective:800px;position:relative;animation:float 5s ease-in-out infinite}
-.stage::after{content:"";position:absolute;left:14%;right:14%;bottom:-24px;height:18px;border-radius:50%;background:radial-gradient(rgba(11,30,49,.5),transparent 70%);filter:blur(5px);animation:gshadow 5s ease-in-out infinite}
-.punch{--p:0;--c:#8aa0c0;--c2:#3b4f6e;--c3:#7f97b8;--g:rgba(95,115,135,.45);--sz:clamp(150px,min(52vw,27dvh),230px);width:var(--sz);height:var(--sz);border:0;padding:0;border-radius:50%;position:relative;display:grid;place-items:center;color:#fff;transform-style:preserve-3d;background:conic-gradient(var(--c) calc(var(--p)*1%),rgba(255,255,255,.55) 0);box-shadow:0 10px 0 rgba(11,30,49,.28),0 28px 40px -8px var(--g),inset 0 2px 0 #fff;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(var(--s,1));transition:transform .15s,box-shadow .2s}
-.punch::before{content:"";position:absolute;inset:calc(var(--sz)*.075);border-radius:50%;background:radial-gradient(ellipse 52% 26% at 50% 14%,rgba(255,255,255,.95),rgba(255,255,255,0) 100%),radial-gradient(ellipse 62% 42% at 50% 104%,var(--c),transparent 100%),radial-gradient(circle at 50% 50%,rgba(255,255,255,0) 52%,rgba(255,255,255,.42) 100%),radial-gradient(circle at 50% 38%,var(--c3),var(--c2) 95%);box-shadow:inset 4px 0 8px rgba(255,90,130,.35),inset -4px 0 8px rgba(80,200,255,.4),inset 0 -14px 26px rgba(0,0,0,.22),inset 0 8px 16px rgba(255,255,255,.4),0 0 0 3px rgba(255,255,255,.7)}
-.punch .in{position:relative;z-index:1;text-align:center;padding:0 12px;transform:translateZ(30px);margin-top:6%}
-.punch .ic{font-size:calc(var(--sz)*.2);line-height:1;filter:drop-shadow(0 5px 6px rgba(0,0,0,.4))}
-.punch .lb{font-size:calc(var(--sz)*.095);font-weight:800;margin-top:5px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.45)}
-.punch .sb{font-size:clamp(10.5px,calc(var(--sz)*.05),13px);color:rgba(255,255,255,.88);margin-top:3px;line-height:1.25;text-shadow:0 1px 3px rgba(0,0,0,.4)}
-.punch:not(:disabled):active{--s:.95;box-shadow:0 3px 0 rgba(11,30,49,.28),0 12px 24px -8px var(--g),inset 0 2px 0 #fff}
-.punch:disabled{cursor:default}
-.punch.ok{--c:#19c58a;--c2:#0b6b4c;--c3:#2fd6a0;--g:rgba(22,160,111,.6)}
-.punch.amb,.punch.wait{--c:#ffa91f;--c2:#8a5200;--c3:#ffc24f;--g:rgba(240,160,30,.6)}
-.punch.no,.punch.abs{--c:#f0566a;--c2:#7a1a2b;--c3:#f4808f;--g:rgba(214,69,80,.55)}
-.punch.done{--c:#3b8fe0;--c2:#123f6e;--c3:#6cb2f2;--g:rgba(59,143,224,.55)}
-.punch.ready{animation:glowp 2s ease-in-out infinite}
-.punch.ready::after{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid var(--c);animation:pl 2s ease-out infinite}
-.rip{position:absolute;inset:0;border-radius:50%;border:4px solid var(--c);pointer-events:none;animation:rip .7s ease-out forwards}
-
-.msg{margin:4px 16px 0;font-size:14px;min-height:18px;text-align:center;color:var(--mut)}
-.msg.good{color:#0b8a5d;font-weight:700;animation:pop .4s}
-.msg.bad{color:var(--bad);font-weight:600;animation:pop .4s}
-.ruled{margin:10px 16px 0;padding:10px 14px;border-radius:16px}
-.ruled summary{list-style:none;font-size:13px;font-weight:700;color:var(--amb);display:flex;justify-content:space-between;align-items:center}
-.ruled summary::-webkit-details-marker{display:none}
-.ruled summary::after{content:"\25BE";transition:transform .25s}
-.ruled[open] summary::after{transform:rotate(180deg)}
-#rule{font-size:12.5px;line-height:1.55;color:#3d5368;margin-top:8px}
-.chip{margin:10px 16px 0;border-radius:18px;padding:12px 14px;display:flex;gap:13px;align-items:center}
-.dot{width:13px;height:13px;border-radius:50%;background:#9aabbd;flex:none}
-.dot.in{background:var(--ok);box-shadow:0 0 0 5px rgba(22,160,111,.22);animation:beat 1.6s ease-in-out infinite}
-.dot.out{background:var(--bad);box-shadow:0 0 0 5px rgba(214,69,80,.2)}
-.chip b{font-size:15px}
-.chip small{display:block;color:var(--mut);margin-top:2px;font-size:12.5px}
-.three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 16px 0}
-.mini{border-radius:18px;padding:12px 6px;text-align:center;transform:perspective(600px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .2s}
-.mini small{color:var(--mut);font-size:12px}
-.mini b{display:block;font-size:clamp(16px,4.6vw,19px);margin-top:3px}
-.sec{margin:14px 16px 0;padding-bottom:20px}
-.sec h3{margin:0 0 10px;font-size:15px;color:var(--navy)}
-
-/* ===== report ===== */
-.mnav{display:flex;align-items:center;justify-content:space-between;margin:16px 16px 0;border-radius:20px;padding:6px}
-.mnav button{width:46px;height:46px;border:0;border-radius:14px;font-size:24px;color:#fff;background:linear-gradient(180deg,rgba(255,255,255,.3) 0,rgba(255,255,255,0) 50%),linear-gradient(160deg,var(--navy2),var(--navy));box-shadow:0 4px 0 #08182a,inset 0 1px 0 rgba(255,255,255,.4);transition:.12s}
-.mnav button:active{transform:translateY(3px);box-shadow:0 1px 0 #08182a}
-.mnav button:disabled{opacity:.3}
-.mnav b{font-size:17px}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 16px 0}
-.st{border-radius:18px;padding:14px;background:linear-gradient(135deg,var(--t1),var(--t2));transform:perspective(600px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .2s;box-shadow:0 14px 24px -12px var(--sh),0 2px 6px rgba(11,30,49,.08),inset 0 1px 0 #fff,inset 0 -2px 6px rgba(11,30,49,.06)}
-.st small{font-size:12.5px;color:var(--ac);opacity:.9}
-.st b{display:block;font-size:28px;margin-top:2px;color:var(--ac)}
-.st.p{--t1:rgba(22,160,111,.5);--t2:rgba(22,160,111,.14);--ac:#0b6b49;--sh:rgba(22,160,111,.6)}
-.st.a{--t1:rgba(214,69,80,.45);--t2:rgba(214,69,80,.12);--ac:#9a2630;--sh:rgba(214,69,80,.55)}
-.st.h{--t1:rgba(59,143,224,.45);--t2:rgba(59,143,224,.12);--ac:#1d4a85;--sh:rgba(59,143,224,.55)}
-.st.r{--t1:rgba(255,184,61,.6);--t2:rgba(255,184,61,.16);--ac:#7a5200;--sh:rgba(240,160,30,.6)}
-.st.l{--t1:rgba(255,140,60,.5);--t2:rgba(255,140,60,.14);--ac:#8a4200;--sh:rgba(255,140,60,.55)}
-.st.o{--t1:rgba(110,140,255,.45);--t2:rgba(110,140,255,.12);--ac:#243e8f;--sh:rgba(110,140,255,.55)}
-.cal{border-radius:22px;padding:14px;margin:14px 16px 0}
-.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;text-align:center}
-.cg .wd{font-size:12px;color:var(--mut);padding-bottom:4px;font-weight:600}
-.cd{aspect-ratio:1;border-radius:12px;display:grid;place-items:center;font-size:clamp(12px,3.7vw,15px);font-weight:700;background:rgba(255,255,255,.5);color:var(--mut);box-shadow:0 2px 4px rgba(11,30,49,.1),inset 0 1px 0 #fff;animation:pop .45s backwards}
-.cg>:nth-child(7n+2){animation-delay:.03s}.cg>:nth-child(7n+3){animation-delay:.06s}.cg>:nth-child(7n+4){animation-delay:.09s}
-.cg>:nth-child(7n+5){animation-delay:.12s}.cg>:nth-child(7n+6){animation-delay:.15s}.cg>:nth-child(7n){animation-delay:.18s}
-.cd.p,.cd.l,.cd.o,.cd.h,.cd.a{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25)}
-.cd.p{background:linear-gradient(180deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.05) 50%,transparent 51%),linear-gradient(160deg,#3fdca8,#0f9467);box-shadow:0 5px 9px -3px rgba(15,148,103,.65),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -2px 4px rgba(0,0,0,.18)}
-.cd.l{color:#4a2f00;text-shadow:none;background:linear-gradient(180deg,rgba(255,255,255,.55) 0,rgba(255,255,255,.05) 50%,transparent 51%),linear-gradient(160deg,#ffd27a,#e8961a);box-shadow:0 5px 9px -3px rgba(232,150,26,.65),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -2px 4px rgba(0,0,0,.15)}
-.cd.o{background:linear-gradient(180deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.05) 50%,transparent 51%),linear-gradient(160deg,#8fd0ff,#3b8fe0);box-shadow:0 5px 9px -3px rgba(59,143,224,.65),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -2px 4px rgba(0,0,0,.18)}
-.cd.h{background:linear-gradient(180deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.05) 50%,transparent 51%),linear-gradient(160deg,#c7b9ff,#7b66e6);box-shadow:0 5px 9px -3px rgba(123,102,230,.65),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -2px 4px rgba(0,0,0,.18)}
-.cd.a{background:linear-gradient(180deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.05) 50%,transparent 51%),linear-gradient(160deg,#ff8f9d,#d63a52);box-shadow:0 5px 9px -3px rgba(214,58,82,.65),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -2px 4px rgba(0,0,0,.18)}
-.cd.off{background:rgba(255,255,255,.22);color:#93a5b8;box-shadow:none}
-.cd.t{outline:2px solid var(--navy);outline-offset:2px;animation:pop .45s backwards,tod 1.8s ease-in-out infinite}
-.leg{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;margin-top:12px;font-size:12px;color:var(--mut)}
-.leg i{display:inline-block;width:11px;height:11px;border-radius:4px;margin-right:5px;vertical-align:-1px;box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px;border-radius:16px;padding:12px 14px;margin-bottom:9px;animation:rise .45s backwards}
-.row:nth-child(2){animation-delay:.05s}.row:nth-child(3){animation-delay:.1s}.row:nth-child(4){animation-delay:.15s}.row:nth-child(n+5){animation-delay:.2s}
-.row b{font-size:15px}
-.row small{display:block;color:var(--mut);font-size:12px;margin-top:2px}
-.row .t{text-align:right;font-size:14px}
-.acts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 16px 0}
-.ab{border:0;border-radius:16px;padding:15px;font-weight:800;font-size:15px;color:#fff;background:linear-gradient(180deg,rgba(255,255,255,.3) 0,rgba(255,255,255,0) 50%),linear-gradient(160deg,var(--navy2),var(--navy));box-shadow:0 6px 0 #08182a,0 14px 22px -8px rgba(11,30,49,.6),inset 0 1px 0 rgba(255,255,255,.4);transition:.12s}
-.ab.g{color:var(--navy);background:var(--gbg);box-shadow:0 6px 0 rgba(11,30,49,.22),0 14px 22px -10px rgba(11,30,49,.35),inset 0 1px 0 #fff}
-.ab:active{transform:translateY(5px);box-shadow:0 1px 0 #08182a}
-.ab.g:active{box-shadow:0 1px 0 rgba(11,30,49,.22)}
-.empty{text-align:center;color:var(--mut);padding:18px;font-size:14px}
-.phead{display:none}
-
-/* ===== nav ===== */
-.nav{position:fixed;left:50%;bottom:calc(12px + env(safe-area-inset-bottom));width:min(calc(100% - 28px),420px);transform:translateX(-50%);z-index:20;display:flex;gap:6px;padding:7px;border-radius:26px;background:rgba(255,255,255,.5);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,.6);box-shadow:0 18px 36px -12px rgba(11,30,49,.5),inset 0 1px 0 #fff}
-.nav button{flex:1;border:0;background:none;color:var(--mut);padding:9px 6px 8px;border-radius:20px;font-weight:700;font-size:12.5px;transition:.25s}
-.nav svg{display:block;margin:0 auto 3px;width:24px;height:24px;transition:.25s}
-.nav button.on{color:#fff;background:linear-gradient(180deg,rgba(255,255,255,.28) 0,rgba(255,255,255,0) 50%),linear-gradient(160deg,var(--navy2),var(--navy));box-shadow:0 4px 0 #08182a,0 10px 16px -6px rgba(11,30,49,.6),inset 0 1px 0 rgba(255,255,255,.4)}
-.nav button.on svg{transform:translateY(-2px) scale(1.12);color:var(--amber);filter:drop-shadow(0 3px 5px rgba(255,184,61,.7))}
-
-/* ===== keyframes ===== */
-@keyframes drift{to{transform:translate(8vw,-6vh) scale(1.15)}}
-@keyframes gridmove{to{background-position:0 46px}}
-@keyframes ldb{from{left:-40%}to{left:100%}}
-@keyframes spin{to{--ang:360deg}}
-@keyframes enter{from{opacity:0;transform:translateY(50px) scale(.92)}}
-@keyframes view{from{opacity:0;transform:translateY(20px) scale(.98)}}
-@keyframes float{50%{transform:translateY(-9px)}}
-@keyframes gshadow{50%{transform:scale(.82);opacity:.6}}
-@keyframes shine{0%,55%{left:-40%}100%{left:130%}}
-@keyframes beam{to{transform:translateX(8%)}}
-@keyframes sweep{from{transform:translateX(-90px) skewX(-22deg)}to{transform:translateX(60px) skewX(-22deg)}}
-@keyframes pl{from{transform:scale(1);opacity:.7}to{transform:scale(1.25);opacity:0}}
-@keyframes glowp{50%{filter:brightness(1.1)}}
-@keyframes rip{from{transform:scale(1);opacity:.9}to{transform:scale(1.5);opacity:0}}
-@keyframes beat{50%{transform:scale(1.25)}}
-@keyframes pop{from{opacity:0;transform:scale(.7)}}
-@keyframes rise{from{opacity:0;transform:translateY(16px)}}
-@keyframes tod{50%{outline-color:var(--amber)}}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
-@media (max-height:640px){.clock{font-size:38px}.punch{--sz:clamp(135px,min(48vw,26dvh),190px)}#vHome .hero{padding-bottom:80px}.stagewrap{margin-top:-70px;padding-bottom:18px}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
-@media print{
- body{background:#fff;color:#000;padding:0}
- .bg,.hero,.nav,.punch,.chip,.msg,.three,.acts,.mnav button,#vHome,.load,#net{display:none!important}
- .phead{display:block;padding:10px 16px}
- .app{max-width:none}
- *{animation:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
- .cal::before,.cal::after,.st::before,.st::after,.row::before,.row::after,.mnav::before,.mnav::after{display:none}
- .cal,.st,.row,.mnav{background:#fff;box-shadow:none;border:1px solid #ccd}
- .cd{box-shadow:none;border:1px solid #ccd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-}
-</style>
-</head>
-<body>
-<div class="bg"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="grid"></div></div>
-<div class="load" id="ld"></div>
-<div id="net">&#9888; Internet nahi hai &mdash; jab wapas aaye tab apne aap judega</div>
-
-<div id="lg">
-  <div class="lcard" data-tilt="8">
-    <div class="logo"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-    <h1>Attendance</h1>
-    <p>Sansthan, mobile number aur User ID se login karein</p>
-    <div id="orgBox"><label for="os">Apna sansthan chunein (sirf pehli baar)</label><select id="os"><option value="">Sansthan load ho rahe hain...</option></select></div>
-    <div id="orgSaved" class="orgsaved" hidden>Sansthan: <b id="orgName"></b><a href="#" onclick="chgOrg();return false">badlein</a></div>
-    <input id="m" type="tel" inputmode="numeric" maxlength="10" placeholder="Mobile number" autocomplete="off" oninput="this.value=this.value.replace(/\D/g,'')">
-    <input id="u" placeholder="User ID (jaise shr001)" autocapitalize="off" autocomplete="off" onkeydown="if(event.key==='Enter')login()">
-    <button class="go" id="lb" onclick="login()">Login</button>
-    <div class="err" id="lm"></div>
-  </div>
+<section class="sec" id="super" style="--c:#c2188a"><span class="tag">SUPER ADMIN</span>
+<h2>👑 <span class="hi">सुपर एडमिन के लिए</span><span class="en">For Super Admin</span></h2>
+<p class="sub"><span class="hi">सब कुछ आपके हाथ में। ऊपर के सूची-बटन से "सभी संस्थान" या कोई एक संस्थान चुनें।</span><span class="en">You control everything. Use the top selector for "All Sansthan" or a single one.</span></p>
+<div class="f">
+<div class="fe"><b>🏢 Sansthan</b><br><span class="hi">नाम, <b>लोकेशन</b> (संस्थान के अंदर खड़े होकर "Meri current location lo"), Radius (30–2000 मी), <b>ID Code</b> (3 अक्षर)। Edit, Band/Chalu, Delete।</span><span class="en">Name, <b>location</b> (stand inside and tap "Meri current location lo"), radius (30–2000 m), <b>ID Code</b> (3 letters). Edit, Block/Unblock, Delete.</span></div>
+<div class="fe"><b>🔑 Admin</b><br><span class="hi">संस्थान चुनकर Admin बनाएँ — ID और पासवर्ड <b>सिर्फ एक बार</b> दिखता है, तुरंत भेज दें। Reset, Band, Delete भी यहीं।</span><span class="en">Create an admin per Sansthan — ID and password are shown <b>only once</b>, send them right away. Reset, Block, Delete too.</span></div>
+<div class="fe"><b>🆔 User ID</b><br><span class="hi">पुरानी ID (जैसे sdm001) हों तो Staff टैब में पीला बैनर दिखेगा — "Naye format mein badlein" दबाएँ और नई ID स्टाफ को बताएँ।</span><span class="en">If staff have old IDs (e.g. sdm001) a yellow banner appears in Staff — tap "Naye format mein badlein" and share the new IDs.</span></div>
+<div class="fe"><b>🛡️ Settings</b><br><span class="hi">अपना ID/पासवर्ड बदलते ही बाकी सभी पुराने लॉगिन बंद हो जाते हैं।</span><span class="en">When you change your ID/password, all other old logins are closed.</span></div>
 </div>
+<div class="warn"><b>⚠ <span class="hi">ध्यान</span><span class="en">Note</span>:</b> <span class="hi">Google Sheet किसी से शेयर न करें। संस्थान का ID Code बनने के बाद बदलता नहीं। जिस संस्थान में staff/attendance हो, उसे delete नहीं, "Band" करें।</span><span class="en">Never share the Google Sheet. A Sansthan's ID Code cannot change once created. A Sansthan with staff/attendance cannot be deleted — use "Block".</span></div>
+</section>
 
-<div class="app" id="hm" hidden>
-  <div id="vHome">
-    <div class="hero">
-      <div class="hr">
-        <div><small id="gr">Namaste</small><b id="nm"></b><small id="org"></small></div>
-        <button class="av" id="av" onclick="if(confirm('Logout karein?'))logout()"></button>
-      </div>
-      <div class="clock" id="ck">--:--:--</div>
-      <div class="date" id="dt"></div>
-    </div>
-    <div class="stagewrap">
-      <div class="stage">
-        <button class="punch" id="pn" disabled onclick="punch()" aria-live="polite">
-          <div class="in">
-            <div class="ic" id="pi">&#128205;</div>
-            <div class="lb" id="pl">Location...</div>
-            <div class="sb" id="ps"></div>
-          </div>
-        </button>
-      </div>
-    </div>
-    <div class="msg" id="mg"></div>
-    <details class="ruled"><summary>Niyam dekhein</summary><div id="rule"></div></details>
-    <div class="chip"><span class="dot" id="dot"></span>
-      <div><b id="zs">Location dhoondh rahe hain...</b><small id="zd"></small></div>
-    </div>
-    <div class="three">
-      <div class="mini" data-tilt="14"><small>Check In</small><b id="ti">--:--</b></div>
-      <div class="mini" data-tilt="14"><small>Check Out</small><b id="to">--:--</b></div>
-      <div class="mini" data-tilt="14"><small>Kaam ke ghante</small><b id="th">-</b></div>
-    </div>
-    <div class="sec">
-      <h3>Is mahine ka sar</h3>
-      <div class="stats" style="margin:0">
-        <div class="st p" data-tilt="10"><small>Present</small><b id="hp">0</b></div>
-        <div class="st a" data-tilt="10"><small>Absent</small><b id="ha">0</b></div>
-      </div>
-    </div>
-  </div>
+<section class="sec" id="rules" style="--c:#e08a00"><span class="tag">RULES</span>
+<h2>📋 <span class="hi">मुख्य नियम</span><span class="en">Key rules</span></h2>
+<div class="tw"><table><tr><th><span class="hi">विषय</span><span class="en">Topic</span></th><th><span class="hi">नियम</span><span class="en">Rule</span></th></tr>
+<tr><td>📍 Location</td><td><span class="hi">अपने संस्थान के Radius (डिफ़ॉल्ट 100 मी) के अंदर; GPS सटीकता 60 मी से बेहतर।</span><span class="en">Inside your Sansthan's radius (default 100 m); GPS accuracy better than 60 m.</span></td></tr>
+<tr><td>☝ Check In / Out</td><td><span class="hi">दिन में सिर्फ एक बार; Out, In के 2 घंटे बाद।</span><span class="en">Only once a day; Out is allowed 2 hours after In.</span></td></tr>
+<tr><td>🌙 8 PM</td><td><span class="hi">Out नहीं हुआ तो Auto-out + Absent; 8 बजे के बाद Check In नहीं।</span><span class="en">No Out → Auto-out + Absent; no Check In after 8 PM.</span></td></tr>
+<tr><td>📵 Phone</td><td><span class="hi">एक स्टाफ = एक फोन। एक मोबाइल नंबर = एक संस्थान।</span><span class="en">One staff = one phone. One mobile number = one Sansthan.</span></td></tr>
+<tr><td>🆔 User ID</td><td><span class="hi">संस्थान के पहले 3 अक्षर + 3 अंक का क्रम (shr001, shr002…)। दूसरे संस्थान की ID यहाँ नहीं चलती।</span><span class="en">First 3 letters of the Sansthan + 3-digit number (shr001, shr002…). Another Sansthan's ID never works here.</span></td></tr>
+<tr><td>📈 Upasthiti %</td><td><span class="hi">(Present + Office Work) ÷ कार्य-दिवस। रविवार/छुट्टी गिनती में नहीं।</span><span class="en">(Present + Office Work) ÷ working days. Sundays/holidays excluded.</span></td></tr>
+<tr data-adm><td>🔐 Login lock</td><td><span class="hi">5 बार गलत पासवर्ड पर उस ID का 15 मिनट के लिए लॉक।</span><span class="en">5 wrong passwords lock that ID for 15 minutes.</span></td></tr></table></div></section>
 
-  <div id="vRep" hidden>
-    <div class="hero">
-      <div class="hr">
-        <div><small>Meri report</small><b id="rn"></b></div>
-      </div>
-    </div>
-    <div class="phead"><h2 id="pt" style="margin:0"></h2></div>
-    <div class="mnav"><button id="pm" onclick="mv(-1)" aria-label="Pichhla mahina">&#8249;</button><b id="mt"></b><button id="nx" onclick="mv(1)" aria-label="Agla mahina">&#8250;</button></div>
-    <div class="stats">
-      <div class="st p" data-tilt="10"><small>Present</small><b id="rp">0</b></div>
-      <div class="st a" data-tilt="10"><small>Absent</small><b id="ra">0</b></div>
-      <div class="st l" data-tilt="10"><small>Leave (CL / ML)</small><b id="rl2">0</b></div>
-      <div class="st o" data-tilt="10"><small>Office work</small><b id="ro">0</b></div>
-      <div class="st h" data-tilt="10"><small>Kul ghante</small><b id="rh">0h</b></div>
-      <div class="st r" data-tilt="10"><small>Attendance %</small><b id="rr">0%</b></div>
-    </div>
-    <div class="cal">
-      <div class="cg" id="cg"></div>
-      <div class="leg"><span><i style="background:#1fb583"></i>Present</span><span><i style="background:#e0415a"></i>Absent</span><span><i style="background:#f0a020"></i>Leave</span><span><i style="background:#3b8fe0"></i>Office work</span><span><i style="background:#8171ee"></i>Chhutti</span><span><i style="background:#b9c6d4"></i>Ravivar</span></div>
-    </div>
-    <div class="acts"><button class="ab" onclick="print()">Print / PDF</button><button class="ab g" onclick="csv()">CSV download</button></div>
-    <div class="sec">
-      <h3>Din-wise record</h3>
-      <div id="rl"></div>
-    </div>
-  </div>
+<section class="sec" id="faq" style="--c:#c62f3e"><span class="tag">FAQ</span>
+<h2>🛠️ <span class="hi">समस्या-समाधान</span><span class="en">Troubleshooting</span></h2>
+<details><summary><span class="hi">"Location permission band hai" दिखता है</span><span class="en">"Location permission band hai" is shown</span></summary><p><span class="hi">लिंक <b>https://</b> वाला हो, फाइल से न खोलें। Chrome में पता-पट्टी के आइकन से Location = Allow करें, फोन की Location ON रखें, पेज रिफ्रेश करें।</span><span class="en">Use the <b>https://</b> link, not a local file. In Chrome set Location = Allow from the address-bar icon, keep phone Location ON, refresh.</span></p></details>
+<details><summary><span class="hi">बटन लाल है / "Door hain"</span><span class="en">Button is red / "Door hain"</span></summary><p><span class="hi">स्क्रीन पर दूरी और GPS ± देखें। संस्थान की सेव लोकेशन गलत हो सकती है (आपके एडमिन ठीक करें) या GPS कमज़ोर है — खुले में रुकें।</span><span class="en">Check the distance and GPS ± on screen. The saved location may be wrong (your admin fixes it) or GPS is weak — wait outdoors.</span></p></details>
+<details><summary><span class="hi">"Mobile, User ID ya Sansthan galat hai"</span><span class="en">"Mobile, User ID ya Sansthan galat hai"</span></summary><p><span class="hi">सही संस्थान चुनें (ID के पहले 3 अक्षर संस्थान के code से मिलने चाहिए), मोबाइल/ID जाँचें। संस्थान बदलना हो तो "badlein" दबाएँ।</span><span class="en">Choose the right Sansthan (the ID's first 3 letters must match its code) and recheck mobile/ID. Tap "badlein" to change Sansthan.</span></p></details>
+<details><summary><span class="hi">"Ye account kisi dusre phone se juda hai"</span><span class="en">"Ye account kisi dusre phone se juda hai"</span></summary><p><span class="hi">नया फोन/ब्राउज़र है। एडमिन Staff टैब में <b>Phone reset</b> करें, फिर नए फोन से लॉगिन करें।</span><span class="en">New phone/browser. Admin does <b>Phone reset</b> in Staff, then log in from the new phone.</span></p></details>
+<details><summary><span class="hi">Check Out नहीं खुल रहा</span><span class="en">Check Out will not open</span></summary><p><span class="hi">Check In के 2 घंटे पूरे होने तक बटन पर प्रतीक्षा-समय दिखता है। 8 बजे के बाद Out नहीं होता।</span><span class="en">Until 2 hours pass the button shows the wait time. After 8 PM Out is closed.</span></p></details>
+<details data-adm><summary><span class="hi">Admin लॉगिन "Bahut zyada galat koshish"</span><span class="en">Admin login says "Bahut zyada galat koshish"</span></summary><p><span class="hi">15 मिनट रुकें। सुपर एडमिन तुरंत खोलना चाहे तो Apps Script में <code>resetLocks</code> चलाए। पासवर्ड भूले तो सुपर एडमिन "Password reset" करे; सुपर एडमिन भूले तो <code>emergencyResetSuper</code>।</span><span class="en">Wait 15 minutes. The Super Admin can run <code>resetLocks</code> in Apps Script to unlock now. Forgotten password: Super Admin uses "Password reset"; if the Super Admin forgets, run <code>emergencyResetSuper</code>.</span></p></details>
+</section>
 
-  <div class="nav">
-    <button id="n1" class="on" onclick="tab('Home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>Aaj</button>
-    <button id="n2" onclick="tab('Rep')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Meri report</button>
-  </div>
-</div>
-
+<section class="sec" id="setup" style="--c:#0f8b8d"><span class="tag">OWNER SETUP</span>
+<h2>⚙️ <span class="hi">पहली बार सेटअप (मालिक के लिए)</span><span class="en">First-time setup (for the owner)</span></h2>
+<ol class="s">
+<li><span class="hi">Google Sheet → Extensions → Apps Script में <code>Code.gs</code> पेस्ट करें, <b>Save</b>।</span><span class="en">In Google Sheet → Extensions → Apps Script paste <code>Code.gs</code>, <b>Save</b>.</span></li>
+<li><span class="hi">फ़ंक्शन <code>upgrade</code> (नई शीट पर <code>setup</code>) एक बार <b>Run</b> करें।</span><span class="en">Run function <code>upgrade</code> (<code>setup</code> on a brand-new sheet) once.</span></li>
+<li><span class="hi"><b>Deploy → Manage deployments → ✏ → New version → Deploy</b> (हर बदलाव के बाद यही, "New deployment" नहीं)।</span><span class="en"><b>Deploy → Manage deployments → ✏ → New version → Deploy</b> (after every change; never "New deployment").</span></li>
+<li><span class="hi"><code>/exec</code> लिंक खोलकर <code>version: v11 role-based-admins</code> देखें।</span><span class="en">Open the <code>/exec</code> link and check <code>version: v11 role-based-admins</code>.</span></li>
+<li><span class="hi"><code>index.html</code>, <code>app.html</code>, <code>admin.html</code>, <code>guide.html</code> को GitHub Pages पर डालें; स्टाफ को सिर्फ <code>app.html</code> का लिंक दें।</span><span class="en">Upload <code>index.html</code>, <code>app.html</code>, <code>admin.html</code>, <code>guide.html</code> to GitHub Pages; give staff only the <code>app.html</code> link.</span></li>
+<li><span class="hi">सुपर एडमिन से लॉगिन → पासवर्ड बदलें → Sansthan बनाएँ → Admin बनाएँ → Staff जोड़ें।</span><span class="en">Log in as Super Admin → change password → create Sansthan → create Admins → add Staff.</span></li>
+</ol>
+<button class="bt" onclick="print()">🖨️ Print / PDF</button></section>
+</main>
+<footer><b>Shiv Computer</b><br>Karanpur Suratganj, Barabanki, Uttar Pradesh<br><span class="hi">धन्यवाद! सुरक्षित और आसान अटेंडेंस के लिए।</span><span class="en">Thank you! Safe and simple attendance.</span></footer>
 <script>
-/* ====== APNA APPS SCRIPT URL (deploy ke baad yahan badlein) ====== */
-const API_URL="https://script.google.com/macros/s/AKfycby3R-zHxm-x5MuGnqSdZdqAM0FS236jHw6eua3qRTy1j5RJoKKp32uVA57PTPyB1sBGmA/exec";
-const MAX_ACC=60,$=i=>document.getElementById(i);
-const iso=d=>{const z=new Date(d.getTime()-d.getTimezoneOffset()*6e4);return z.toISOString().slice(0,10)};
-let S=null,cfg=null,pos=null,rec=null,busy=false,TODAYHOL="",rm=new Date(),rrows=[],monthRows=[];rm.setDate(1);
-const gc=n=>{const m=document.cookie.match(new RegExp("(?:^|; )"+n+"=([^;]*)"));return m?decodeURIComponent(m[1]):""};
-let DEV=localStorage.getItem("att_dev")||gc("att_dev");
-if(!DEV||DEV.length<16)DEV=(window.crypto&&crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2)+Math.random().toString(36).slice(2)+"xxxx");
-try{localStorage.setItem("att_dev",DEV)}catch(e){}
-document.cookie="att_dev="+encodeURIComponent(DEV)+";max-age=315360000;path=/;SameSite=Lax"+(location.protocol==="https:"?";Secure":"");
-
-/* ---- network banner + API (25s timeout, 1 auto-retry) ---- */
-const netPill=$("net");
-const netWatch=()=>netPill.classList.toggle("on",!navigator.onLine);
-addEventListener("online",netWatch);addEventListener("offline",netWatch);netWatch();
-const api=async b=>{
- $("ld").style.display="block";
- const once=async()=>{const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),25000);
-  const r=await fetch(API_URL,{method:"POST",body:JSON.stringify({...b,device:DEV}),signal:ac.signal});
-  clearTimeout(tm);return await r.json()};
- try{const j=await once();netPill.classList.remove("on");return j}
- catch(e){try{const j=await once();netPill.classList.remove("on");return j}catch(e2){return{ok:false,msg:"Network error, internet check karein"}}}
- finally{$("ld").style.display="none"}};
-const cred=()=>({mobile:S.m,userId:S.u});
-const hav=(a,b,c,d)=>{const R=6371000,r=x=>x*Math.PI/180,dl=r(c-a),dn=r(d-b),h=Math.sin(dl/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
-const mins=(a,b)=>{if(!a||!b)return 0;const[x,y]=a.split(":"),[p,q]=b.split(":"),m=(p*60+ +q)-(x*60+ +y);return m>0?m:0};
-const fh=m=>m?Math.floor(m/60)+"h "+String(m%60).padStart(2,"0")+"m":"-";
-const dmy=s=>s.split("-").reverse().join("-");
-
-let ORG=null;try{ORG=JSON.parse(localStorage.getItem("att_org")||"null")}catch(e){}
-function showOrg(){const has=!!ORG;$("orgSaved").hidden=!has;$("orgBox").hidden=has;if(has)$("orgName").textContent=ORG.name;else loadOrgs()}
-function chgOrg(){ORG=null;showOrg()}
-async function loadOrgs(){const s=$("os");s.innerHTML='<option value="">Sansthan load ho rahe hain...</option>';
- const r=await api({a:"orgs"});
- if(!r.ok){s.innerHTML='<option value="">Sansthan load nahi hue</option>';$("lm").textContent=r.msg;if(/Network/.test(r.msg))setTimeout(()=>{if(!ORG)loadOrgs()},4000);return}
- if(!r.orgs.length){s.innerHTML='<option value="">Koi sansthan upalabdh nahi</option>';return}
- $("lm").textContent="";s.innerHTML='<option value="">-- Apna sansthan chunein --</option>'+r.orgs.map(o=>`<option value="${esc(o.id)}" data-code="${esc(o.code||"")}">${esc(o.name)}</option>`).join("")}
-const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-
-async function login(){const m=$("m").value.trim(),u=$("u").value.trim(),e=$("lm");e.textContent="";
- if(!/^\d{10}$/.test(m)||!u){e.textContent="Mobile (10 digit) aur User ID dalein";$("lg").firstElementChild.classList.remove("shake");void $("lg").offsetWidth;$("lg").firstElementChild.classList.add("shake");return}
- const oid=ORG?ORG.id:$("os").value;if(!oid){e.textContent="Pehle apna sansthan chunein";return}
- $("lb").disabled=true;$("lb").textContent="Ruko...";const r=await api({a:"login",mobile:m,userId:u,org:oid});$("lb").disabled=false;$("lb").textContent="Login";
- if(!r.ok){let hint="";
-  if(/Sansthan galat/.test(r.msg)){const opt=$("os").selectedOptions[0],code=ORG?(ORG.code||""):((opt&&opt.dataset.code)||""),mm=/^([a-z0-9]{3})\d{3,}$/i.exec(u);
-   hint=(mm&&code&&mm[1].toLowerCase()!==code)?" Dhyan dein: aapki ID '"+mm[1].toLowerCase()+"' se shuru hoti hai, jabki chune hue sansthan ka code '"+code+"' hai. Sahi sansthan chunein.":(ORG?" (Sansthan galat ho to 'badlein' dabayein)":"")}
-  e.textContent=r.msg+hint;return}
- if(!r.deviceLock){e.textContent="Server purana hai (phone lock band). Admin se Apps Script mein New version Deploy karwayein";return}
- ORG={id:r.orgId,name:r.org,code:r.code||""};localStorage.setItem("att_org",JSON.stringify(ORG));localStorage.setItem("att_me",JSON.stringify({m,u,o:r.orgId}));start({m,u,o:r.orgId},r)}
-function logout(){localStorage.removeItem("att_me");location.reload()}
-async function start(s,r){S=s;cfg=r;$("lg").hidden=true;$("hm").hidden=false;
- $("nm").textContent=r.name;$("rn").textContent=r.name;$("rule").textContent="Niyam: Check In aur Check Out din mein sirf ek-ek baar. Check Out, Check In ke "+((r.minStay||120)/60)+" ghante baad. Shaam "+(r.autoTime||"20:00")+" tak Check Out na hua to auto-out hoga aur us din Absent maana jayega.";$("org").textContent=r.org||"";$("av").textContent=(r.name||"?").trim()[0].toUpperCase();
- const h=new Date().getHours();$("gr").textContent=h<12?"Suprabhat":h<17?"Namaste":"Shubh sandhya";
- const cs=JSON.parse(localStorage.getItem("att_rec")||"null");if(cs&&cs.m===S.m&&cs.date===iso(new Date())&&cs.rec)rec={...cs.rec,cached:1};
- clock();setInterval(clock,1000);setInterval(()=>{if(cfg&&!busy)upd()},30000);
- await load();
- if(!navigator.geolocation){$("zs").textContent="GPS support nahi hai";return}
- navigator.geolocation.watchPosition(p=>{pos=p;upd()},er=>{$("zs").textContent=er.code===1?"Location permission band hai":"Location nahi mil rahi";$("zd").textContent="Phone ki Location on karke Allow dein";$("dot").className="dot out";setP("no","&#128683;","Band","")},{enableHighAccuracy:true,maximumAge:0,timeout:20000})}
-function clock(){if(new Date().getSeconds()===0&&cfg)upd();const d=new Date();$("ck").textContent=d.toLocaleTimeString("en-GB");$("dt").textContent=d.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}
-function tab(t){$("vHome").hidden=t!=="Home";$("vRep").hidden=t!=="Rep";$("n1").classList.toggle("on",t==="Home");$("n2").classList.toggle("on",t==="Rep");scrollTo(0,0);if(t==="Rep")report()}
-
-function setP(c,ic,lb,sb,p,ready,dis=true){const b=$("pn");b.className="punch "+c+(ready?" ready":"");b.style.setProperty("--p",p||0);b.disabled=dis;$("pi").innerHTML=ic;$("pl").textContent=lb;$("ps").textContent=sb||""}
-const AD={FULL:["&#9989;","Full day","Admin ne Full day mark kiya","Full day"],CL:["&#127796;","Casual Leave","Admin ne CL mark kiya","CL"],ML:["&#127973;","Medical Leave","Admin ne ML mark kiya","ML"],OW:["&#128188;","Office Work","Admin ne Office Work mark kiya","Office work"]};
-const MIN=()=>cfg.minStay||120,AUTO=()=>cfg.autoTime||"20:00";
-const toMin=s=>{const p=String(s).split(":");return p[0]*60+ +p[1]},nowMin=()=>{const d=new Date();return d.getHours()*60+d.getMinutes()};
-const remain=()=>rec&&rec.inTime?Math.max(MIN()-(nowMin()-toMin(rec.inTime)),0):0;
-function upd(){if(!cfg)return;let d=0,acc=0,inn=false,ok=false,p=0;
- if(pos){d=Math.round(hav(pos.coords.latitude,pos.coords.longitude,cfg.lat,cfg.lng));acc=Math.round(pos.coords.accuracy);inn=d<=cfg.radius;ok=acc<=MAX_ACC;p=Math.min(100,cfg.radius/Math.max(d,cfg.radius)*100);
-  $("dot").className="dot "+(inn&&ok?"in":"out");$("zs").textContent=!ok?"GPS signal kamzor hai":inn?"Aap office ke andar hain":"Aap office se bahar hain";
-  $("zd").textContent=`Doori ${d} m  \u2022  Limit ${cfg.radius} m  \u2022  GPS \u00b1${acc} m`}
- if(!loaded&&!rec){setP("idle","&#8987;","Ruko...","Status load ho raha hai",0,false);return}
- const ST=rec&&rec.status;
- if(ST&&AD[ST]&&!(ST==="FULL"&&rec.inTime&&!rec.outTime)){setP("done",AD[ST][0],AD[ST][1],AD[ST][2],100,false);return}
- if(!rec&&TODAYHOL){setP("done","&#127881;","Chhutti",TODAYHOL,100,false);return}
- if(rec&&rec.status==="AUTO"){setP("abs","&#9940;","Absent","Auto out "+AUTO()+" - aaj absent",100,false);return}
- if(rec&&rec.outTime){setP("done","&#9989;","Poora hua","Aaj ka kaam: "+fh(mins(rec.inTime,rec.outTime)),100,false);return}
- if(busy||!pos)return;
- const far=()=>setP("no","&#128205;",inn?"Wait":"Door hain",!ok?"GPS kamzor":(d-cfg.radius)+" m aur paas aayein",p,false),can=inn&&ok;
- if(!rec){if(nowMin()>=toMin(AUTO()))setP("no","&#128339;","Samay samapt","Check In "+AUTO()+" tak",100,false);
-  else can?setP("ok","&#128073;","Check In","Ek baar dabayein",p,true,false):far()}
- else{const rem=remain();if(rem>0)setP("wait","&#9203;","Check Out",fh(rem)+" baad khulega",p,false);
-  else can?setP("amb","&#128170;","Check Out","In: "+rec.inTime,p,true,false):far()}}
-function punch(){mark(rec?"out":"in")}
-async function mark(t){if(busy||!pos||!loaded)return;
- if(t==="in"&&rec)return;if(t==="out"&&(!rec||rec.outTime||remain()>0))return;
- if(t==="out"&&!confirm("Check Out karein?\nAaj ke liye Check Out sirf ek baar hota hai."))return;
- busy=true;$("pn").disabled=true;$("pl").textContent="Ruko...";const mg=$("mg");mg.className="msg";mg.textContent="Location jaanch rahe hain...";
- const p=await new Promise(r=>navigator.geolocation.getCurrentPosition(r,()=>r(null),{enableHighAccuracy:true,maximumAge:0,timeout:15000}));
- if(!p){mg.className="msg bad";mg.textContent="Location nahi mili, dobara try karein";busy=false;upd();return}
- const r=await api({a:"mark",type:t,...cred(),lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy});
- mg.className="msg "+(r.ok?"good":"bad");mg.textContent=r.ok?(t==="in"?"Check In":"Check Out")+" ho gaya: "+r.time+" ("+r.dist+" m)":r.msg;
- try{navigator.vibrate&&navigator.vibrate(r.ok?[25,40,25]:120)}catch(e){}
- if(r.ok){const dt=iso(new Date());rec=t==="in"?{date:dt,inTime:r.time,outTime:"",status:"",local:1}:{...(rec||{date:dt}),outTime:r.time,local:1}}
- await load();busy=false;upd()}
-
-let loaded=false,retrying=false;
-async function load(){let r=await api({a:"history",...cred()});if(!r.ok&&/Network/.test(r.msg))r=await api({a:"history",...cred()});
- if(!r.ok){if(/band|galat|juda/.test(r.msg)){logout();return}
-  $("mg").className="msg bad";$("mg").textContent="Server se jaankari nahi mili, dobara koshish ho rahi hai...";
-  if(!retrying){retrying=true;setTimeout(async()=>{retrying=false;await load();upd()},5000)}upd();return}
- loaded=true;if(/koshish/.test($("mg").textContent))$("mg").textContent="";
- const t=r.today,ym=t.slice(0,7);TODAYHOL=r.todayHoliday||"";rec=r.list.find(x=>x.date===t)||(rec&&rec.local&&rec.date===t?rec:null);
- const ST=rec&&rec.status,au=ST==="AUTO",adm=!!ST&&!!AD[ST]&&!(ST==="FULL"&&rec.inTime);
- rec?localStorage.setItem("att_rec",JSON.stringify({m:S.m,date:t,rec:{...rec,local:0,cached:0}})):localStorage.removeItem("att_rec");
- $("ti").textContent=rec?.inTime||"--:--";$("to").textContent=rec?.outTime?(au?"Auto "+rec.outTime:rec.outTime):"--:--";
- $("th").textContent=au?"Absent":adm?AD[ST][3]:rec?.outTime?fh(mins(rec.inTime,rec.outTime)):"-";
- const hs={},mp={};(r.hol||[]).forEach(h=>hs[h.date]=1);r.list.filter(x=>x.date.startsWith(ym)).forEach(x=>mp[x.date]=x);
- const dayN=+t.slice(8),late=(r.now||"")>=AUTO();let pc=0,ac=0;
- for(let i=1;i<=dayN;i++){const ds=ym+"-"+String(i).padStart(2,"0"),x=mp[ds],dw=new Date(+ym.slice(0,4),+ym.slice(5,7)-1,i).getDay();
-  if(x){if(!x.status||x.status==="FULL"||x.status==="OW")pc++;else if(x.status==="AUTO")ac++}
-  else if(!hs[ds]&&dw!==0&&(ds<t||late))ac++}
- $("hp").textContent=pc;$("ha").textContent=ac}
-
-/* ---- report ---- */
-function mv(n){rm.setMonth(rm.getMonth()+n);report()}
-const WDN=["Ravivar","Somvar","Mangalvar","Budhvar","Guruvar","Shukravar","Shanivar"];
-function rowHTML(o){const wd=WDN[new Date(o.d+"T00:00:00").getDay()];
- if(o.h)return`<div class="row"><div><b>${dmy(o.d)}</b><small>${wd}</small></div><div class="t"><b style="color:var(--vio)">Chhutti</b><small>${esc(o.h.name)}</small></div></div>`;
- const x=o.x,k=x.status||"";let top,sub,col="";
- if(k==="CL"||k==="ML"||k==="OW"||(k==="FULL"&&!x.inTime)){top={CL:"Casual Leave (CL)",ML:"Medical Leave (ML)",OW:"Office Work",FULL:"Full day (Present)"}[k];sub="Admin ne mark kiya";col="var(--amb)"}
- else{top=(x.inTime||"-")+" &rarr; "+(x.outTime||"-");
-  if(k==="AUTO"){sub="Auto Check Out - Absent";col="var(--bad)"}
-  else sub=fh(mins(x.inTime,x.outTime))+(x.inDist?" \u2022 "+x.inDist+" m":"")+(k==="FULL"?" \u2022 Admin: Full day":"")}
- return`<div class="row"><div><b>${dmy(x.date)}</b><small>${wd}</small></div><div class="t"><b>${top}</b><small${col?` style="color:${col};font-weight:700"`:""}>${sub}</small></div></div>`}
-async function report(){const y=rm.getFullYear(),m=rm.getMonth(),last=new Date(y,m+1,0).getDate(),ym=y+"-"+String(m+1).padStart(2,"0"),now=new Date();
- $("mt").textContent=rm.toLocaleDateString("en-IN",{month:"long",year:"numeric"});$("nx").disabled=(y===now.getFullYear()&&m===now.getMonth());
- $("pt").textContent=S?cfg.name+" - Attendance "+$("mt").textContent:"";
- const r=await api({a:"history",...cred(),from:ym+"-01",to:ym+"-"+String(last).padStart(2,"0")});
- rrows=(r.ok?r.list:[]).filter(x=>x.date.startsWith(ym)).sort((a,b)=>a.date<b.date?1:-1);
- const hol=(r.ok&&r.hol)||[],hs={};hol.forEach(x=>hs[x.date]=x.name);
- const map={},td=iso(now),late=now.getHours()>=20;rrows.forEach(x=>map[x.date]=x);let pr=0,ab=0,lv=0,ow=0,wk=0,mn=0;
- let h='<div class="wd">र</div><div class="wd">सो</div><div class="wd">मं</div><div class="wd">बु</div><div class="wd">गु</div><div class="wd">शु</div><div class="wd">श</div>'+'<div></div>'.repeat(new Date(y,m,1).getDay());
- for(let d=1;d<=last;d++){const ds=ym+"-"+String(d).padStart(2,"0"),dw=new Date(y,m,d).getDay(),x=map[ds];let c="";
-  if(x){const k=x.status;wk++;
-   if(k==="AUTO"){c="a";ab++}else if(k==="CL"||k==="ML"){c="l";lv++}else if(k==="OW"){c="o";ow++;mn+=mins(x.inTime,x.outTime)}else{c="p";pr++;mn+=mins(x.inTime,x.outTime)}}
-  else if(hs[ds])c="h";else if(dw===0)c="off";else if(ds<td||(ds===td&&late)){c="a";ab++;wk++}
-  h+=`<div class="cd ${c}${ds===td?" t":""}"${hs[ds]?` title="${esc(hs[ds])}"`:""}>${d}</div>`}
- $("cg").innerHTML=h;$("rp").textContent=pr;$("ra").textContent=ab;$("rl2").textContent=lv;$("ro").textContent=ow;$("rh").textContent=mn?Math.floor(mn/60)+"h":"0h";$("rr").textContent=wk?Math.min(100,Math.round((pr+ow)/wk*100))+"%":"0%";
- const items=[...rrows.map(x=>({d:x.date,x})),...hol.filter(x=>!map[x.date]).map(x=>({d:x.date,h:x}))].sort((a,b)=>a.d<b.d?1:-1);
- $("rl").innerHTML=items.map(rowHTML).join("")||'<div class="empty">Is mahine ka koi record nahi</div>'}
-function csv(){if(!rrows.length)return;const L={"":"Present",FULL:"Present (Admin Full day)",CL:"Casual Leave",ML:"Medical Leave",OW:"Office Work",AUTO:"Absent (Auto out)"};
- const c=[["Date","In","Out","Hours","Status","Distance(m)"],...[...rrows].reverse().map(x=>{const k=x.status||"",hr=(k===""||k==="FULL"||k==="OW")?fh(mins(x.inTime,x.outTime)):"";return[dmy(x.date),x.inTime,x.outTime,hr,L[k]||k,x.inDist]})].map(a=>a.map(v=>`"${v||""}"`).join(",")).join("\n");
- const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+c],{type:"text/csv"}));a.download="my_attendance_"+iso(rm).slice(0,7)+".csv";a.click()}
-
-(async()=>{const s=JSON.parse(localStorage.getItem("att_me")||"null");
- if(!s||!s.o){showOrg();return}
- $("lg").hidden=true;const r=await api({a:"login",mobile:s.m,userId:s.u,org:s.o});
- if(r.ok&&r.deviceLock)start(s,r);else{$("lg").hidden=false;showOrg();$("lm").textContent=r.ok?"Server purana hai (phone lock band). Admin se New version Deploy karwayein":(r.msg||"")+(/Sansthan galat/.test(r.msg||"")?" (Sansthan galat ho to 'badlein' dabayein)":"")}})();
-</script>
-
-<script>
-/* ===== 3D effects (UI only) ===== */
-(()=>{
- if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
- const rs=el=>{el.style.setProperty("--rx","0deg");el.style.setProperty("--ry","0deg")};
- document.querySelectorAll("[data-tilt]").forEach(el=>{const mx=+el.dataset.tilt||10;
-  el.addEventListener("pointermove",e=>{const r=el.getBoundingClientRect();el.style.setProperty("--ry",((e.clientX-r.left)/r.width-.5)*mx+"deg");el.style.setProperty("--rx",-((e.clientY-r.top)/r.height-.5)*mx+"deg")});
-  ["pointerleave","pointerup","pointercancel"].forEach(t=>el.addEventListener(t,()=>rs(el)))});
- const pn=document.getElementById("pn");
- pn.addEventListener("pointermove",e=>{if(pn.disabled&&e.pointerType==="touch")return;const r=pn.getBoundingClientRect();pn.style.setProperty("--ry",((e.clientX-r.left)/r.width-.5)*22+"deg");pn.style.setProperty("--rx",-((e.clientY-r.top)/r.height-.5)*22+"deg")});
- ["pointerleave","pointerup","pointercancel"].forEach(t=>pn.addEventListener(t,()=>rs(pn)));
- pn.addEventListener("pointerdown",()=>{if(pn.disabled)return;const s=document.createElement("span");s.className="rip";pn.appendChild(s);s.addEventListener("animationend",()=>s.remove());try{navigator.vibrate&&navigator.vibrate(15)}catch(e){}});
- let q=0;addEventListener("deviceorientation",e=>{if(q)return;q=requestAnimationFrame(()=>{q=0;const g=Math.max(-30,Math.min(30,e.gamma||0)),b=Math.max(-30,Math.min(30,(e.beta||45)-45));document.documentElement.style.setProperty("--gx",g);document.documentElement.style.setProperty("--gy",b)})});
-})();
-</script>
-</body>
-</html>
+function L(l){document.body.dataset.l=l;document.documentElement.lang=l;try{localStorage.setItem("gl",l)}catch(e){}}
+try{L(localStorage.getItem("gl")||"hi")}catch(e){L("hi")}
+// ?for=staff  ->  staff ko sirf unke kaam ki jaankari (admin / super admin / owner setup wale hisse hata diye jate hain)
+if(new URLSearchParams(location.search).get("for")==="staff"){
+ ["admin","super","setup"].forEach(function(i){var e=document.getElementById(i);if(e)e.remove()});
+ document.querySelectorAll('nav a[href="#admin"],nav a[href="#super"],nav a[href="#setup"],[data-adm]').forEach(function(e){e.remove()});
+ document.getElementById("bk").hidden=false}
+</script></body></html>
