@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="hi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shiv Attendance – उपयोग गाइड / User Guide</title>
+<style>
+:root{--ink:#14213d;--mut:#5b6b82;--bg:#f4f6ff}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;font-family:"Noto Sans Devanagari","Nirmala UI","Mangal","Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:16px}
+body[data-l=hi] .en,body[data-l=en] .hi{display:none!important}
+.hero{position:relative;overflow:hidden;color:#fff;text-align:center;padding:48px 18px 70px;background:linear-gradient(120deg,#6a5cff,#ff3d9a,#ffb629,#18d6c4);background-size:300% 300%;animation:bg 14s ease infinite}
+@keyframes bg{50%{background-position:100% 50%}}
+.hero h1{margin:8px 0 6px;font-size:clamp(28px,6vw,48px);text-shadow:0 3px 14px #0003}.hero p{margin:0 auto;max-width:620px;font-size:17px;opacity:.95}
+.pin{font-size:56px;display:inline-block;animation:bob 3s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-9px)}}
+.lang{display:inline-flex;margin-top:18px;background:#ffffff33;border-radius:30px;padding:4px;backdrop-filter:blur(6px)}
+.lang button{border:0;background:none;color:#fff;font:inherit;font-weight:700;padding:8px 22px;border-radius:26px;cursor:pointer}
+body[data-l=hi] #bh,body[data-l=en] #be{background:#fff;color:#6a5cff}
+nav{position:sticky;top:0;z-index:9;display:flex;gap:6px;overflow-x:auto;background:#fffffff0;backdrop-filter:blur(8px);padding:9px 12px;box-shadow:0 3px 14px #14213d1a}
+nav a{flex:none;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px;padding:7px 14px;border-radius:20px;background:#eef0ff}
+nav a:hover{background:#6a5cff;color:#fff}
+main{max-width:980px;margin:-40px auto 0;padding:0 14px 40px;position:relative}
+.sec{background:#fff;border-radius:22px;padding:22px;margin-bottom:22px;box-shadow:0 10px 30px #14213d14;border-top:7px solid var(--c)}
+.sec h2{margin:0 0 4px;font-size:26px;color:var(--c)}.sec .sub{color:var(--mut);margin:0 0 14px}
+.tag{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--c);padding:3px 12px;border-radius:20px;margin-bottom:8px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.card{border-radius:18px;padding:16px;color:#fff;position:relative;overflow:hidden}
+.card b{font-size:18px;display:block;margin-bottom:4px}.card .n{position:absolute;right:12px;top:-6px;font-size:64px;font-weight:900;opacity:.22}
+.k1{background:linear-gradient(135deg,#16a06f,#18d6c4)}.k2{background:linear-gradient(135deg,#0b5ed7,#6a5cff)}.k3{background:linear-gradient(135deg,#ff3d9a,#ffb629)}
+ol.s{list-style:none;counter-reset:s;padding:0;margin:0}
+ol.s li{counter-increment:s;position:relative;padding:10px 12px 10px 58px;margin:8px 0;border-radius:14px;background:color-mix(in srgb,var(--c) 9%,#fff)}
+ol.s li:before{content:counter(s);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:var(--c);color:#fff;font-weight:800;display:grid;place-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.chip{padding:5px 14px;border-radius:20px;color:#fff;font-weight:700;font-size:14px}
+.f{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.fe{border-radius:16px;padding:14px;background:color-mix(in srgb,var(--c) 10%,#fff);border-left:6px solid var(--c)}.fe b{color:var(--c)}
+table{width:100%;border-collapse:collapse;border-radius:14px;overflow:hidden}
+th{background:var(--c);color:#fff;padding:10px;text-align:left}td{padding:9px 10px;border-bottom:1px solid #e6e9f5}tr:nth-child(even) td{background:#f7f8ff}
+.tw{overflow-x:auto}
+.warn{border-radius:14px;padding:12px 14px;margin-top:12px;background:#fff4d6;color:#7a5200;border-left:6px solid #ffb629}
+.ok{background:#dff5ea;color:#0b6b49;border-left-color:#16a06f}
+details{border-radius:14px;margin:8px 0;background:#f6f7ff;border:1px solid #e1e4ff;overflow:hidden}
+summary{cursor:pointer;font-weight:700;padding:12px 14px;color:#c62f3e}summary:hover{background:#eceeff}details p{margin:0;padding:0 14px 12px}
+code{background:#14213d;color:#7dffb3;padding:2px 8px;border-radius:7px;font-size:14px}
+.bt{display:inline-block;margin:6px 4px 0 0;padding:9px 18px;border:0;border-radius:24px;background:#14213d;color:#fff;font:inherit;font-weight:700;cursor:pointer}
+footer{text-align:center;padding:26px 14px;color:#fff;background:linear-gradient(120deg,#14213d,#6a5cff)}footer b{font-size:18px}
+@media print{.hero{animation:none}nav,.lang,.bt{display:none}body{background:#fff}.sec{box-shadow:none;break-inside:avoid}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head>
+<body data-l="hi">
+<header class="hero"><div class="pin">📍</div>
+<h1>Shiv Attendance</h1>
+<p><span class="hi">लोकेशन आधारित स्मार्ट अटेंडेंस — उपयोग गाइड</span><span class="en">Location-based smart attendance — User Guide</span></p>
+<div class="lang"><button id="bh" onclick="L('hi')">हिंदी</button><button id="be" onclick="L('en')">English</button></div></header>
+<nav><a href="#start"><span class="hi">शुरुआत</span><span class="en">Start</span></a><a href="#staff"><span class="hi">स्टाफ</span><span class="en">Staff</span></a><a href="#admin"><span class="hi">संस्थान एडमिन</span><span class="en">Sansthan Admin</span></a><a href="#super"><span class="hi">सुपर एडमिन</span><span class="en">Super Admin</span></a><a href="#rules"><span class="hi">नियम</span><span class="en">Rules</span></a><a href="#faq"><span class="hi">समस्या-समाधान</span><span class="en">FAQ</span></a><a href="#setup"><span class="hi">सेटअप</span><span class="en">Setup</span></a></nav>
+<main>
+
+<section class="sec" id="start" style="--c:#6a5cff"><span class="tag">1</span>
+<h2><span class="hi">3 आसान कदम</span><span class="en">3 easy steps</span></h2>
+<p class="sub"><span class="hi">तीन तरह के उपयोगकर्ता: स्टाफ, संस्थान एडमिन (अपने संस्थान का), सुपर एडमिन (सबका)।</span><span class="en">Three kinds of users: Staff, Sansthan Admin (own organization only) and Super Admin (everything).</span></p>
+<div class="g3">
+<div class="card k1"><span class="n">1</span><b><span class="hi">संस्थान चुनें</span><span class="en">Choose your Sansthan</span></b><span class="hi">पहली बार लॉगिन पर अपना संस्थान चुनें।</span><span class="en">On first login, pick your organization.</span></div>
+<div class="card k2"><span class="n">2</span><b><span class="hi">लॉगिन करें</span><span class="en">Login</span></b><span class="hi">मोबाइल नंबर + User ID (जैसे <u>shr001</u>)।</span><span class="en">Mobile number + User ID (like <u>shr001</u>).</span></div>
+<div class="card k3"><span class="n">3</span><b><span class="hi">ऑफिस में Check In</span><span class="en">Check In at office</span></b><span class="hi">ऑफिस के 100 मीटर के अंदर हरा बटन दबाएँ।</span><span class="en">Tap the green button within 100 m of the office.</span></div>
+</div></section>
+
+<section class="sec" id="staff" style="--c:#16a06f"><span class="tag"><span class="hi">स्टाफ ऐप</span><span class="en">STAFF APP</span></span>
+<h2>📱 <span class="hi">स्टाफ के लिए</span><span class="en">For Staff</span></h2>
+<ol class="s">
+<li><span class="hi">फोन में <b>Chrome</b> खोलें, एडमिन द्वारा दिया लिंक खोलें, <b>Location (GPS) ON</b> रखें और <b>Allow</b> दबाएँ।</span><span class="en">Open the link in <b>Chrome</b>, keep <b>Location (GPS) ON</b> and tap <b>Allow</b>.</span></li>
+<li><span class="hi">पहली बार <b>अपना संस्थान चुनें</b>, फिर मोबाइल नंबर और User ID डालें। (User ID एडमिन बताते हैं: संस्थान के पहले 3 अक्षर + क्रम, जैसे <code>shr001</code>)</span><span class="en">First time: <b>choose your Sansthan</b>, then enter mobile and User ID. (Your admin gives the ID: first 3 letters of the Sansthan + number, e.g. <code>shr001</code>)</span></li>
+<li><span class="hi">पहली लॉगिन पर आपका खाता इसी <b>फोन से जुड़</b> जाता है। दूसरे फोन से लॉगिन के लिए एडमिन से "Phone reset" कराएँ।</span><span class="en">On first login your account gets <b>locked to this phone</b>. For a new phone ask the admin for "Phone reset".</span></li>
+<li><span class="hi">बड़ा गोल बटन <b>हरा</b> होते ही <b>Check In</b> दबाएँ। लाल हो तो ऑफिस के और पास जाएँ।</span><span class="en">When the big round button turns <b>green</b>, tap <b>Check In</b>. If red, move closer to the office.</span></li>
+<li><span class="hi"><b>Check Out</b> Check In के कम से कम <b>2 घंटे बाद</b> खुलता है (बटन पर समय दिखता है)।</span><span class="en"><b>Check Out</b> opens at least <b>2 hours after</b> Check In (the button shows the wait).</span></li>
+<li><span class="hi">शाम <b>8 बजे</b> तक Check Out न किया तो अपने-आप Out होगा और उस दिन <b>Absent</b> गिना जाएगा।</span><span class="en">If you do not Check Out by <b>8 PM</b>, it is closed automatically and that day counts as <b>Absent</b>.</span></li>
+<li><span class="hi"><b>"मेरी report"</b> टैब में महीना बदलकर कैलेंडर, घंटे और % देखें; Print/PDF और CSV भी मिलता है।</span><span class="en">In <b>"My report"</b> change the month to see calendar, hours and %; Print/PDF and CSV available.</span></li>
+</ol>
+<div class="chips"><span class="chip" style="background:#16a06f">Present</span><span class="chip" style="background:#d64550">Absent</span><span class="chip" style="background:#e08a00">Leave CL/ML</span><span class="chip" style="background:#0b5ed7">Office Work</span><span class="chip" style="background:#6a5cff"><span class="hi">छुट्टी</span><span class="en">Holiday</span></span><span class="chip" style="background:#8795a6"><span class="hi">रविवार</span><span class="en">Sunday</span></span></div>
+<div class="warn ok"><b>✔ <span class="hi">सुझाव</span><span class="en">Tips</span>:</b> <span class="hi">हमेशा एक ही तरीके (Chrome / होम-स्क्रीन शॉर्टकट) से खोलें, ब्राउज़र का डेटा साफ़ न करें, और खुले में 10–20 सेकंड रुककर GPS सटीक होने दें।</span><span class="en">Always open it the same way (Chrome / home-screen shortcut), do not clear browser data, and wait 10–20 s outdoors for an accurate GPS.</span></div>
+</section>
+
+<section class="sec" id="admin" style="--c:#0b5ed7"><span class="tag"><span class="hi">संस्थान एडमिन</span><span class="en">SANSTHAN ADMIN</span></span>
+<h2>🏫 <span class="hi">संस्थान एडमिन के लिए</span><span class="en">For Sansthan Admin</span></h2>
+<p class="sub"><span class="hi">आप सिर्फ अपने संस्थान का स्टाफ, अटेंडेंस, छुट्टी और रिपोर्ट संभाल सकते हैं — किसी और संस्थान का कुछ नहीं दिखेगा।</span><span class="en">You manage only your own organization's staff, attendance, holidays and reports — nothing from other organizations is visible.</span></p>
+<ol class="s"><li><span class="hi">सुपर एडमिन से <b>Admin ID और अस्थायी पासवर्ड</b> लें। पहली लॉगिन पर <b>नया पासवर्ड</b> रखना ज़रूरी है (8+ अक्षर, अक्षर और अंक दोनों)।</span><span class="en">Get your <b>Admin ID and temporary password</b> from the Super Admin. On first login you must set a <b>new password</b> (8+ chars, letters and digits).</span></li></ol>
+<div class="f" style="margin-top:10px">
+<div class="fe"><b>📊 Dashboard</b><br><span class="hi">आज कौन Present, Leave या Absent है — लाइव।</span><span class="en">Who is Present, on Leave or Absent today — live.</span></div>
+<div class="fe"><b>👥 Staff</b><br><span class="hi">नाम + मोबाइल डालें; <b>User ID अपने-आप बनती है</b>। हरे कार्ड से "Message copy" करके स्टाफ को भेजें। Block, Phone reset, Delete यहीं।</span><span class="en">Enter name + mobile; the <b>User ID is generated automatically</b>. Use "Copy message" on the green card to send it. Block, Phone reset, Delete here.</span></div>
+<div class="fe"><b>✅ Attendance</b><br><span class="hi">तारीख और स्टाफ चुनें → <b>Full day / CL / ML / Office Work</b> या Clear। कई दिन चुनने पर रविवार-छुट्टी अपने-आप छूटते हैं।</span><span class="en">Pick date and staff → <b>Full day / CL / ML / Office Work</b> or Clear. For many days, Sundays and holidays are skipped automatically.</span></div>
+<div class="fe"><b>🎉 Holiday</b><br><span class="hi">अपने संस्थान की छुट्टी जोड़ें/हटाएँ। उस दिन Check In बंद और Absent नहीं गिना जाता।</span><span class="en">Add/remove your holidays. Check In is disabled that day and it is not counted Absent.</span></div>
+<div class="fe"><b>🖨️ Report</b><br><span class="hi">Summary, Register (P/A) और Details। <b>Print / PDF</b> (A4 landscape) और <b>CSV</b>।</span><span class="en">Summary, Register (P/A) and Details. <b>Print / PDF</b> (A4 landscape) and <b>CSV</b>.</span></div>
+<div class="fe"><b>🧾 Gatividhi (Log)</b><br><span class="hi">किसने, कब, क्या किया — सब दर्ज रहता है।</span><span class="en">Who did what and when — everything is recorded.</span></div>
+</div></section>
+
+<section class="sec" id="super" style="--c:#c2188a"><span class="tag">SUPER ADMIN</span>
+<h2>👑 <span class="hi">सुपर एडमिन के लिए</span><span class="en">For Super Admin</span></h2>
+<p class="sub"><span class="hi">सब कुछ आपके हाथ में। ऊपर के सूची-बटन से "सभी संस्थान" या कोई एक संस्थान चुनें।</span><span class="en">You control everything. Use the top selector for "All Sansthan" or a single one.</span></p>
+<div class="f">
+<div class="fe"><b>🏢 Sansthan</b><br><span class="hi">नाम, <b>लोकेशन</b> (संस्थान के अंदर खड़े होकर "Meri current location lo"), Radius (30–2000 मी), <b>ID Code</b> (3 अक्षर)। Edit, Band/Chalu, Delete।</span><span class="en">Name, <b>location</b> (stand inside and tap "Meri current location lo"), radius (30–2000 m), <b>ID Code</b> (3 letters). Edit, Block/Unblock, Delete.</span></div>
+<div class="fe"><b>🔑 Admin</b><br><span class="hi">संस्थान चुनकर Admin बनाएँ — ID और पासवर्ड <b>सिर्फ एक बार</b> दिखता है, तुरंत भेज दें। Reset, Band, Delete भी यहीं।</span><span class="en">Create an admin per Sansthan — ID and password are shown <b>only once</b>, send them right away. Reset, Block, Delete too.</span></div>
+<div class="fe"><b>🆔 User ID</b><br><span class="hi">पुरानी ID (जैसे sdm001) हों तो Staff टैब में पीला बैनर दिखेगा — "Naye format mein badlein" दबाएँ और नई ID स्टाफ को बताएँ।</span><span class="en">If staff have old IDs (e.g. sdm001) a yellow banner appears in Staff — tap "Naye format mein badlein" and share the new IDs.</span></div>
+<div class="fe"><b>🛡️ Settings</b><br><span class="hi">अपना ID/पासवर्ड बदलते ही बाकी सभी पुराने लॉगिन बंद हो जाते हैं।</span><span class="en">When you change your ID/password, all other old logins are closed.</span></div>
+</div>
+<div class="warn"><b>⚠ <span class="hi">ध्यान</span><span class="en">Note</span>:</b> <span class="hi">Google Sheet किसी से शेयर न करें। संस्थान का ID Code बनने के बाद बदलता नहीं। जिस संस्थान में staff/attendance हो, उसे delete नहीं, "Band" करें।</span><span class="en">Never share the Google Sheet. A Sansthan's ID Code cannot change once created. A Sansthan with staff/attendance cannot be deleted — use "Block".</span></div>
+</section>
+
+<section class="sec" id="rules" style="--c:#e08a00"><span class="tag">RULES</span>
+<h2>📋 <span class="hi">मुख्य नियम</span><span class="en">Key rules</span></h2>
+<div class="tw"><table><tr><th><span class="hi">विषय</span><span class="en">Topic</span></th><th><span class="hi">नियम</span><span class="en">Rule</span></th></tr>
+<tr><td>📍 Location</td><td><span class="hi">अपने संस्थान के Radius (डिफ़ॉल्ट 100 मी) के अंदर; GPS सटीकता 60 मी से बेहतर।</span><span class="en">Inside your Sansthan's radius (default 100 m); GPS accuracy better than 60 m.</span></td></tr>
+<tr><td>☝ Check In / Out</td><td><span class="hi">दिन में सिर्फ एक बार; Out, In के 2 घंटे बाद।</span><span class="en">Only once a day; Out is allowed 2 hours after In.</span></td></tr>
+<tr><td>🌙 8 PM</td><td><span class="hi">Out नहीं हुआ तो Auto-out + Absent; 8 बजे के बाद Check In नहीं।</span><span class="en">No Out → Auto-out + Absent; no Check In after 8 PM.</span></td></tr>
+<tr><td>📵 Phone</td><td><span class="hi">एक स्टाफ = एक फोन। एक मोबाइल नंबर = एक संस्थान।</span><span class="en">One staff = one phone. One mobile number = one Sansthan.</span></td></tr>
+<tr><td>🆔 User ID</td><td><span class="hi">संस्थान के पहले 3 अक्षर + 3 अंक का क्रम (shr001, shr002…)। दूसरे संस्थान की ID यहाँ नहीं चलती।</span><span class="en">First 3 letters of the Sansthan + 3-digit number (shr001, shr002…). Another Sansthan's ID never works here.</span></td></tr>
+<tr><td>📈 Upasthiti %</td><td><span class="hi">(Present + Office Work) ÷ कार्य-दिवस। रविवार/छुट्टी गिनती में नहीं।</span><span class="en">(Present + Office Work) ÷ working days. Sundays/holidays excluded.</span></td></tr>
+<tr><td>🔐 Login lock</td><td><span class="hi">5 बार गलत पासवर्ड पर उस ID का 15 मिनट के लिए लॉक।</span><span class="en">5 wrong passwords lock that ID for 15 minutes.</span></td></tr></table></div></section>
+
+<section class="sec" id="faq" style="--c:#c62f3e"><span class="tag">FAQ</span>
+<h2>🛠️ <span class="hi">समस्या-समाधान</span><span class="en">Troubleshooting</span></h2>
+<details><summary><span class="hi">"Location permission band hai" दिखता है</span><span class="en">"Location permission band hai" is shown</span></summary><p><span class="hi">लिंक <b>https://</b> वाला हो, फाइल से न खोलें। Chrome में पता-पट्टी के आइकन से Location = Allow करें, फोन की Location ON रखें, पेज रिफ्रेश करें।</span><span class="en">Use the <b>https://</b> link, not a local file. In Chrome set Location = Allow from the address-bar icon, keep phone Location ON, refresh.</span></p></details>
+<details><summary><span class="hi">बटन लाल है / "Door hain"</span><span class="en">Button is red / "Door hain"</span></summary><p><span class="hi">स्क्रीन पर दूरी और GPS ± देखें। संस्थान की सेव लोकेशन गलत हो सकती है (सुपर एडमिन ठीक करें) या GPS कमज़ोर है — खुले में रुकें।</span><span class="en">Check the distance and GPS ± on screen. The saved location may be wrong (Super Admin fixes it) or GPS is weak — wait outdoors.</span></p></details>
+<details><summary><span class="hi">"Mobile, User ID ya Sansthan galat hai"</span><span class="en">"Mobile, User ID ya Sansthan galat hai"</span></summary><p><span class="hi">सही संस्थान चुनें (ID के पहले 3 अक्षर संस्थान के code से मिलने चाहिए), मोबाइल/ID जाँचें। संस्थान बदलना हो तो "badlein" दबाएँ।</span><span class="en">Choose the right Sansthan (the ID's first 3 letters must match its code) and recheck mobile/ID. Tap "badlein" to change Sansthan.</span></p></details>
+<details><summary><span class="hi">"Ye account kisi dusre phone se juda hai"</span><span class="en">"Ye account kisi dusre phone se juda hai"</span></summary><p><span class="hi">नया फोन/ब्राउज़र है। एडमिन Staff टैब में <b>Phone reset</b> करें, फिर नए फोन से लॉगिन करें।</span><span class="en">New phone/browser. Admin does <b>Phone reset</b> in Staff, then log in from the new phone.</span></p></details>
+<details><summary><span class="hi">Check Out नहीं खुल रहा</span><span class="en">Check Out will not open</span></summary><p><span class="hi">Check In के 2 घंटे पूरे होने तक बटन पर प्रतीक्षा-समय दिखता है। 8 बजे के बाद Out नहीं होता।</span><span class="en">Until 2 hours pass the button shows the wait time. After 8 PM Out is closed.</span></p></details>
+<details><summary><span class="hi">Admin लॉगिन "Bahut zyada galat koshish"</span><span class="en">Admin login says "Bahut zyada galat koshish"</span></summary><p><span class="hi">15 मिनट रुकें। सुपर एडमिन तुरंत खोलना चाहे तो Apps Script में <code>resetLocks</code> चलाए। पासवर्ड भूले तो सुपर एडमिन "Password reset" करे; सुपर एडमिन भूले तो <code>emergencyResetSuper</code>।</span><span class="en">Wait 15 minutes. The Super Admin can run <code>resetLocks</code> in Apps Script to unlock now. Forgotten password: Super Admin uses "Password reset"; if the Super Admin forgets, run <code>emergencyResetSuper</code>.</span></p></details>
+</section>
+
+<section class="sec" id="setup" style="--c:#0f8b8d"><span class="tag">OWNER SETUP</span>
+<h2>⚙️ <span class="hi">पहली बार सेटअप (मालिक के लिए)</span><span class="en">First-time setup (for the owner)</span></h2>
+<ol class="s">
+<li><span class="hi">Google Sheet → Extensions → Apps Script में <code>Code.gs</code> पेस्ट करें, <b>Save</b>।</span><span class="en">In Google Sheet → Extensions → Apps Script paste <code>Code.gs</code>, <b>Save</b>.</span></li>
+<li><span class="hi">फ़ंक्शन <code>upgrade</code> (नई शीट पर <code>setup</code>) एक बार <b>Run</b> करें।</span><span class="en">Run function <code>upgrade</code> (<code>setup</code> on a brand-new sheet) once.</span></li>
+<li><span class="hi"><b>Deploy → Manage deployments → ✏ → New version → Deploy</b> (हर बदलाव के बाद यही, "New deployment" नहीं)।</span><span class="en"><b>Deploy → Manage deployments → ✏ → New version → Deploy</b> (after every change; never "New deployment").</span></li>
+<li><span class="hi"><code>/exec</code> लिंक खोलकर <code>version: v11 role-based-admins</code> देखें।</span><span class="en">Open the <code>/exec</code> link and check <code>version: v11 role-based-admins</code>.</span></li>
+<li><span class="hi"><code>index.html</code>, <code>app.html</code>, <code>admin.html</code>, <code>guide.html</code> को GitHub Pages पर डालें; स्टाफ को सिर्फ <code>app.html</code> का लिंक दें।</span><span class="en">Upload <code>index.html</code>, <code>app.html</code>, <code>admin.html</code>, <code>guide.html</code> to GitHub Pages; give staff only the <code>app.html</code> link.</span></li>
+<li><span class="hi">सुपर एडमिन से लॉगिन → पासवर्ड बदलें → Sansthan बनाएँ → Admin बनाएँ → Staff जोड़ें।</span><span class="en">Log in as Super Admin → change password → create Sansthan → create Admins → add Staff.</span></li>
+</ol>
+<button class="bt" onclick="print()">🖨️ Print / PDF</button></section>
+</main>
+<footer><b>Shiv Computer</b><br>Karanpur Suratganj, Barabanki, Uttar Pradesh<br><span class="hi">धन्यवाद! सुरक्षित और आसान अटेंडेंस के लिए।</span><span class="en">Thank you! Safe and simple attendance.</span></footer>
+<script>
+function L(l){document.body.dataset.l=l;document.documentElement.lang=l;try{localStorage.setItem("gl",l)}catch(e){}}
+try{L(localStorage.getItem("gl")||"hi")}catch(e){L("hi")}
+</script></body></html>
