@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b1e31">
+<link rel="preconnect" href="https://script.google.com">
+<link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
 <title>Shiv Attendance</title>
 <style>
 :root{
@@ -20,37 +22,26 @@ button{cursor:pointer}
 [hidden]{display:none!important}
 
 /* ===== aurora backdrop ===== */
-.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:linear-gradient(160deg,#dcf4e4,#cbe9e7 55%,#d3e2f7)}
-.orb{position:absolute;border-radius:50%;filter:blur(54px);opacity:.55;animation:drift 15s ease-in-out infinite alternate;translate:calc(var(--gx,0)*1px) calc(var(--gy,0)*1px);transition:translate .4s}
-.o1{width:55vmax;height:55vmax;left:-22vmax;top:28vh;background:#2fd0b0}
-.o2{width:50vmax;height:50vmax;right:-22vmax;top:48vh;background:#5a9bff;opacity:.42;animation-duration:19s}
-.o3{width:38vmax;height:38vmax;left:20vw;bottom:-14vmax;background:#ffc15a;opacity:.5;animation-duration:23s}
-.grid{position:absolute;left:-50%;right:-50%;bottom:-8%;height:40%;background:linear-gradient(rgba(11,30,49,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(11,30,49,.08) 1px,transparent 1px);background-size:46px 46px;transform:perspective(520px) rotateX(64deg);-webkit-mask-image:linear-gradient(transparent,#000 80%);mask-image:linear-gradient(transparent,#000 80%);animation:gridmove 3s linear infinite}
+.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(60vmax 50vmax at 0% 70%,rgba(47,208,176,.35),transparent 70%),radial-gradient(55vmax 45vmax at 100% 85%,rgba(90,155,255,.3),transparent 70%),radial-gradient(45vmax 35vmax at 30% 100%,rgba(255,193,90,.35),transparent 70%),linear-gradient(160deg,#dcf4e4,#cbe9e7 55%,#d3e2f7)}
 .load{position:fixed;top:0;left:0;right:0;height:3px;z-index:80;display:none;overflow:hidden}
 .load::after{content:"";position:absolute;top:0;bottom:0;width:40%;background:linear-gradient(90deg,transparent,var(--amber),#2fd6a0,transparent);animation:ldb 1s linear infinite}
 #net{position:fixed;top:10px;left:50%;transform:translateX(-50%) translateY(-60px);z-index:70;background:#3a1218;color:#ffb3b8;font-size:12.5px;font-weight:600;padding:8px 16px;border-radius:30px;box-shadow:0 10px 24px -8px rgba(0,0,0,.4);transition:transform .35s cubic-bezier(.2,.9,.3,1.2)}
 #net.on{transform:translateX(-50%) translateY(0)}
 
 /* ===== glass base ===== */
-.chip,.mini,.mnav,.cal,.row,.ruled,.st,.nav{isolation:isolate;position:relative;background:var(--gbg);backdrop-filter:blur(16px) saturate(170%);-webkit-backdrop-filter:blur(16px) saturate(170%);border:1px solid rgba(255,255,255,.55);box-shadow:0 14px 28px -12px rgba(11,30,49,.38),0 2px 6px rgba(11,30,49,.08),inset 0 1px 0 #fff,inset 0 -2px 6px rgba(11,30,49,.06)}
-.chip::before,.mini::before,.mnav::before,.cal::before,.row::before,.ruled::before,.st::before,.nav::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.7) 0,rgba(255,255,255,0) 32%),linear-gradient(295deg,rgba(255,255,255,.35) 0,rgba(255,255,255,0) 20%)}
-.chip::after,.mini::after,.mnav::after,.cal::after,.row::after,.ruled::after,.st::after,.nav::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;background:linear-gradient(135deg,#fff,rgba(80,190,255,.8) 25%,rgba(255,255,255,.15) 50%,rgba(255,180,80,.8) 75%,#fff);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.chip,.mini,.mnav,.cal,.row,.ruled,.st,.nav{position:relative;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.85);box-shadow:0 8px 18px -10px rgba(11,30,49,.38),0 1px 3px rgba(11,30,49,.08),inset 0 1px 0 #fff}
 
 /* ===== login ===== */
-@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
 #lg{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:calc(20px + env(safe-area-inset-top)) 20px 20px;color:#fff;background:radial-gradient(60% 40% at 12% 8%,rgba(45,226,166,.4),transparent),radial-gradient(50% 40% at 92% 88%,rgba(255,184,61,.36),transparent),radial-gradient(45% 40% at 88% 14%,rgba(90,160,255,.4),transparent),linear-gradient(165deg,#0b1e31,#17405f)}
-.lcard{position:relative;width:min(100%,400px);padding:clamp(22px,6vw,34px);border-radius:30px;background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.05) 50%,rgba(255,255,255,.14));backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.28);box-shadow:0 40px 70px -24px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -2px 8px rgba(255,255,255,.08);animation:enter .9s cubic-bezier(.2,.9,.3,1.15) backwards}
-.lcard::before{content:"";position:absolute;inset:-1px;border-radius:31px;padding:1.5px;background:conic-gradient(from var(--ang),rgba(255,255,255,.85),rgba(90,200,255,.6),rgba(255,190,90,.6),rgba(110,255,205,.55),rgba(255,255,255,.85));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 7s linear infinite;pointer-events:none}
-.logo{width:78px;height:78px;border-radius:26px;display:grid;place-items:center;margin-bottom:20px;color:#fff;position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.55) 0,rgba(255,255,255,.05) 50%,transparent 51%),linear-gradient(145deg,#3fdca8,#0f9467);box-shadow:0 10px 0 #0a6a50,0 24px 30px -6px rgba(22,160,111,.6),inset 0 2px 0 rgba(255,255,255,.8),inset 0 -3px 8px rgba(0,0,0,.2);animation:float 4s ease-in-out infinite}
+.lcard{position:relative;width:min(100%,400px);padding:clamp(22px,6vw,34px);border-radius:30px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);box-shadow:0 30px 50px -24px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.5)}
+.logo{width:78px;height:78px;border-radius:26px;display:grid;place-items:center;margin-bottom:20px;color:#fff;position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.55) 0,rgba(255,255,255,.05) 50%,transparent 51%),linear-gradient(145deg,#3fdca8,#0f9467);box-shadow:0 10px 0 #0a6a50,0 24px 30px -6px rgba(22,160,111,.6),inset 0 2px 0 rgba(255,255,255,.8),inset 0 -3px 8px rgba(0,0,0,.2)}
 .logo svg{filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
-.logo::after{content:"";position:absolute;top:-50%;bottom:-50%;width:28%;background:rgba(255,255,255,.6);transform:skewX(-20deg);animation:shine 3.5s ease-in-out infinite}
 #lg h1{margin:0 0 4px;font-size:clamp(28px,8vw,34px);letter-spacing:.3px}
 #lg p{margin:0 0 22px;opacity:.78;font-size:14.5px}
 #lg input,#lg select{width:100%;height:56px;padding:0 16px;border-radius:16px;font-size:17px;margin-bottom:12px;color:var(--ink);background:#fff;border:2px solid transparent;box-shadow:inset 0 3px 6px rgba(11,30,49,.18);transition:.2s}
 #lg select{padding:0 44px 0 16px;font-size:16px;-webkit-appearance:none;appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%230b1e31' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 16px center/14px}
 #lg input:focus,#lg select:focus{outline:0;border-color:var(--amber);box-shadow:inset 0 3px 6px rgba(11,30,49,.18),0 0 0 4px rgba(255,184,61,.35)}
 .go{width:100%;border:0;border-radius:16px;padding:17px;font-size:17px;font-weight:800;color:#3a2100;position:relative;overflow:hidden;margin-top:4px;background:linear-gradient(180deg,#ffd06a,#ffa81f);box-shadow:0 7px 0 #b46a00,0 18px 26px -8px rgba(255,170,0,.55),inset 0 2px 0 rgba(255,255,255,.7);transition:transform .12s,box-shadow .12s}
-.go::after{content:"";position:absolute;top:0;bottom:0;width:28%;background:rgba(255,255,255,.55);transform:skewX(-20deg);animation:shine 3s ease-in-out infinite .6s}
 .go:active{transform:translateY(5px);box-shadow:0 2px 0 #b46a00,0 8px 14px -6px rgba(255,170,0,.5),inset 0 2px 0 rgba(255,255,255,.7)}
 .go:disabled{opacity:.7}
 .err{color:#ffb3b8;font-size:14px;min-height:20px;margin-top:12px}
@@ -61,13 +52,11 @@ button{cursor:pointer}
 
 /* ===== shell + hero ===== */
 .app{max-width:540px;margin:auto;min-height:calc(100dvh - var(--nav));display:flex;flex-direction:column}
-#vHome,#vRep{animation:view .5s cubic-bezier(.2,.8,.2,1) backwards}
+#vHome,#vRep{}
 #vHome{flex:1;display:flex;flex-direction:column}
 .hero{position:relative;overflow:hidden;color:#fff;padding:calc(16px + env(safe-area-inset-top)) 20px 96px;border-radius:0 0 36px 36px;background:linear-gradient(165deg,var(--navy),var(--navy2));box-shadow:0 22px 40px -18px rgba(11,30,49,.75),inset 0 -2px 0 rgba(255,255,255,.15)}
 #vHome .hero{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center}
 #vRep .hero{padding-bottom:30px}
-.hero::before{content:"";position:absolute;inset:0 -10%;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.11) 38%,rgba(255,255,255,.02) 46%,transparent 52%),radial-gradient(60% 80% at 100% 0%,rgba(255,184,61,.3),transparent 60%),radial-gradient(50% 70% at 0% 100%,rgba(45,226,166,.24),transparent 60%);animation:beam 8s ease-in-out infinite alternate}
-.hero::after{content:"";position:absolute;top:-20%;bottom:-20%;left:62%;width:40px;pointer-events:none;background:linear-gradient(90deg,rgba(255,90,140,0),rgba(255,150,80,.2),rgba(255,230,120,.22),rgba(100,230,170,.2),rgba(90,170,255,.22),rgba(150,110,255,0));filter:blur(2px);animation:sweep 7s ease-in-out infinite alternate}
 .hero>*{position:relative;z-index:1}
 .hr{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .hr small{opacity:.72;font-size:13px}
@@ -79,11 +68,10 @@ button{cursor:pointer}
 
 /* ===== punch orb ===== */
 .stagewrap{position:relative;z-index:2;display:grid;place-items:center;margin-top:-84px;padding:0 0 26px}
-.stage{perspective:800px;position:relative;animation:float 5s ease-in-out infinite}
-.stage::after{content:"";position:absolute;left:14%;right:14%;bottom:-24px;height:18px;border-radius:50%;background:radial-gradient(rgba(11,30,49,.5),transparent 70%);filter:blur(5px);animation:gshadow 5s ease-in-out infinite}
-.punch{--p:0;--c:#8aa0c0;--c2:#3b4f6e;--c3:#7f97b8;--g:rgba(95,115,135,.45);--sz:clamp(150px,min(52vw,27dvh),230px);width:var(--sz);height:var(--sz);border:0;padding:0;border-radius:50%;position:relative;display:grid;place-items:center;color:#fff;transform-style:preserve-3d;background:conic-gradient(var(--c) calc(var(--p)*1%),rgba(255,255,255,.55) 0);box-shadow:0 10px 0 rgba(11,30,49,.28),0 28px 40px -8px var(--g),inset 0 2px 0 #fff;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(var(--s,1));transition:transform .15s,box-shadow .2s}
+.stage{position:relative}
+.punch{--p:0;--c:#8aa0c0;--c2:#3b4f6e;--c3:#7f97b8;--g:rgba(95,115,135,.45);--sz:clamp(150px,min(52vw,27dvh),230px);width:var(--sz);height:var(--sz);border:0;padding:0;border-radius:50%;position:relative;display:grid;place-items:center;color:#fff;background:conic-gradient(var(--c) calc(var(--p)*1%),rgba(255,255,255,.55) 0);box-shadow:0 10px 0 rgba(11,30,49,.28),0 28px 40px -8px var(--g),inset 0 2px 0 #fff;transform:scale(var(--s,1));transition:transform .15s,box-shadow .2s}
 .punch::before{content:"";position:absolute;inset:calc(var(--sz)*.075);border-radius:50%;background:radial-gradient(ellipse 52% 26% at 50% 14%,rgba(255,255,255,.95),rgba(255,255,255,0) 100%),radial-gradient(ellipse 62% 42% at 50% 104%,var(--c),transparent 100%),radial-gradient(circle at 50% 50%,rgba(255,255,255,0) 52%,rgba(255,255,255,.42) 100%),radial-gradient(circle at 50% 38%,var(--c3),var(--c2) 95%);box-shadow:inset 4px 0 8px rgba(255,90,130,.35),inset -4px 0 8px rgba(80,200,255,.4),inset 0 -14px 26px rgba(0,0,0,.22),inset 0 8px 16px rgba(255,255,255,.4),0 0 0 3px rgba(255,255,255,.7)}
-.punch .in{position:relative;z-index:1;text-align:center;padding:0 12px;transform:translateZ(30px);margin-top:6%}
+.punch .in{position:relative;z-index:1;text-align:center;padding:0 12px;margin-top:6%}
 .punch .ic{font-size:calc(var(--sz)*.2);line-height:1;filter:drop-shadow(0 5px 6px rgba(0,0,0,.4))}
 .punch .lb{font-size:calc(var(--sz)*.095);font-weight:800;margin-top:5px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.45)}
 .punch .sb{font-size:clamp(10.5px,calc(var(--sz)*.05),13px);color:rgba(255,255,255,.88);margin-top:3px;line-height:1.25;text-shadow:0 1px 3px rgba(0,0,0,.4)}
@@ -93,7 +81,6 @@ button{cursor:pointer}
 .punch.amb,.punch.wait{--c:#ffa91f;--c2:#8a5200;--c3:#ffc24f;--g:rgba(240,160,30,.6)}
 .punch.no,.punch.abs{--c:#f0566a;--c2:#7a1a2b;--c3:#f4808f;--g:rgba(214,69,80,.55)}
 .punch.done{--c:#3b8fe0;--c2:#123f6e;--c3:#6cb2f2;--g:rgba(59,143,224,.55)}
-.punch.ready{animation:glowp 2s ease-in-out infinite}
 .punch.ready::after{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid var(--c);animation:pl 2s ease-out infinite}
 .rip{position:absolute;inset:0;border-radius:50%;border:4px solid var(--c);pointer-events:none;animation:rip .7s ease-out forwards}
 
@@ -126,7 +113,7 @@ button{cursor:pointer}
 .mnav button:disabled{opacity:.3}
 .mnav b{font-size:17px}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 16px 0}
-.st{border-radius:18px;padding:14px;background:linear-gradient(135deg,var(--t1),var(--t2));transform:perspective(600px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .2s;box-shadow:0 14px 24px -12px var(--sh),0 2px 6px rgba(11,30,49,.08),inset 0 1px 0 #fff,inset 0 -2px 6px rgba(11,30,49,.06)}
+.st{border-radius:18px;padding:14px;background:linear-gradient(135deg,var(--t1),var(--t2));box-shadow:0 14px 24px -12px var(--sh),0 2px 6px rgba(11,30,49,.08),inset 0 1px 0 #fff,inset 0 -2px 6px rgba(11,30,49,.06)}
 .st small{font-size:12.5px;color:var(--ac);opacity:.9}
 .st b{display:block;font-size:28px;margin-top:2px;color:var(--ac)}
 .st.p{--t1:rgba(22,160,111,.5);--t2:rgba(22,160,111,.14);--ac:#0b6b49;--sh:rgba(22,160,111,.6)}
@@ -138,9 +125,7 @@ button{cursor:pointer}
 .cal{border-radius:22px;padding:14px;margin:14px 16px 0}
 .cg{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;text-align:center}
 .cg .wd{font-size:12px;color:var(--mut);padding-bottom:4px;font-weight:600}
-.cd{aspect-ratio:1;border-radius:12px;display:grid;place-items:center;font-size:clamp(12px,3.7vw,15px);font-weight:700;background:rgba(255,255,255,.5);color:var(--mut);box-shadow:0 2px 4px rgba(11,30,49,.1),inset 0 1px 0 #fff;animation:pop .45s backwards}
-.cg>:nth-child(7n+2){animation-delay:.03s}.cg>:nth-child(7n+3){animation-delay:.06s}.cg>:nth-child(7n+4){animation-delay:.09s}
-.cg>:nth-child(7n+5){animation-delay:.12s}.cg>:nth-child(7n+6){animation-delay:.15s}.cg>:nth-child(7n){animation-delay:.18s}
+.cd{aspect-ratio:1;border-radius:12px;display:grid;place-items:center;font-size:clamp(12px,3.7vw,15px);font-weight:700;background:rgba(255,255,255,.5);color:var(--mut);box-shadow:0 2px 4px rgba(11,30,49,.1),inset 0 1px 0 #fff}
 .cd.p,.cd.l,.cd.o,.cd.h,.cd.a{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25)}
 .cd.p{background:linear-gradient(180deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.05) 50%,transparent 51%),linear-gradient(160deg,#3fdca8,#0f9467);box-shadow:0 5px 9px -3px rgba(15,148,103,.65),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -2px 4px rgba(0,0,0,.18)}
 .cd.l{color:#4a2f00;text-shadow:none;background:linear-gradient(180deg,rgba(255,255,255,.55) 0,rgba(255,255,255,.05) 50%,transparent 51%),linear-gradient(160deg,#ffd27a,#e8961a);box-shadow:0 5px 9px -3px rgba(232,150,26,.65),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -2px 4px rgba(0,0,0,.15)}
@@ -148,11 +133,10 @@ button{cursor:pointer}
 .cd.h{background:linear-gradient(180deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.05) 50%,transparent 51%),linear-gradient(160deg,#c7b9ff,#7b66e6);box-shadow:0 5px 9px -3px rgba(123,102,230,.65),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -2px 4px rgba(0,0,0,.18)}
 .cd.a{background:linear-gradient(180deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.05) 50%,transparent 51%),linear-gradient(160deg,#ff8f9d,#d63a52);box-shadow:0 5px 9px -3px rgba(214,58,82,.65),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -2px 4px rgba(0,0,0,.18)}
 .cd.off{background:rgba(255,255,255,.22);color:#93a5b8;box-shadow:none}
-.cd.t{outline:2px solid var(--navy);outline-offset:2px;animation:pop .45s backwards,tod 1.8s ease-in-out infinite}
+.cd.t{outline:2px solid var(--navy);outline-offset:2px}
 .leg{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;margin-top:12px;font-size:12px;color:var(--mut)}
 .leg i{display:inline-block;width:11px;height:11px;border-radius:4px;margin-right:5px;vertical-align:-1px;box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px;border-radius:16px;padding:12px 14px;margin-bottom:9px;animation:rise .45s backwards}
-.row:nth-child(2){animation-delay:.05s}.row:nth-child(3){animation-delay:.1s}.row:nth-child(4){animation-delay:.15s}.row:nth-child(n+5){animation-delay:.2s}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;border-radius:16px;padding:12px 14px;margin-bottom:9px}
 .row b{font-size:15px}
 .row small{display:block;color:var(--mut);font-size:12px;margin-top:2px}
 .row .t{text-align:right;font-size:14px}
@@ -163,9 +147,10 @@ button{cursor:pointer}
 .ab.g:active{box-shadow:0 1px 0 rgba(11,30,49,.22)}
 .empty{text-align:center;color:var(--mut);padding:18px;font-size:14px}
 .phead{display:none}
+.rt{flex:none;border:0;border-radius:12px;padding:9px 12px;font-weight:800;font-size:13px;color:#3a2100;background:linear-gradient(180deg,#ffd06a,#ffa81f);box-shadow:0 3px 0 #b46a00}.rt:active{transform:translateY(2px);box-shadow:0 1px 0 #b46a00}
 
 /* ===== nav ===== */
-.nav{position:fixed;left:50%;bottom:calc(12px + env(safe-area-inset-bottom));width:min(calc(100% - 28px),420px);transform:translateX(-50%);z-index:20;display:flex;gap:6px;padding:7px;border-radius:26px;background:rgba(255,255,255,.5);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,.6);box-shadow:0 18px 36px -12px rgba(11,30,49,.5),inset 0 1px 0 #fff}
+.nav{position:fixed;left:50%;bottom:calc(12px + env(safe-area-inset-bottom));width:min(calc(100% - 28px),420px);transform:translateX(-50%);z-index:20;display:flex;gap:6px;padding:7px;border-radius:26px;background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.6);box-shadow:0 18px 36px -12px rgba(11,30,49,.5),inset 0 1px 0 #fff}
 .nav button,.nav a{flex:1;border:0;background:none;color:var(--mut);padding:9px 6px 8px;border-radius:20px;font-weight:700;font-size:12.5px;transition:.25s;text-decoration:none;text-align:center;display:block;font-family:inherit}
 .nav a:active{transform:scale(.95)}
 .nav svg{display:block;margin:0 auto 3px;width:24px;height:24px;transition:.25s}
@@ -173,24 +158,11 @@ button{cursor:pointer}
 .nav button.on svg{transform:translateY(-2px) scale(1.12);color:var(--amber);filter:drop-shadow(0 3px 5px rgba(255,184,61,.7))}
 
 /* ===== keyframes ===== */
-@keyframes drift{to{transform:translate(8vw,-6vh) scale(1.15)}}
-@keyframes gridmove{to{background-position:0 46px}}
 @keyframes ldb{from{left:-40%}to{left:100%}}
-@keyframes spin{to{--ang:360deg}}
-@keyframes enter{from{opacity:0;transform:translateY(50px) scale(.92)}}
-@keyframes view{from{opacity:0;transform:translateY(20px) scale(.98)}}
-@keyframes float{50%{transform:translateY(-9px)}}
-@keyframes gshadow{50%{transform:scale(.82);opacity:.6}}
-@keyframes shine{0%,55%{left:-40%}100%{left:130%}}
-@keyframes beam{to{transform:translateX(8%)}}
-@keyframes sweep{from{transform:translateX(-90px) skewX(-22deg)}to{transform:translateX(60px) skewX(-22deg)}}
 @keyframes pl{from{transform:scale(1);opacity:.7}to{transform:scale(1.25);opacity:0}}
-@keyframes glowp{50%{filter:brightness(1.1)}}
 @keyframes rip{from{transform:scale(1);opacity:.9}to{transform:scale(1.5);opacity:0}}
 @keyframes beat{50%{transform:scale(1.25)}}
 @keyframes pop{from{opacity:0;transform:scale(.7)}}
-@keyframes rise{from{opacity:0;transform:translateY(16px)}}
-@keyframes tod{50%{outline-color:var(--amber)}}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
 @media (max-height:640px){.clock{font-size:38px}.punch{--sz:clamp(135px,min(48vw,26dvh),190px)}#vHome .hero{padding-bottom:80px}.stagewrap{margin-top:-70px;padding-bottom:18px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -208,12 +180,12 @@ button{cursor:pointer}
 </style>
 </head>
 <body>
-<div class="bg"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="grid"></div></div>
+<div class="bg"></div>
 <div class="load" id="ld"></div>
 <div id="net">&#9888; Internet nahi hai &mdash; jab wapas aaye tab apne aap judega</div>
 
 <div id="lg">
-  <div class="lcard" data-tilt="8">
+  <div class="lcard">
     <div class="logo"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
     <h1>Attendance</h1>
     <p>Sansthan, mobile number aur User ID se login karein</p>
@@ -251,18 +223,18 @@ button{cursor:pointer}
     <div class="msg" id="mg"></div>
     <details class="ruled"><summary>Niyam dekhein</summary><div id="rule"></div></details>
     <div class="chip"><span class="dot" id="dot"></span>
-      <div><b id="zs">Location dhoondh rahe hain...</b><small id="zd"></small></div>
+      <div style="flex:1;min-width:0"><b id="zs">Location dhoondh rahe hain...</b><small id="zd"></small></div><button id="gpsbtn" class="rt" hidden onclick="gpsStart(true)">Dobara try</button>
     </div>
     <div class="three">
-      <div class="mini" data-tilt="14"><small>Check In</small><b id="ti">--:--</b></div>
-      <div class="mini" data-tilt="14"><small>Check Out</small><b id="to">--:--</b></div>
-      <div class="mini" data-tilt="14"><small>Kaam ke ghante</small><b id="th">-</b></div>
+      <div class="mini"><small>Check In</small><b id="ti">--:--</b></div>
+      <div class="mini"><small>Check Out</small><b id="to">--:--</b></div>
+      <div class="mini"><small>Kaam ke ghante</small><b id="th">-</b></div>
     </div>
     <div class="sec">
       <h3>Is mahine ka sar</h3>
       <div class="stats" style="margin:0">
-        <div class="st p" data-tilt="10"><small>Present</small><b id="hp">0</b></div>
-        <div class="st a" data-tilt="10"><small>Absent</small><b id="ha">0</b></div>
+        <div class="st p"><small>Present</small><b id="hp">0</b></div>
+        <div class="st a"><small>Absent</small><b id="ha">0</b></div>
       </div>
     </div>
   </div>
@@ -276,12 +248,12 @@ button{cursor:pointer}
     <div class="phead"><h2 id="pt" style="margin:0"></h2></div>
     <div class="mnav"><button id="pm" onclick="mv(-1)" aria-label="Pichhla mahina">&#8249;</button><b id="mt"></b><button id="nx" onclick="mv(1)" aria-label="Agla mahina">&#8250;</button></div>
     <div class="stats">
-      <div class="st p" data-tilt="10"><small>Present</small><b id="rp">0</b></div>
-      <div class="st a" data-tilt="10"><small>Absent</small><b id="ra">0</b></div>
-      <div class="st l" data-tilt="10"><small>Leave (CL / ML)</small><b id="rl2">0</b></div>
-      <div class="st o" data-tilt="10"><small>Office work</small><b id="ro">0</b></div>
-      <div class="st h" data-tilt="10"><small>Kul ghante</small><b id="rh">0h</b></div>
-      <div class="st r" data-tilt="10"><small>Attendance %</small><b id="rr">0%</b></div>
+      <div class="st p"><small>Present</small><b id="rp">0</b></div>
+      <div class="st a"><small>Absent</small><b id="ra">0</b></div>
+      <div class="st l"><small>Leave (CL / ML)</small><b id="rl2">0</b></div>
+      <div class="st o"><small>Office work</small><b id="ro">0</b></div>
+      <div class="st h"><small>Kul ghante</small><b id="rh">0h</b></div>
+      <div class="st r"><small>Attendance %</small><b id="rr">0%</b></div>
     </div>
     <div class="cal">
       <div class="cg" id="cg"></div>
@@ -304,118 +276,189 @@ button{cursor:pointer}
 <script>
 /* ====== APNA APPS SCRIPT URL (deploy ke baad yahan badlein) ====== */
 const API_URL="https://script.google.com/macros/s/AKfycby3R-zHxm-x5MuGnqSdZdqAM0FS236jHw6eua3qRTy1j5RJoKKp32uVA57PTPyB1sBGmA/exec";
-const MAX_ACC=60,$=i=>document.getElementById(i);
+const $=i=>document.getElementById(i);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const LS={get(k){try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const iso=d=>{const z=new Date(d.getTime()-d.getTimezoneOffset()*6e4);return z.toISOString().slice(0,10)};
-let S=null,cfg=null,pos=null,rec=null,busy=false,TODAYHOL="",rm=new Date(),rrows=[],monthRows=[];rm.setDate(1);
+let S=null,cfg=null,rec=null,busy=false,TODAYHOL="",LIST=[],NOWT="",rm=new Date(),rrows=[],loaded=false,retrying=false,lastLoad=0,repTok=0,timers=[];rm.setDate(1);
 const gc=n=>{const m=document.cookie.match(new RegExp("(?:^|; )"+n+"=([^;]*)"));return m?decodeURIComponent(m[1]):""};
-let DEV=localStorage.getItem("att_dev")||gc("att_dev");
+/* phone ki pehchaan: pehle jaisi hi (badli nahi, taaki purana device-lock na toote) */
+let DEV="";try{DEV=localStorage.getItem("att_dev")||""}catch(e){}DEV=DEV||gc("att_dev");
 if(!DEV||DEV.length<16)DEV=(window.crypto&&crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2)+Math.random().toString(36).slice(2)+"xxxx");
 try{localStorage.setItem("att_dev",DEV)}catch(e){}
 document.cookie="att_dev="+encodeURIComponent(DEV)+";max-age=315360000;path=/;SameSite=Lax"+(location.protocol==="https:"?";Secure":"");
 
-/* ---- network banner + API (25s timeout, 1 auto-retry) ---- */
-const netPill=$("net");
-const netWatch=()=>netPill.classList.toggle("on",!navigator.onLine);
-addEventListener("online",netWatch);addEventListener("offline",netWatch);netWatch();
-const api=async b=>{
- $("ld").style.display="block";
- const once=async()=>{const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),25000);
-  const r=await fetch(API_URL,{method:"POST",body:JSON.stringify({...b,device:DEV}),signal:ac.signal});
-  clearTimeout(tm);return await r.json()};
- try{const j=await once();netPill.classList.remove("on");return j}
- catch(e){try{const j=await once();netPill.classList.remove("on");return j}catch(e2){return{ok:false,msg:"Network error, internet check karein"}}}
- finally{$("ld").style.display="none"}};
+/* ---- network banner + API (20s timeout; padhne wale kaam 1 baar auto-retry, mark kabhi dobara nahi bheja jata) ---- */
+const netPill=$("net"),netWatch=()=>netPill.classList.toggle("on",!navigator.onLine);
+addEventListener("online",()=>{netWatch();if(cfg&&!busy)load().then(upd)});addEventListener("offline",netWatch);netWatch();
+let pend=0;
+const api=async(b,o={})=>{
+ pend++;$("ld").style.display="block";
+ const once=async()=>{const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),o.ms||20000);
+  try{const r=await fetch(API_URL,{method:"POST",body:JSON.stringify({...b,device:DEV}),signal:ac.signal});return await r.json()}finally{clearTimeout(tm)}};
+ try{let j;try{j=await once()}catch(e){if(o.noRetry)throw e;j=await once()}netPill.classList.remove("on");return j}
+ catch(e){return{ok:false,net:true,msg:"Network error, internet check karein"}}
+ finally{if(--pend<=0){pend=0;$("ld").style.display="none"}}};
 const cred=()=>({mobile:S.m,userId:S.u});
 const hav=(a,b,c,d)=>{const R=6371000,r=x=>x*Math.PI/180,dl=r(c-a),dn=r(d-b),h=Math.sin(dl/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
 const mins=(a,b)=>{if(!a||!b)return 0;const[x,y]=a.split(":"),[p,q]=b.split(":"),m=(p*60+ +q)-(x*60+ +y);return m>0?m:0};
 const fh=m=>m?Math.floor(m/60)+"h "+String(m%60).padStart(2,"0")+"m":"-";
 const dmy=s=>s.split("-").reverse().join("-");
+const setT=(id,t)=>{const e=$(id);if(e.textContent!==t)e.textContent=t};
 
-let ORG=null;try{ORG=JSON.parse(localStorage.getItem("att_org")||"null")}catch(e){}
+/* ---- sansthan list (pehle se saved ho to turant dikhti hai) ---- */
+let ORG=LS.get("att_org");
 function showOrg(){const has=!!ORG;$("orgSaved").hidden=!has;$("orgBox").hidden=has;if(has)$("orgName").textContent=ORG.name;else loadOrgs()}
 function chgOrg(){ORG=null;showOrg()}
-async function loadOrgs(){const s=$("os");s.innerHTML='<option value="">Sansthan load ho rahe hain...</option>';
+const orgOpts=l=>'<option value="">-- Apna sansthan chunein --</option>'+l.map(o=>`<option value="${esc(o.id)}" data-code="${esc(o.code||"")}">${esc(o.name)}</option>`).join("");
+async function loadOrgs(){const s=$("os"),c=LS.get("att_orgs");
+ s.innerHTML=c&&c.length?orgOpts(c):'<option value="">Sansthan load ho rahe hain...</option>';
  const r=await api({a:"orgs"});
- if(!r.ok){s.innerHTML='<option value="">Sansthan load nahi hue</option>';$("lm").textContent=r.msg;if(/Network/.test(r.msg))setTimeout(()=>{if(!ORG)loadOrgs()},4000);return}
+ if(!r.ok){if(!(c&&c.length))s.innerHTML='<option value="">Sansthan load nahi hue</option>';$("lm").textContent=r.msg;if(r.net)setTimeout(()=>{if(!ORG)loadOrgs()},4000);return}
  if(!r.orgs.length){s.innerHTML='<option value="">Koi sansthan upalabdh nahi</option>';return}
- $("lm").textContent="";s.innerHTML='<option value="">-- Apna sansthan chunein --</option>'+r.orgs.map(o=>`<option value="${esc(o.id)}" data-code="${esc(o.code||"")}">${esc(o.name)}</option>`).join("")}
-const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+ LS.set("att_orgs",r.orgs);$("lm").textContent="";const v=s.value;s.innerHTML=orgOpts(r.orgs);if(v)s.value=v}
 
 async function login(){const m=$("m").value.trim(),u=$("u").value.trim(),e=$("lm");e.textContent="";
  if(!/^\d{10}$/.test(m)||!u){e.textContent="Mobile (10 digit) aur User ID dalein";$("lg").firstElementChild.classList.remove("shake");void $("lg").offsetWidth;$("lg").firstElementChild.classList.add("shake");return}
  const oid=ORG?ORG.id:$("os").value;if(!oid){e.textContent="Pehle apna sansthan chunein";return}
- $("lb").disabled=true;$("lb").textContent="Ruko...";const r=await api({a:"login",mobile:m,userId:u,org:oid});$("lb").disabled=false;$("lb").textContent="Login";
+ $("lb").disabled=true;$("lb").textContent="Ruko...";const r=await api({a:"login",mobile:m,userId:u,org:oid,withHistory:1});$("lb").disabled=false;$("lb").textContent="Login";
  if(!r.ok){let hint="";
   if(/Sansthan galat/.test(r.msg)){const opt=$("os").selectedOptions[0],code=ORG?(ORG.code||""):((opt&&opt.dataset.code)||""),mm=/^([a-z0-9]{3})\d{3,}$/i.exec(u);
    hint=(mm&&code&&mm[1].toLowerCase()!==code)?" Dhyan dein: aapki ID '"+mm[1].toLowerCase()+"' se shuru hoti hai, jabki chune hue sansthan ka code '"+code+"' hai. Sahi sansthan chunein.":(ORG?" (Sansthan galat ho to 'badlein' dabayein)":"")}
   e.textContent=r.msg+hint;return}
  if(!r.deviceLock){e.textContent="Server purana hai (phone lock band). Admin se Apps Script mein New version Deploy karwayein";return}
- ORG={id:r.orgId,name:r.org,code:r.code||""};localStorage.setItem("att_org",JSON.stringify(ORG));localStorage.setItem("att_me",JSON.stringify({m,u,o:r.orgId}));start({m,u,o:r.orgId},r)}
-function logout(){localStorage.removeItem("att_me");location.reload()}
-async function start(s,r){S=s;cfg=r;$("lg").hidden=true;$("hm").hidden=false;
- $("nm").textContent=r.name;$("rn").textContent=r.name;$("rule").textContent="Niyam: Check In aur Check Out din mein sirf ek-ek baar. Check Out, Check In ke "+((r.minStay||120)/60)+" ghante baad. Shaam "+(r.autoTime||"20:00")+" tak Check Out na hua to auto-out hoga aur us din Absent maana jayega.";$("org").textContent=r.org||"";$("av").textContent=(r.name||"?").trim()[0].toUpperCase();
- const h=new Date().getHours();$("gr").textContent=h<12?"Suprabhat":h<17?"Namaste":"Shubh sandhya";
- const cs=JSON.parse(localStorage.getItem("att_rec")||"null");if(cs&&cs.m===S.m&&cs.date===iso(new Date())&&cs.rec)rec={...cs.rec,cached:1};
- clock();setInterval(clock,1000);setInterval(()=>{if(cfg&&!busy)upd()},30000);
- await load();
- if(!navigator.geolocation){$("zs").textContent="GPS support nahi hai";return}
- navigator.geolocation.watchPosition(p=>{pos=p;upd()},er=>{$("zs").textContent=er.code===1?"Location permission band hai":"Location nahi mil rahi";$("zd").textContent="Phone ki Location on karke Allow dein";$("dot").className="dot out";setP("no","&#128683;","Band","")},{enableHighAccuracy:true,maximumAge:0,timeout:20000})}
-function clock(){if(new Date().getSeconds()===0&&cfg)upd();const d=new Date();$("ck").textContent=d.toLocaleTimeString("en-GB");$("dt").textContent=d.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}
-function tab(t){$("vHome").hidden=t!=="Home";$("vRep").hidden=t!=="Rep";$("n1").classList.toggle("on",t==="Home");$("n2").classList.toggle("on",t==="Rep");scrollTo(0,0);if(t==="Rep")report()}
+ ORG={id:r.orgId,name:r.org,code:r.code||""};LS.set("att_org",ORG);const me={m,u,o:r.orgId};LS.set("att_me",me);saveCfg(me,r);start(me,r)}
+const saveCfg=(me,r)=>{const{hist,...c}=r;LS.set("att_cfg",{m:me.m,cfg:c})};
+function logout(){LS.del("att_me");LS.del("att_cfg");LS.del("att_rec");location.reload()}
+function stopAll(){timers.forEach(clearInterval);timers=[];if(watchId!=null&&navigator.geolocation){navigator.geolocation.clearWatch(watchId);watchId=null}}
 
-function setP(c,ic,lb,sb,p,ready,dis=true){const b=$("pn");b.className="punch "+c+(ready?" ready":"");b.style.setProperty("--p",p||0);b.disabled=dis;$("pi").innerHTML=ic;$("pl").textContent=lb;$("ps").textContent=sb||""}
+/* ---- start: pehle turant screen, phir server se taaza jaankari ---- */
+function start(s,r,skipLoad){S=s;cfg=r;$("lg").hidden=true;$("hm").hidden=false;
+ $("nm").textContent=r.name;$("rn").textContent=r.name;$("rule").textContent="Niyam: Check In aur Check Out din mein sirf ek-ek baar. Check Out, Check In ke "+((r.minStay||120)/60)+" ghante baad. Shaam "+(r.autoTime||"20:00")+" tak Check Out na hua to auto-out hoga aur us din Absent maana jayega.";
+ $("org").textContent=r.org||"";$("av").textContent=((r.name||"?").trim()[0]||"?").toUpperCase();
+ const h=new Date().getHours();$("gr").textContent=h<12?"Suprabhat":h<17?"Namaste":"Shubh sandhya";
+ const cs=LS.get("att_rec");if(cs&&cs.m===S.m&&cs.date===iso(new Date())&&cs.rec)rec={...cs.rec,cached:1};
+ clock();timers.push(setInterval(clock,1000),setInterval(()=>{if(cfg&&!busy&&!document.hidden)upd()},30000));
+ gpsStart(false);                       // GPS server ka intezar kiye bina turant shuru
+ if(r.hist)applyHist(r.hist);else if(!skipLoad)load().then(upd);
+ upd()}
+function clock(){const d=new Date();if(d.getSeconds()===0&&cfg)sched();if(document.hidden)return;setT("ck",d.toLocaleTimeString("en-GB"));setT("dt",d.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"}))}
+function tab(t){$("vHome").hidden=t!=="Home";$("vRep").hidden=t!=="Rep";$("n1").classList.toggle("on",t==="Home");$("n2").classList.toggle("on",t==="Rep");scrollTo(0,0);if(t==="Rep")report()}
+document.addEventListener("visibilitychange",()=>{if(document.hidden||!cfg)return;clock();gpsStart(true);if(Date.now()-lastLoad>60000&&!busy)load().then(upd);else sched()});
+
+/* ================= GPS =================
+   - pehle high accuracy; 25s mein na mile to network location par chale jate hain aur 20s baad dobara GPS try karte hain
+   - timeout / signal chhutne par "Band" nahi dikhate, bas "dhoondh rahe hain" (sirf permission band hone par Band)
+   - pichhle 10 second ki sabse achhi location use hoti hai (jhatke / flicker kam)
+   - Check In/Out dabane par 9 second tak sabse achhi location chuni jati hai */
+let watchId=null,gpsMode="hi",ring=[],pos=null,gpsErr="",modeT=0;
+const bestFix=()=>{const cut=Date.now()-10000;ring=ring.filter(x=>x.t>cut);return ring.length?ring.reduce((a,b)=>b.acc<a.acc?b:a):pos};
+function gpsStart(force){
+ if(!navigator.geolocation){gpsErr="none";$("zs").textContent="GPS support nahi hai";return}
+ if(watchId!=null){if(!force)return;navigator.geolocation.clearWatch(watchId);watchId=null}
+ if(force&&gpsErr==="denied"){gpsErr="";gpsMode="hi"}
+ $("gpsbtn").hidden=true;
+ const o=gpsMode==="hi"?{enableHighAccuracy:true,maximumAge:2000,timeout:25000}:{enableHighAccuracy:false,maximumAge:10000,timeout:20000};
+ watchId=navigator.geolocation.watchPosition(onPos,onGpsErr,o)}
+function onPos(p){const c=p.coords;pos={lat:c.latitude,lng:c.longitude,acc:c.accuracy,t:Date.now()};ring.push(pos);gpsErr="";$("gpsbtn").hidden=true;sched()}
+function onGpsErr(er){
+ if(er.code===1){gpsErr="denied";$("dot").className="dot out";setT("zs","Location permission band hai");setT("zd","Phone settings mein Location allow karein, phir 'Dobara try' dabayein");$("gpsbtn").hidden=false;sched();return}
+ const have=bestFix();if(have&&Date.now()-have.t<20000)return;     // abhi bhi achhi location hai: chup rahein
+ if(gpsMode==="hi"){gpsMode="lo";gpsStart(true);clearTimeout(modeT);modeT=setTimeout(()=>{if(gpsMode==="lo"){gpsMode="hi";gpsStart(true)}},20000)}
+ else{gpsErr="wait";$("gpsbtn").hidden=false}
+ sched()}
+function sampleBest(ms){return new Promise(res=>{
+ if(!navigator.geolocation)return res(null);
+ let best=bestFix(),done=false,id=null,tm=null,tm2=null;
+ if(best&&Date.now()-best.t>10000)best=null;
+ const fin=()=>{if(done)return;done=true;clearTimeout(tm);clearTimeout(tm2);if(id!=null)navigator.geolocation.clearWatch(id);res(best)};
+ if(best&&best.acc<=40)return fin();                 // pichhle 10 second mein achhi location mil chuki hai
+ tm=setTimeout(fin,ms);tm2=setTimeout(()=>{if(best&&best.acc<=80)fin()},4000);
+ id=navigator.geolocation.watchPosition(p=>{const c=p.coords,f={lat:c.latitude,lng:c.longitude,acc:c.accuracy,t:Date.now()};if(!best||f.acc<best.acc)best=f;if(best.acc<=25)fin()},()=>{},{enableHighAccuracy:true,maximumAge:0,timeout:ms})})}
+
+/* ---- punch button ---- */
+let lastSig="",qT=0;
+const sched=()=>{if(qT)return;qT=setTimeout(()=>{qT=0;upd()},200)};
+function setP(c,ic,lb,sb,p,ready,dis=true){const sig=[c,ic,lb,sb,Math.round(p||0),ready?1:0,dis?1:0].join("|");if(sig===lastSig)return;lastSig=sig;
+ const b=$("pn");b.className="punch "+c+(ready?" ready":"");b.style.setProperty("--p",p||0);b.disabled=dis;$("pi").innerHTML=ic;$("pl").textContent=lb;$("ps").textContent=sb||""}
 const AD={FULL:["&#9989;","Full day","Admin ne Full day mark kiya","Full day"],CL:["&#127796;","Casual Leave","Admin ne CL mark kiya","CL"],ML:["&#127973;","Medical Leave","Admin ne ML mark kiya","ML"],OW:["&#128188;","Office Work","Admin ne Office Work mark kiya","Office work"]};
 const MIN=()=>cfg.minStay||120,AUTO=()=>cfg.autoTime||"20:00";
 const toMin=s=>{const p=String(s).split(":");return p[0]*60+ +p[1]},nowMin=()=>{const d=new Date();return d.getHours()*60+d.getMinutes()};
 const remain=()=>rec&&rec.inTime?Math.max(MIN()-(nowMin()-toMin(rec.inTime)),0):0;
-function upd(){if(!cfg)return;let d=0,acc=0,inn=false,ok=false,p=0;
- if(pos){d=Math.round(hav(pos.coords.latitude,pos.coords.longitude,cfg.lat,cfg.lng));acc=Math.round(pos.coords.accuracy);inn=d<=cfg.radius;ok=acc<=MAX_ACC;p=Math.min(100,cfg.radius/Math.max(d,cfg.radius)*100);
-  $("dot").className="dot "+(inn&&ok?"in":"out");$("zs").textContent=!ok?"GPS signal kamzor hai":inn?"Aap office ke andar hain":"Aap office se bahar hain";
-  $("zd").textContent=`Doori ${d} m  \u2022  Limit ${cfg.radius} m  \u2022  GPS \u00b1${acc} m`}
+function upd(){if(!cfg)return;let d=0,acc=0,inn=false,ok=false,p=0,near=false;
+ const f=bestFix(),maxA=cfg.maxAcc||150,tol=cfg.accTol||40;
+ if(f){d=Math.round(hav(f.lat,f.lng,cfg.lat,cfg.lng));acc=Math.round(f.acc);ok=acc<=maxA;inn=d<=cfg.radius+Math.min(acc,tol);near=d<=cfg.radius+Math.min(acc,400);p=Math.min(100,cfg.radius/Math.max(d,cfg.radius)*100);
+  const stale=Date.now()-f.t>60000;
+  $("dot").className="dot "+(inn&&ok&&!stale?"in":"out");
+  setT("zs",stale?"GPS signal purana hai, naya dhoondh rahe hain":!ok?"GPS signal kamzor hai (±"+acc+" m)":inn?"Aap office ke andar hain":"Aap office se bahar hain");
+  setT("zd",`Doori ${d} m  \u2022  Limit ${cfg.radius} m  \u2022  GPS \u00b1${acc} m`+(!ok?"  \u2022  Khule mein jayein":""))}
+ else if(gpsErr!=="denied"){$("dot").className="dot out";setT("zs","GPS signal dhoondh rahe hain...");setT("zd","Phone ki Location on rakhein, khule mein 10-20 second lag sakte hain")}
  if(!loaded&&!rec){setP("idle","&#8987;","Ruko...","Status load ho raha hai",0,false);return}
  const ST=rec&&rec.status;
  if(ST&&AD[ST]&&!(ST==="FULL"&&rec.inTime&&!rec.outTime)){setP("done",AD[ST][0],AD[ST][1],AD[ST][2],100,false);return}
  if(!rec&&TODAYHOL){setP("done","&#127881;","Chhutti",TODAYHOL,100,false);return}
  if(rec&&rec.status==="AUTO"){setP("abs","&#9940;","Absent","Auto out "+AUTO()+" - aaj absent",100,false);return}
  if(rec&&rec.outTime){setP("done","&#9989;","Poora hua","Aaj ka kaam: "+fh(mins(rec.inTime,rec.outTime)),100,false);return}
- if(busy||!pos)return;
- const far=()=>setP("no","&#128205;",inn?"Wait":"Door hain",!ok?"GPS kamzor":(d-cfg.radius)+" m aur paas aayein",p,false),can=inn&&ok;
+ if(busy)return;
+ if(gpsErr==="denied"){setP("no","&#128683;","Location band","Allow karke 'Dobara try'",0,false);return}
+ if(!f){setP("idle","&#128225;","GPS...","Location mil rahi hai",0,false);return}
+ const far=()=>setP("no","&#128205;","Door hain",(d-cfg.radius)+" m aur paas aayein",p,false);
+ const weak=(lb,sb,cls)=>setP(cls,lb[0],lb[1],sb,p,false,false);       // GPS kamzor par bhi dabane dete hain: dabane par behtar signal dhoondhte hain
  if(!rec){if(nowMin()>=toMin(AUTO()))setP("no","&#128339;","Samay samapt","Check In "+AUTO()+" tak",100,false);
-  else can?setP("ok","&#128073;","Check In","Ek baar dabayein",p,true,false):far()}
+  else if(inn&&ok)setP("ok","&#128073;","Check In","Ek baar dabayein",p,true,false);
+  else if(!ok&&near)weak(["&#128073;","Check In"],"GPS kamzor, dabakar try karein","amb");else far()}
  else{const rem=remain();if(rem>0)setP("wait","&#9203;","Check Out",fh(rem)+" baad khulega",p,false);
-  else can?setP("amb","&#128170;","Check Out","In: "+rec.inTime,p,true,false):far()}}
+  else if(inn&&ok)setP("amb","&#128170;","Check Out","In: "+rec.inTime,p,true,false);
+  else if(!ok&&near)weak(["&#128170;","Check Out"],"GPS kamzor, dabakar try karein","amb");else far()}}
 function punch(){mark(rec?"out":"in")}
-async function mark(t){if(busy||!pos||!loaded)return;
+async function mark(t){if(busy||!loaded)return;
  if(t==="in"&&rec)return;if(t==="out"&&(!rec||rec.outTime||remain()>0))return;
  if(t==="out"&&!confirm("Check Out karein?\nAaj ke liye Check Out sirf ek baar hota hai."))return;
- busy=true;$("pn").disabled=true;$("pl").textContent="Ruko...";const mg=$("mg");mg.className="msg";mg.textContent="Location jaanch rahe hain...";
- const p=await new Promise(r=>navigator.geolocation.getCurrentPosition(r,()=>r(null),{enableHighAccuracy:true,maximumAge:0,timeout:15000}));
- if(!p){mg.className="msg bad";mg.textContent="Location nahi mili, dobara try karein";busy=false;upd();return}
- const r=await api({a:"mark",type:t,...cred(),lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy});
- mg.className="msg "+(r.ok?"good":"bad");mg.textContent=r.ok?(t==="in"?"Check In":"Check Out")+" ho gaya: "+r.time+" ("+r.dist+" m)":r.msg;
- try{navigator.vibrate&&navigator.vibrate(r.ok?[25,40,25]:120)}catch(e){}
- if(r.ok){const dt=iso(new Date());rec=t==="in"?{date:dt,inTime:r.time,outTime:"",status:"",local:1}:{...(rec||{date:dt}),outTime:r.time,local:1}}
- await load();busy=false;upd()}
+ busy=true;lastSig="";$("pn").disabled=true;$("pl").textContent="Ruko...";$("ps").textContent="GPS pakad rahe hain";const mg=$("mg");mg.className="msg";mg.textContent="Sabse achhi location dhoondh rahe hain (max 9 second)...";
+ const p=await sampleBest(9000)||(()=>{const b=bestFix();return b&&Date.now()-b.t<60000?b:null})();
+ if(!p){mg.className="msg bad";mg.textContent="Location nahi mili. Khule mein jayein, Location on karein aur dobara dabayein";busy=false;upd();return}
+ const maxA=cfg.maxAcc||150;
+ if(p.acc>maxA){mg.className="msg bad";mg.textContent="GPS signal kamzor hai (±"+Math.round(p.acc)+" m). Khule mein 10 second rukkar dobara dabayein";busy=false;upd();return}
+ mg.textContent="Server par darj ho raha hai...";
+ const r=await api({a:"mark",type:t,...cred(),lat:p.lat,lng:p.lng,acc:p.acc},{noRetry:true});
+ let okk=!!r.ok;
+ if(r.net){await load();okk=t==="in"?!!(rec&&rec.inTime):!!(rec&&rec.outTime);   // jawab nahi aaya: dekhein ki darj hua ya nahi
+  mg.className="msg "+(okk?"good":"bad");mg.textContent=okk?(t==="in"?"Check In":"Check Out")+" ho gaya: "+(t==="in"?rec.inTime:rec.outTime):"Network problem, dobara koshish karein";busy=false;upd();return}
+ mg.className="msg "+(okk?"good":"bad");mg.textContent=okk?(t==="in"?"Check In":"Check Out")+" ho gaya: "+r.time+" ("+r.dist+" m)":r.msg;
+ try{navigator.vibrate&&navigator.vibrate(okk?[25,40,25]:120)}catch(e){}
+ if(r.rec){rec={...r.rec};putToday(rec)}                 // server ne naya record saath bheja: dobara load ki zaroorat nahi
+ else if(okk)await load();
+ else if(r.already)await load();
+ busy=false;lastSig="";upd()}
 
-let loaded=false,retrying=false;
-async function load(){let r=await api({a:"history",...cred()});if(!r.ok&&/Network/.test(r.msg))r=await api({a:"history",...cred()});
- if(!r.ok){if(/band|galat|juda/.test(r.msg)){logout();return}
-  $("mg").className="msg bad";$("mg").textContent="Server se jaankari nahi mili, dobara koshish ho rahi hai...";
-  if(!retrying){retrying=true;setTimeout(async()=>{retrying=false;await load();upd()},5000)}upd();return}
- loaded=true;if(/koshish/.test($("mg").textContent))$("mg").textContent="";
- const t=r.today,ym=t.slice(0,7);TODAYHOL=r.todayHoliday||"";rec=r.list.find(x=>x.date===t)||(rec&&rec.local&&rec.date===t?rec:null);
- const ST=rec&&rec.status,au=ST==="AUTO",adm=!!ST&&!!AD[ST]&&!(ST==="FULL"&&rec.inTime);
- rec?localStorage.setItem("att_rec",JSON.stringify({m:S.m,date:t,rec:{...rec,local:0,cached:0}})):localStorage.removeItem("att_rec");
- $("ti").textContent=rec?.inTime||"--:--";$("to").textContent=rec?.outTime?(au?"Auto "+rec.outTime:rec.outTime):"--:--";
- $("th").textContent=au?"Absent":adm?AD[ST][3]:rec?.outTime?fh(mins(rec.inTime,rec.outTime)):"-";
- const hs={},mp={};(r.hol||[]).forEach(h=>hs[h.date]=1);r.list.filter(x=>x.date.startsWith(ym)).forEach(x=>mp[x.date]=x);
- const dayN=+t.slice(8),late=(r.now||"")>=AUTO();let pc=0,ac=0;
+/* ---- aaj ki sthiti + is mahine ka sar ---- */
+function putToday(x){const t=iso(new Date());delete RC[t.slice(0,7)];LIST=LIST.filter(y=>y.date!==t);LIST.unshift(x);saveRec();summary()}
+function saveRec(){const t=iso(new Date());rec&&rec.date===t?LS.set("att_rec",{m:S.m,date:t,rec:{...rec,local:0,cached:0}}):LS.del("att_rec")}
+function applyHist(r){
+ lastLoad=Date.now();loaded=true;if(/koshish/.test($("mg").textContent))$("mg").textContent="";
+ const t=r.today;TODAYHOL=r.todayHoliday||"";LIST=r.list||[];NOWT=r.now||"";HOLS=r.hol||[];
+ rec=LIST.find(x=>x.date===t)||(rec&&rec.date===t&&!rec.cached?rec:null);saveRec();summary();upd()}
+let HOLS=[];
+function summary(){
+ const t=iso(new Date()),ST=rec&&rec.status,au=ST==="AUTO",adm=!!ST&&!!AD[ST]&&!(ST==="FULL"&&rec.inTime);
+ setT("ti",rec?.inTime||"--:--");setT("to",rec?.outTime?(au?"Auto "+rec.outTime:rec.outTime):"--:--");
+ setT("th",au?"Absent":adm?AD[ST][3]:rec?.outTime?fh(mins(rec.inTime,rec.outTime)):"-");
+ const ym=t.slice(0,7),hs={},mp={};HOLS.forEach(h=>hs[h.date]=1);LIST.filter(x=>x.date.startsWith(ym)).forEach(x=>mp[x.date]=x);
+ const dayN=+t.slice(8),late=nowMin()>=toMin(AUTO());let pc=0,ac=0;
  for(let i=1;i<=dayN;i++){const ds=ym+"-"+String(i).padStart(2,"0"),x=mp[ds],dw=new Date(+ym.slice(0,4),+ym.slice(5,7)-1,i).getDay();
   if(x){if(!x.status||x.status==="FULL"||x.status==="OW")pc++;else if(x.status==="AUTO")ac++}
   else if(!hs[ds]&&dw!==0&&(ds<t||late))ac++}
- $("hp").textContent=pc;$("ha").textContent=ac}
+ setT("hp",String(pc));setT("ha",String(ac))}
+async function load(){
+ const r=await api({a:"history",...cred()});
+ if(!r.ok){if(!r.net&&/band|galat|juda/.test(r.msg||"")){logout();return}
+  if(r.net)return netPill.classList.add("on");
+  $("mg").className="msg bad";$("mg").textContent="Server se jaankari nahi mili, dobara koshish ho rahi hai...";
+  if(!retrying){retrying=true;setTimeout(async()=>{retrying=false;await load();upd()},5000)}upd();return}
+ applyHist(r)}
 
 /* ---- report ---- */
+const RC={};
 function mv(n){rm.setMonth(rm.getMonth()+n);report()}
 const WDN=["Ravivar","Somvar","Mangalvar","Budhvar","Guruvar","Shukravar","Shanivar"];
 function rowHTML(o){const wd=WDN[new Date(o.d+"T00:00:00").getDay()];
@@ -424,15 +467,12 @@ function rowHTML(o){const wd=WDN[new Date(o.d+"T00:00:00").getDay()];
  if(k==="CL"||k==="ML"||k==="OW"||(k==="FULL"&&!x.inTime)){top={CL:"Casual Leave (CL)",ML:"Medical Leave (ML)",OW:"Office Work",FULL:"Full day (Present)"}[k];sub="Admin ne mark kiya";col="var(--amb)"}
  else{top=(x.inTime||"-")+" &rarr; "+(x.outTime||"-");
   if(k==="AUTO"){sub="Auto Check Out - Absent";col="var(--bad)"}
-  else sub=fh(mins(x.inTime,x.outTime))+(x.inDist?" \u2022 "+x.inDist+" m":"")+(k==="FULL"?" \u2022 Admin: Full day":"")}
+  else sub=fh(mins(x.inTime,x.outTime))+(x.inDist?" \u2022 "+esc(x.inDist)+" m":"")+(k==="FULL"?" \u2022 Admin: Full day":"")}
  return`<div class="row"><div><b>${dmy(x.date)}</b><small>${wd}</small></div><div class="t"><b>${top}</b><small${col?` style="color:${col};font-weight:700"`:""}>${sub}</small></div></div>`}
-async function report(){const y=rm.getFullYear(),m=rm.getMonth(),last=new Date(y,m+1,0).getDate(),ym=y+"-"+String(m+1).padStart(2,"0"),now=new Date();
- $("mt").textContent=rm.toLocaleDateString("en-IN",{month:"long",year:"numeric"});$("nx").disabled=(y===now.getFullYear()&&m===now.getMonth());
- $("pt").textContent=S?cfg.name+" - Attendance "+$("mt").textContent:"";
- const r=await api({a:"history",...cred(),from:ym+"-01",to:ym+"-"+String(last).padStart(2,"0")});
+function renderRep(r,y,m){const last=new Date(y,m+1,0).getDate(),ym=y+"-"+String(m+1).padStart(2,"0"),now=new Date();
  rrows=(r.ok?r.list:[]).filter(x=>x.date.startsWith(ym)).sort((a,b)=>a.date<b.date?1:-1);
  const hol=(r.ok&&r.hol)||[],hs={};hol.forEach(x=>hs[x.date]=x.name);
- const map={},td=iso(now),late=now.getHours()>=20;rrows.forEach(x=>map[x.date]=x);let pr=0,ab=0,lv=0,ow=0,wk=0,mn=0;
+ const map={},td=iso(now),late=nowMin()>=toMin(cfg?AUTO():"20:00");rrows.forEach(x=>map[x.date]=x);let pr=0,ab=0,lv=0,ow=0,wk=0,mn=0;
  let h='<div class="wd">र</div><div class="wd">सो</div><div class="wd">मं</div><div class="wd">बु</div><div class="wd">गु</div><div class="wd">शु</div><div class="wd">श</div>'+'<div></div>'.repeat(new Date(y,m,1).getDay());
  for(let d=1;d<=last;d++){const ds=ym+"-"+String(d).padStart(2,"0"),dw=new Date(y,m,d).getDay(),x=map[ds];let c="";
   if(x){const k=x.status;wk++;
@@ -442,30 +482,38 @@ async function report(){const y=rm.getFullYear(),m=rm.getMonth(),last=new Date(y
  $("cg").innerHTML=h;$("rp").textContent=pr;$("ra").textContent=ab;$("rl2").textContent=lv;$("ro").textContent=ow;$("rh").textContent=mn?Math.floor(mn/60)+"h":"0h";$("rr").textContent=wk?Math.min(100,Math.round((pr+ow)/wk*100))+"%":"0%";
  const items=[...rrows.map(x=>({d:x.date,x})),...hol.filter(x=>!map[x.date]).map(x=>({d:x.date,h:x}))].sort((a,b)=>a.d<b.d?1:-1);
  $("rl").innerHTML=items.map(rowHTML).join("")||'<div class="empty">Is mahine ka koi record nahi</div>'}
+async function report(){const y=rm.getFullYear(),m=rm.getMonth(),last=new Date(y,m+1,0).getDate(),ym=y+"-"+String(m+1).padStart(2,"0"),now=new Date(),cur=y===now.getFullYear()&&m===now.getMonth(),my=++repTok;
+ $("mt").textContent=rm.toLocaleDateString("en-IN",{month:"long",year:"numeric"});$("nx").disabled=cur;
+ $("pt").textContent=S?cfg.name+" - Attendance "+$("mt").textContent:"";
+ if(RC[ym])renderRep(RC[ym],y,m);                       // pehle se dekha mahina turant dikhta hai
+ if(RC[ym]&&!cur)return;                                // beete mahine dobara server se nahi mangwate
+ const r=await api({a:"history",...cred(),from:ym+"-01",to:ym+"-"+String(last).padStart(2,"0")});
+ if(my!==repTok)return;                                 // beech mein mahina badal gaya: purana jawab chhod do
+ if(r.ok)RC[ym]=r;else if(RC[ym])return;
+ renderRep(r,y,m)}
 function csv(){if(!rrows.length)return;const L={"":"Present",FULL:"Present (Admin Full day)",CL:"Casual Leave",ML:"Medical Leave",OW:"Office Work",AUTO:"Absent (Auto out)"};
- const c=[["Date","In","Out","Hours","Status","Distance(m)"],...[...rrows].reverse().map(x=>{const k=x.status||"",hr=(k===""||k==="FULL"||k==="OW")?fh(mins(x.inTime,x.outTime)):"";return[dmy(x.date),x.inTime,x.outTime,hr,L[k]||k,x.inDist]})].map(a=>a.map(v=>`"${v||""}"`).join(",")).join("\n");
- const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+c],{type:"text/csv"}));a.download="my_attendance_"+iso(rm).slice(0,7)+".csv";a.click()}
+ const q=v=>'"'+String(v??"").replace(/"/g,'""')+'"';
+ const c=[["Date","In","Out","Hours","Status","Distance(m)"],...[...rrows].reverse().map(x=>{const k=x.status||"",hr=(k===""||k==="FULL"||k==="OW")?fh(mins(x.inTime,x.outTime)):"";return[dmy(x.date),x.inTime,x.outTime,hr,L[k]||k,x.inDist]})].map(a=>a.map(q).join(",")).join("\n");
+ const a=document.createElement("a"),u=URL.createObjectURL(new Blob(["\ufeff"+c],{type:"text/csv"}));a.href=u;a.download="my_attendance_"+iso(rm).slice(0,7)+".csv";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),10000)}
 
-(async()=>{const s=JSON.parse(localStorage.getItem("att_me")||"null");
+/* ---- punch button dabane par halka vibrate (pehle ka 3D tilt hata diya: phone dheema hota tha) ---- */
+$("pn").addEventListener("pointerdown",()=>{if(!$("pn").disabled){try{navigator.vibrate&&navigator.vibrate(15)}catch(e){}}});
+
+/* ---- app khulte hi ---- */
+(async()=>{const s=LS.get("att_me");
  if(!s||!s.o){showOrg();return}
- $("lg").hidden=true;const r=await api({a:"login",mobile:s.m,userId:s.u,org:s.o});
- if(r.ok&&r.deviceLock)start(s,r);else{$("lg").hidden=false;showOrg();$("lm").textContent=r.ok?"Server purana hai (phone lock band). Admin se New version Deploy karwayein":(r.msg||"")+(/Sansthan galat/.test(r.msg||"")?" (Sansthan galat ho to 'badlein' dabayein)":"")}})();
-</script>
-
-<script>
-/* ===== 3D effects (UI only) ===== */
-(()=>{
- if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
- const rs=el=>{el.style.setProperty("--rx","0deg");el.style.setProperty("--ry","0deg")};
- document.querySelectorAll("[data-tilt]").forEach(el=>{const mx=+el.dataset.tilt||10;
-  el.addEventListener("pointermove",e=>{const r=el.getBoundingClientRect();el.style.setProperty("--ry",((e.clientX-r.left)/r.width-.5)*mx+"deg");el.style.setProperty("--rx",-((e.clientY-r.top)/r.height-.5)*mx+"deg")});
-  ["pointerleave","pointerup","pointercancel"].forEach(t=>el.addEventListener(t,()=>rs(el)))});
- const pn=document.getElementById("pn");
- pn.addEventListener("pointermove",e=>{if(pn.disabled&&e.pointerType==="touch")return;const r=pn.getBoundingClientRect();pn.style.setProperty("--ry",((e.clientX-r.left)/r.width-.5)*22+"deg");pn.style.setProperty("--rx",-((e.clientY-r.top)/r.height-.5)*22+"deg")});
- ["pointerleave","pointerup","pointercancel"].forEach(t=>pn.addEventListener(t,()=>rs(pn)));
- pn.addEventListener("pointerdown",()=>{if(pn.disabled)return;const s=document.createElement("span");s.className="rip";pn.appendChild(s);s.addEventListener("animationend",()=>s.remove());try{navigator.vibrate&&navigator.vibrate(15)}catch(e){}});
- let q=0;addEventListener("deviceorientation",e=>{if(q)return;q=requestAnimationFrame(()=>{q=0;const g=Math.max(-30,Math.min(30,e.gamma||0)),b=Math.max(-30,Math.min(30,(e.beta||45)-45));document.documentElement.style.setProperty("--gx",g);document.documentElement.style.setProperty("--gy",b)})});
-})();
+ const cc=LS.get("att_cfg");
+ const bad=r=>{stopAll();S=null;cfg=null;$("hm").hidden=true;$("lg").hidden=false;showOrg();
+  $("lm").textContent=r.ok?"Server purana hai (phone lock band). Admin se New version Deploy karwayein":(r.msg||"")+(/Sansthan galat/.test(r.msg||"")?" (Sansthan galat ho to 'badlein' dabayein)":"")};
+ if(cc&&cc.m===s.m&&cc.cfg&&cc.cfg.lat!=null){          // TEZ RASTA: saved jaankari se app turant khulta hai, server ki jaanch peeche chalti hai
+  $("lg").hidden=true;start(s,cc.cfg,true);
+  const r=await api({a:"login",mobile:s.m,userId:s.u,org:s.o,withHistory:1});
+  if(r.net){setTimeout(()=>{if(cfg&&!loaded)load().then(upd)},4000);return}
+  if(r.ok&&r.deviceLock){cfg=r;saveCfg(s,r);if(r.hist)applyHist(r.hist);else load().then(upd);upd()}
+  else{LS.del("att_cfg");bad(r)}
+  return}
+ $("lg").hidden=true;const r=await api({a:"login",mobile:s.m,userId:s.u,org:s.o,withHistory:1});
+ if(r.ok&&r.deviceLock){saveCfg(s,r);start(s,r)}else{$("lg").hidden=false;showOrg();if(r.net)$("lm").textContent=r.msg;else bad(r)}})();
 </script>
 </body>
 </html>
