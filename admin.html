@@ -4,7 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Attendance Admin</title>
+  <link rel="preconnect" href="https://script.google.com">
+<link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
+<title>Attendance Admin</title>
   <style>
     :root {
       --bg: #c2f5d3;
@@ -935,7 +937,22 @@
     function clearOrgForm() { $("oid").value = ""; $("on").value = ""; $("la").value = ""; $("lo").value = ""; $("ra").value = 100; $("oc").value = ""; $("oc").disabled = false; $("otitle").textContent = "Naya sansthan banayein" }
     function editOrg(id) { const o = orgs.find(x => x.orgId === id); $("oid").value = id; $("on").value = o.name; $("la").value = o.lat; $("lo").value = o.lng; $("ra").value = o.radius; $("oc").value = o.code || ""; $("oc").disabled = !!o.code; $("otitle").textContent = "Sansthan badlein: " + o.name; scrollTo(0, 0) }
     function pickOrg(id) { $("osw").value = id; setOrg(id); toast("Ab sab kuch is sansthan ka dikhega") }
-    function myLoc() { navigator.geolocation.getCurrentPosition(p => { $("la").value = p.coords.latitude.toFixed(6); $("lo").value = p.coords.longitude.toFixed(6); toast("Location mil gayi (GPS ±" + Math.round(p.coords.accuracy) + " m)") }, () => toast("Location permission dein"), { enableHighAccuracy: true }) }
+    /* sansthan ki location: 10 second tak sabse achhi (kam ±m wali) location chunta hai, phir bharta hai */
+    let locBusy = false;
+    function myLoc() {
+      if (!navigator.geolocation) return toast("Is browser mein GPS nahi hai");
+      if (locBusy) return; locBusy = true; toast("Sahi location dhoondh rahe hain (10 second)... office mein khade rahein");
+      let best = null, id = null, tm = null, denied = false;
+      const done = () => {
+        clearTimeout(tm); if (id != null) navigator.geolocation.clearWatch(id); locBusy = false;
+        if (!best) return toast(denied ? "Location permission dein (browser settings mein Allow)" : "Location nahi mili, khule mein jakar dobara try karein");
+        $("la").value = best.latitude.toFixed(6); $("lo").value = best.longitude.toFixed(6);
+        toast("Location mil gayi (GPS \u00b1" + Math.round(best.accuracy) + " m)" + (best.accuracy > 50 ? " - signal kamzor hai, behtar ke liye khule mein dobara dabayein" : ""))
+      };
+      tm = setTimeout(done, 10000);
+      id = navigator.geolocation.watchPosition(p => { if (!best || p.coords.accuracy < best.accuracy) best = p.coords; if (best.accuracy <= 15) done() },
+        e => { if (e.code === 1) { denied = true; done() } }, { enableHighAccuracy: true, maximumAge: 0, timeout: 10000 })
+    }
     async function saveOrg() {
       if (!isSup()) return;
       const n = $("on").value.trim(), la = parseFloat($("la").value), lo = parseFloat($("lo").value), ra = parseInt($("ra").value, 10), id = $("oid").value;
