@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#3390e7">
   <link rel="preconnect" href="https://script.google.com">
 <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
 <title>Attendance Admin</title>
@@ -546,6 +547,701 @@
         page-break-inside: avoid
       }
     }
+    /* =====================================================================
+       RESPONSIVE LAYER  (sirf screen ke liye; print / PDF bilkul pehle jaisa)
+       Phone  : <= 700px   -> tables "card" ban jaati hain; <=1024px par hamburger menu
+       Tablet : 701-1024px -> beech ka layout, tables scroll
+       PC     : >= 1025px  -> poori chaudai, sticky header + tabs
+       ===================================================================== */
+    @media screen {
+      :root {
+        --hh: 52px;
+        --pad: clamp(10px, 2.6vw, 22px);
+        --sl: env(safe-area-inset-left, 0px);
+        --sr: env(safe-area-inset-right, 0px);
+        --st: env(safe-area-inset-top, 0px);
+        --sb: env(safe-area-inset-bottom, 0px)
+      }
+
+      html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        scroll-padding-top: calc(var(--hh) + 64px)
+      }
+
+      body {
+        min-height: 100vh;
+        min-height: 100dvh;
+        -webkit-tap-highlight-color: transparent;
+        line-height: 1.4
+      }
+
+      button, .btn, select, input, label, nav button {
+        touch-action: manipulation
+      }
+
+      :focus-visible {
+        outline: 3px solid #0b5ed788;
+        outline-offset: 2px
+      }
+
+      /* header + tabs */
+      .hdr {
+        padding: calc(10px + var(--st)) calc(var(--pad) + var(--sr)) 10px calc(var(--pad) + var(--sl))
+      }
+
+      .hdr button {
+        cursor: pointer;
+        min-height: 36px
+      }
+
+      .hdr select {
+        width: auto;
+        min-width: 190px
+      }
+
+      .hdr .rt {
+        flex-wrap: nowrap
+      }
+
+      #who {
+        max-width: 280px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap
+      }
+
+      nav {
+        top: var(--hh);
+        padding-left: calc(var(--pad) + var(--sl));
+        padding-right: calc(var(--pad) + var(--sr));
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x proximity
+      }
+
+      nav::-webkit-scrollbar {
+        display: none
+      }
+
+      nav button {
+        cursor: pointer;
+        min-height: 42px;
+        scroll-snap-align: center
+      }
+
+      main {
+        max-width: 1240px;
+        padding: var(--pad) calc(var(--pad) + var(--sr)) calc(var(--pad) + var(--sb) + 56px) calc(var(--pad) + var(--sl))
+      }
+
+      /* cards, stats, forms */
+      .card {
+        padding: clamp(12px, 2.6vw, 18px)
+      }
+
+      .grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr))
+      }
+
+      .stat div {
+        font-size: clamp(22px, 5vw, 30px)
+      }
+
+      .row {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr))
+      }
+
+      .row > div {
+        min-width: 0
+      }
+
+      input, select {
+        min-height: 42px;
+        min-width: 0
+      }
+
+      input[type=checkbox] {
+        width: 20px;
+        height: 20px;
+        min-height: 0;
+        padding: 0;
+        accent-color: var(--pri);
+        cursor: pointer
+      }
+
+      input[type=date] {
+        -webkit-appearance: none;
+        appearance: none
+      }
+
+      .btn {
+        min-height: 42px
+      }
+
+      .btn.s {
+        min-height: 34px
+      }
+
+      .btn:active {
+        transform: scale(.98)
+      }
+
+      .btn:disabled {
+        opacity: .55
+      }
+
+      .tw {
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain
+      }
+
+      .mselall {
+        display: none
+      }
+
+      /* login + password popup */
+      #login {
+        max-width: 430px;
+        margin: clamp(14px, 9vh, 90px) auto
+      }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: #0f2a43f2;
+        z-index: 30;
+        display: flex;
+        padding: 16px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch
+      }
+
+      .modal > .card {
+        margin: auto
+      }
+
+      .toast {
+        bottom: calc(18px + var(--sb));
+        width: max-content;
+        font-size: 14px
+      }
+
+      /* report sheet: register mein naam wala column sticky (swipe karte waqt dikhta rahe) */
+      .sheet {
+        padding: clamp(12px, 3vw, 22px)
+      }
+
+      .reg th:first-child, .reg td:first-child {
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        width: 28px;
+        min-width: 28px;
+        max-width: 28px
+      }
+
+      .reg td:first-child {
+        background: #fff
+      }
+
+      .reg th:first-child {
+        background: #e9eff7
+      }
+
+      .reg th.nm, .reg td.nm {
+        position: sticky;
+        left: 28px;
+        z-index: 2;
+        box-shadow: 1px 0 0 #cdd6e1
+      }
+
+      .reg td.nm {
+        background: #fff
+      }
+
+      .reg th.nm {
+        background: #e9eff7
+      }
+
+      /* ---------- PC / bade screen ---------- */
+      @media (hover: hover) and (min-width: 701px) {
+        .btn:hover {
+          filter: brightness(1.08)
+        }
+
+        nav button:hover:not(.on) {
+          background: #f1f5fb
+        }
+
+        table:not(.reg) tbody tr:hover td, table:not(.reg) tr:hover > td {
+          background-color: #f7faff
+        }
+      }
+
+      @media (min-width: 1400px) {
+        main {
+          max-width: 1360px
+        }
+
+        body {
+          font-size: 16px
+        }
+      }
+
+      /* ---------- Phone ---------- */
+      @media (max-width: 700px) {
+        body {
+          font-size: 15px
+        }
+
+        input, select {
+          font-size: 16px
+        }
+
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 8px
+        }
+
+        .grid .stat:last-child:nth-child(odd) {
+          grid-column: 1 / -1
+        }
+
+        .stat {
+          padding: 12px
+        }
+
+        .row {
+          grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr))
+        }
+
+        .row > .btn {
+          width: 100%
+        }
+
+        .card > div[style*="flex-wrap"] {
+          display: flex;
+          gap: 8px
+        }
+
+        .card > div[style*="flex-wrap"] .btn {
+          flex: 1 1 140px
+        }
+
+        .note {
+          font-size: 13.5px
+        }
+
+        .mselall {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin: 4px 0 10px;
+          padding: 10px 12px;
+          background: #eef3fb;
+          border-radius: 10px;
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--pri);
+          cursor: pointer
+        }
+
+        .lh h2 {
+          font-size: 19px
+        }
+
+        .lh .meta {
+          text-align: left
+        }
+
+        .sign {
+          flex-direction: column;
+          gap: 40px
+        }
+
+        .sign div {
+          min-width: 0;
+          width: 100%
+        }
+
+        .reg th.nm, .reg td.nm {
+          min-width: 104px;
+          max-width: 128px;
+          white-space: normal;
+          line-height: 1.25
+        }
+
+        .reg td.nm small {
+          display: block
+        }
+
+        .leg span {
+          display: inline-block;
+          margin-right: 10px
+        }
+
+        /* ---- tables -> cards (data-label JS se lagta hai; .reg register scroll hi hota hai) ---- */
+        table.rc, table.rc tbody, table.rc thead, table.rc tfoot {
+          display: block;
+          width: 100%;
+          min-width: 0;
+          border: 0
+        }
+
+        table.rc tr.hr {
+          display: none
+        }
+
+        table.rc tr {
+          display: block;
+          position: relative;
+          margin: 0 0 10px;
+          padding: 4px 12px;
+          background: #fff;
+          border: 1px solid var(--line);
+          border-radius: 12px;
+          box-shadow: 0 1px 2px #0000000f
+        }
+
+        .sheet table.rc tr {
+          border-color: #cdd6e1
+        }
+
+        table.rc tfoot tr {
+          background: #f3f6fa
+        }
+
+        table.rc td {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: nowrap;
+          gap: 4px 12px;
+          min-width: 0;
+          padding: 8px 0;
+          border: 0;
+          border-bottom: 1px dashed #dde3ec;
+          font-size: 14px;
+          white-space: normal;
+          overflow-wrap: anywhere;
+          text-align: right;
+          background: transparent
+        }
+
+        table.rc td:last-child {
+          border-bottom: 0
+        }
+
+        table.rc td::before {
+          content: attr(data-label);
+          flex: 0 0 38%;
+          max-width: 38%;
+          text-align: left;
+          font-weight: 600;
+          font-size: 12.5px;
+          color: var(--mut)
+        }
+
+        table.rc td:not([data-label]) {
+          justify-content: flex-start;
+          flex-wrap: wrap;
+          text-align: left
+        }
+
+        table.rc td.num {
+          display: none
+        }
+
+        table.rc td:not([data-label])::before {
+          display: none
+        }
+
+        table.rc td:empty {
+          display: none
+        }
+
+        table.rc td.ttl {
+          justify-content: flex-start;
+          text-align: left;
+          font-size: 16px;
+          font-weight: 700;
+          color: #0f2a43
+        }
+
+        table.rc td.ttl::before {
+          display: none
+        }
+
+        table.rc td.act {
+          flex-wrap: wrap;
+          gap: 6px;
+          padding-top: 10px
+        }
+
+        table.rc td.act .btn {
+          flex: 1 1 auto;
+          min-height: 38px
+        }
+
+        table.rc td.chk {
+          position: absolute;
+          top: 10px;
+          right: 12px;
+          width: auto;
+          padding: 0;
+          border: 0
+        }
+
+        table.rc td.chk input {
+          width: 24px;
+          height: 24px
+        }
+
+        table.rc tr.hc td.ttl {
+          padding-right: 38px
+        }
+
+        table.rc tr.hc {
+          cursor: pointer
+        }
+
+        .sheet td.n, .sheet td.c {
+          text-align: right
+        }
+
+        .sheet table.rc tr {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 14px
+        }
+
+        .sheet table.rc tr.hr {
+          display: none
+        }
+
+        .sheet table.rc td {
+          grid-column: 1 / -1
+        }
+
+        .sheet table.rc td.n {
+          grid-column: auto;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          gap: 2px;
+          text-align: left;
+          font-size: 16px;
+          font-weight: 700
+        }
+
+        .sheet table.rc td.n::before {
+          flex: none;
+          max-width: none;
+          font-size: 11.5px;
+          font-weight: 600
+        }
+      }
+
+      @media (max-width: 360px) {
+        .btn {
+          padding: 10px 12px
+        }
+      }
+
+      /* =====================================================================
+         HAMBURGER MENU: tablet + phone (<=1024px) par tab-bar ki jagah drawer
+         ===================================================================== */
+      .ttlbox {
+        display: flex;
+        flex-direction: column;
+        min-width: 0
+      }
+
+      #curtab, .burger, #navov, #drawer .dh {
+        display: none
+      }
+
+      @media (max-width: 1024px) {
+        body.menu-open {
+          overflow: hidden
+        }
+
+        .hdr {
+          position: sticky;
+          top: 0;
+          flex-wrap: nowrap;
+          gap: 10px;
+          justify-content: flex-start
+        }
+
+        .hdr .rt {
+          margin-left: auto;
+          flex: 0 0 auto
+        }
+
+        .burger {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex: 0 0 auto;
+          width: 42px;
+          height: 42px;
+          padding: 0;
+          border-radius: 10px
+        }
+
+        .burger svg {
+          width: 22px;
+          height: 22px;
+          stroke: #fff;
+          stroke-width: 2.4;
+          stroke-linecap: round;
+          fill: none
+        }
+
+        .ttlbox b {
+          font-size: 17px;
+          line-height: 1.15;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis
+        }
+
+        #curtab {
+          display: block;
+          font-size: 12.5px;
+          opacity: .9;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis
+        }
+
+        #navov {
+          display: block;
+          position: fixed;
+          inset: 0;
+          z-index: 40;
+          background: #0f2a4399;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity .2s ease
+        }
+
+        body.menu-open #navov {
+          opacity: 1;
+          pointer-events: auto
+        }
+
+        #drawer {
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 41;
+          width: min(86vw, 330px);
+          display: flex;
+          flex-direction: column;
+          background: #fff;
+          overflow-y: auto;
+          overscroll-behavior: contain;
+          -webkit-overflow-scrolling: touch;
+          transform: translateX(-104%);
+          visibility: hidden;
+          transition: transform .24s ease, visibility 0s linear .24s;
+          box-shadow: 6px 0 28px #0f2a4340;
+          padding-left: var(--sl)
+        }
+
+        body.menu-open #drawer {
+          transform: none;
+          visibility: visible;
+          transition: transform .24s ease, visibility 0s
+        }
+
+        #drawer .dh {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: calc(12px + var(--st)) 12px 8px 16px;
+          background: var(--navy);
+          color: #fff
+        }
+
+        #drawer .dh b {
+          font-size: 17px
+        }
+
+        #drawer .dx {
+          width: 40px;
+          height: 40px;
+          border: 0;
+          border-radius: 10px;
+          background: #ffffff2e;
+          color: #fff;
+          font-size: 20px;
+          line-height: 1;
+          cursor: pointer
+        }
+
+        #drawerTop {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          padding: 0 16px 14px;
+          background: var(--navy);
+          color: #fff
+        }
+
+        #drawerTop:empty {
+          display: none
+        }
+
+        #drawerTop #who {
+          align-self: flex-start;
+          max-width: 100%
+        }
+
+        #drawerTop select {
+          width: 100%;
+          max-width: none;
+          min-height: 42px;
+          font-size: 16px
+        }
+
+        nav {
+          position: static;
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          overflow: visible;
+          padding: 10px 10px calc(14px + var(--sb));
+          border: 0;
+          scroll-snap-type: none
+        }
+
+        nav button {
+          flex: none;
+          width: 100%;
+          min-height: 48px;
+          padding: 12px 14px;
+          text-align: left;
+          font-size: 15.5px
+        }
+
+        nav button.on {
+          box-shadow: inset 4px 0 0 var(--pri)
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          scroll-behavior: auto !important;
+          transition: none !important
+        }
+      }
+    }
   </style>
 </head>
 
@@ -566,12 +1262,13 @@
   </div>
 
   <div id="app" hidden>
-    <div class="hdr"><b>Attendance Admin</b>
+    <div class="hdr"><button class="burger" id="burger" type="button" aria-label="Menu kholein" aria-controls="drawer" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><div class="ttlbox"><b>Attendance Admin</b><span id="curtab"></span></div>
       <div class="rt"><span id="who" class="tag" style="background:#ffffff22;color:#fff"></span><select id="osw"
           onchange="setOrg(this.value)" title="Sansthan chunein"></select><button onclick="logout()">Logout</button>
       </div>
     </div>
-    <nav id="nav"></nav>
+    <div id="navov"></div>
+    <div id="drawer" aria-label="Menu"><div class="dh"><b>Menu</b><button class="dx" id="dclose" type="button" aria-label="Menu band karein">&#10005;</button></div><div id="drawerTop"></div><nav id="nav"></nav></div>
     <main>
       <div class="note" id="warn" hidden style="background:#fde4e6;color:#9a2630;margin:0 0 14px"></div>
 
@@ -667,6 +1364,7 @@
         </div>
         <div class="card">
           <h3>Staff chunein <span id="mdate"></span></h3>
+          <label class="mselall"><input type="checkbox" onchange="mAll(this.checked)"> Sabhi staff chunein</label>
           <div class="tw">
             <table id="tmark"></table>
           </div>
@@ -777,9 +1475,8 @@
       </section>
     </main>
   </div>
-  <div id="force" hidden
-    style="position:fixed;inset:0;background:#0f2a43f2;z-index:30;display:flex;align-items:center;justify-content:center;padding:16px">
-    <div class="card" style="max-width:420px;width:100%;margin:0">
+  <div id="force" class="modal" hidden>
+    <div class="card" style="max-width:420px;width:100%">
       <h3 style="font-size:19px">Naya password set karein</h3>
       <p style="margin:0 0 6px;color:#66758a;font-size:14px">Suraksha ke liye pehli login par (ya password reset ke
         baad) naya password rakhna zaruri hai.</p>
@@ -1195,6 +1892,80 @@
       const r = await api({ a: "adminSaveAuth", oldPass: o, newPass: p, user: u }); if (!r.ok) return toast(r.msg);
       TOK = r.token; sessionStorage.setItem("at", TOK); if (r.me) ME = r.me;["op", "np", "np2", "nu"].forEach(i => $(i).value = ""); $("who").textContent = isSup() ? "Super Admin" : ME.name + " \u2022 " + ME.orgName; toast("Password badal gaya. Baaki purane login band ho gaye")
     }
+  </script>
+  <script>
+    /* ====== RESPONSIVE HELPERS (sirf layout; baaki app ka logic nahi badla) ====== */
+    (function () {
+      const $$ = s => document.querySelector(s);
+      const mq = window.matchMedia("(max-width:700px)");
+      const main = $$("main"), hdr = $$(".hdr"), nav = $$("#nav");
+
+      /* 1. sticky tabs ko header ke neeche rakhne ke liye header ki asli unchai */
+      const setH = () => { const h = hdr.offsetHeight; if (h) document.documentElement.style.setProperty("--hh", h + "px") };
+      if (window.ResizeObserver) new ResizeObserver(setH).observe(hdr);
+      addEventListener("resize", setH); setH();
+
+      /* 2. hamburger menu (<=1024px): who + sansthan-chunav drawer mein jaate hain, bade screen par wapas header mein */
+      const mqM = window.matchMedia("(max-width:1024px)"), body = document.body, burger = $$("#burger"), drawerTop = $$("#drawerTop"), rt = $$(".hdr .rt"), logoutBtn = rt.querySelector("button");
+      const setMenu = open => { body.classList.toggle("menu-open", open); burger.setAttribute("aria-expanded", open); burger.setAttribute("aria-label", open ? "Menu band karein" : "Menu kholein"); if (open) { const on = nav.querySelector(".on") || nav.querySelector("button"); on && on.focus({ preventScroll: true }) } else if (document.activeElement && $$("#drawer").contains(document.activeElement)) burger.focus({ preventScroll: true }) };
+      const place = () => {
+        const who = $$("#who"), osw = $$("#osw");
+        if (mqM.matches) { drawerTop.append(who, osw) } else { rt.insertBefore(who, logoutBtn); rt.insertBefore(osw, logoutBtn); setMenu(false) }
+      };
+      const curTab = () => { const b = nav.querySelector(".on"); $$("#curtab").textContent = b ? b.textContent : "" };
+      burger.addEventListener("click", () => setMenu(!body.classList.contains("menu-open")));
+      $$("#navov").addEventListener("click", () => setMenu(false));
+      $$("#dclose").addEventListener("click", () => setMenu(false));
+      addEventListener("keydown", e => { if (e.key === "Escape" && body.classList.contains("menu-open")) setMenu(false) });
+      new MutationObserver(curTab).observe(nav, { attributes: true, subtree: true, attributeFilter: ["class"], childList: true });
+      mqM.addEventListener ? mqM.addEventListener("change", place) : mqM.addListener(place);
+      place(); curTab();
+
+      /* tab dabane par: menu band ho aur page upar se shuru ho */
+      nav.addEventListener("click", e => {
+        const b = e.target.closest("button"); if (!b) return;
+        scrollTo(0, 0); if (mqM.matches) setMenu(false)
+      });
+
+      /* 3. phone par har table ki cell ko uske column ka naam (data-label) dena, taaki card ban sake */
+      function label() {
+        if (!mq.matches) return;
+        main.querySelectorAll("table:not(.reg)").forEach(t => {
+          const rs = t.rows; if (!rs.length || rs[0].dataset.rc) return;
+          const allTh = r => r.cells.length && [...r.cells].every(c => c.tagName === "TH");
+          const hr = [...rs].find(allTh), H = [];
+          if (hr) [...hr.cells].forEach(c => { for (let i = 0; i < c.colSpan; i++) H.push(i ? "" : c.textContent.trim()) });
+          t.classList.add("rc");
+          for (const r of rs) {
+            r.dataset.rc = 1;
+            if (allTh(r)) { r.classList.add("hr"); continue }
+            let ci = 0, titled = false;
+            for (const c of r.cells) {
+              const sp = c.colSpan || 1, lab = sp === 1 ? (H[ci] || "") : ""; ci += sp;
+              if (c.tagName === "TH") continue;
+              if (lab === "#") c.classList.add("num");
+              else if (lab) { c.dataset.label = lab; if (!titled) { c.classList.add("ttl"); titled = true } }
+              else if (c.querySelector("button")) c.classList.add("act");
+              if (c.querySelector("input.mc")) { c.classList.add("chk"); r.classList.add("hc") }
+            }
+          }
+        })
+      }
+      let pend = false;
+      new MutationObserver(ms => {
+        if (ms.some(m => m.target.id === "tmark")) { const sa = $$(".mselall input"); if (sa) sa.checked = false }
+        if (!pend) { pend = true; requestAnimationFrame(() => { pend = false; label() }) }
+      }).observe(main, { childList: true, subtree: true });
+      mq.addEventListener ? mq.addEventListener("change", label) : mq.addListener(label);
+      label();
+
+      /* 4. phone par attendance card par kahin bhi tap = staff select / unselect */
+      main.addEventListener("click", e => {
+        if (!mq.matches) return;
+        const r = e.target.closest("tr.hc"); if (!r || e.target.closest("input,button,a,label")) return;
+        const c = r.querySelector("input.mc"); if (c) c.checked = !c.checked
+      })
+    })();
   </script>
 </body>
 
